@@ -331,7 +331,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} 简幻欢社区维基. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} 简幻欢社区维基. Built with Docusaurus.<br /><a class="footer__link-item" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">黑ICP备2024025211号-2</a>`,
     },
     prism: {
       theme: prismThemes.github,
