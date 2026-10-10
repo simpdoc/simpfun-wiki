@@ -4,35 +4,36 @@ sidebar_position: 3
 
 # 【MCJE】启用命令方块
 
-## 1.21.9(快照25w34b)前
+## 1.21.9(快照25w34b) 前
+
 :::warning[提示]
-
 `server.properties`不支持热重载，请在关闭服务器的情况下对其进行修改。
-
 :::
 
 在服务器文件管理根目录找到server.properties文件并打开，在其中找到这一行:
 
-```properties
+```properties title="server.properties"
 enable-command-block=false
 ```
 
 将其中的`false`改为`true`后保存并重启服务器，这样就启用命令方块了。
 
-## 1.21.9(快照25w35a)后
+## 1.21.9(快照25w35a) 后
+
 ![服务器控制台界面](/img/pages/ins-console-2.webp)
 
 在控制台或游戏内(需要有管理员权限)输入以下命令即可启用：
 
-### 25w35a至25w43a
-1.21.9、1.21.10这两个正式版及1.21.11的部分快照版(25w43a)使用下面的命令：
+### 25w35a 至 25w43a
+1.21.9、1.21.10 这两个正式版及 1.21.11 的部分快照版(25w43a 前)使用下面的命令：
 
 ```text
 /gamerule enableCommandBlocks true
 ```
 
-### 25w44a后
-1.21.11(25w44a)和之后的版本使用下面的命令：
+### 25w44a 后
+
+1.21.11(25w44a) 和之后的版本使用下面的命令：
 
 ```text
 /gamerule command_blocks_work true

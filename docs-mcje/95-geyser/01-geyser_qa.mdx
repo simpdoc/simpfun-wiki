@@ -1,0 +1,42 @@
+---
+sidebar_position: 1
+---
+
+# 互通常见问题Q&A
+
+互通服务器一些常见的问题汇总。
+
+## 过旧的Geyser代理(Geyser版本过低)
+
+![示意图](/img/pages/mcje/geyser/01-qa-1.avif)
+
+如图，你需要前往 [https://modrinth.com/plugin/geyser/versions](https://modrinth.com/plugin/geyser/versions) 下载新版本的 Geyser，并将下载到的文件其放入 `plugins` 文件夹内。务必确保你下载的是下图中红框内的版本（Spigot/Paper）！
+
+![下载](/img/pages/mcje/geyser/01-qa-2.avif)
+
+![上传](/img/pages/mcje/geyser/01-qa-3.avif)
+
+**在大多数情况下，你还需要一并更新ViaVersion与ViaBackwards这两个插件。**
+
+前往 [ViaVersion - Minecraft Plugin](https://modrinth.com/plugin/viaversion/versions?c=release) 和 [ViaBackwards - Minecraft Plugin](https://modrinth.com/plugin/viabackwards/versions?c=release) 下载最新版本的 ViaVersion 与 ViaBackwards，并将下载到的文件其放入 `plugins` 文件夹内，**不要忘记删除旧版本的插件**！
+
+## 你的版本不受支持 无法连接至世界
+
+![示意图](/img/pages/mcje/geyser/01-qa-4.avif)
+
+如图所示，出现此问题的原因与Geyser无关，而是Geyser所用的UDP端口被其他连接占用。    
+出现此问题请检查其他使用UDP协议连接的功能是否使用了你服务器的主端口，例如简单语音插件。
+
+## 多人游戏连接失败
+
+![示意图](/img/pages/mcje/geyser/01-qa-5.avif)
+
+出现此问题请检查日志是否出现类似下图的报错：
+
+若出现请检查 `/plugins/Geyser-Spigot/config.yml` 的配置项是否写对了（如果配置项写错了也会报这个错误）！或者直接删除此文件让 Geyser 重新生成一次。
+
+![log](/img/pages/mcje/geyser/01-qa-6.avif)
+
+## 服务端发送了破损的数据包
+
+可能的原因较多，其中一种原因可能是 Geyser 版本过低，参照上方教程升级你的 Geyser 插件。
