@@ -32,7 +32,7 @@ const config: Config = {
   // If you ever move the build to a SUBPATH (e.g. https://simpdoc.top/wiki/),
   // this MUST be updated too, or every CSS/JS asset will 404.
   baseUrl: '/',
-  trailingSlash: true,
+  trailingSlash: false,
 
   // Only read by the `docusaurus deploy` command (GitHub Pages). Static builds
   // ignore them entirely, so they do not affect the simpdoc.top deployment.
