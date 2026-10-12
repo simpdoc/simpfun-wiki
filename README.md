@@ -10,6 +10,8 @@
 
 主域名：<https://next.simpdoc.top/>
 
+旧页面文档域名：<https://legacy.simpdoc.top/>
+
 ## 参与贡献
 
 我们欢迎任何形式的贡献——**你不需要会写代码**，改文档同样是最重要的贡献。
