@@ -1,0 +1,174 @@
+---
+title: "【AIO V1】快速开始"
+---
+
+<Callout type="error" title="警告">
+
++ 使用自定义镜像请确保你已经具备了一定的开服经验和英文阅读水平。
++ 如果你没有这方面的经验，请不要轻易尝试这部分的内容！
+
+</Callout>
+
+## 什么是自定义镜像
+`自定义镜像` 是指只提供运行环境，技术细节均由**个人解决**的实例镜像，门槛较高。
+
+服务器在创建后，根目录下只有一个`start.sh`(Linux)。
+
+## 自定义镜像有哪些？
+<Callout type="warn" title="警告">
+
+镜像基于 Debian 12 ( 最新 LTS ) 开发
+
+</Callout>
+
+简幻欢 SFE4 新版本仅提供 1 种类型的自定义预设，它是：
+
++ `AIO (All In One)`
+但这个镜像包括以下所有内容：
+    - `Go` ( 1.24.2 )
+    - `Java` ( ZuluJDK 8，11，16，17，19，21 )
+    - `Net` ( 6，8，9 )
+    - `Node` ( 22.14.0 ) + Yarn + PNPM
+    - `Python` ( 3.9.22，3.10.17，3.12.10，3.13.3 )
+    - `SteamCMD` ( Latest )
+    - `Wine` ( 10 ) + Mono
+
+## 【新版本】环境调用方法
+[环境调用方法](/docs/web/custom_image/aio_v1/how_to_use)
+
+[调用信息对应表](/docs/web/custom_image/aio_v1/path_list)
+
+## 各镜像相关说明
+### AIO ( All In One )
+包括以下所有内容，详细说明请对应下文。
+
+### Go
+<Callout type="info" title="信息">
+
+基于 Mise 部署
+
+</Callout>
+
+版本：Go 1.24.2
+
+详见【环境调用方法】与【调用信息对应表】
+
+### Java
+<Callout type="info" title="信息">
+
+基于 Mise 部署
+
+</Callout>
+
+版本：ZuluJDK 8 11 16 17 19 21
+
+详见【环境调用方法】与【调用信息对应表】
+
+<Callout type="info" title="注意">
+
+现可使用 root 用户运行。
+
+</Callout>
+
+为保证兼容，我们设定环境变量为旧版本的`${openjdk+版本}`（已写入镜像内，无需在`start.sh`内写入）。
+
+<Callout type="warn" title="MC Java 版服务端应该使用哪个版本的 Java？">
+
+1.7.10 —— 1.16.5 需要使用 Java 8 ；
+
+1.17 —— 1.20.4 需要使用 Java 17 或更高版本；
+
+1.20.5+ 需要使用 Java 21 或更高版本！
+
+如果你使用的为模组端，那么部分 mod 可能对 Java 版本有特定要求。
+
+[如何导入简幻欢没有的 Java 请点这里查看相关文档。](/docs/web/custom_image/addownjava)
+
+</Callout>
+
+### Python
+<Callout type="info" title="信息">
+
+基于 Mise 部署
+
+</Callout>
+
+版本：Python 3.9.22，3.10.17，3.12.10，3.13.3
+
+详见【环境调用方法】与【调用信息对应表】
+
+<Callout type="info" title="提示">
+
+经优化调整，现可使用 root 用户运行。
+
+</Callout>
+
+### .Net
+<Callout type="info" title="信息">
+
+基于 Mise 部署
+
+</Callout>
+
+版本：DotNet 6 8 9
+
+详见【环境调用方法】与【调用信息对应表】
+
+自行查找相关资料了解 DotNet 如何调用。
+
+### Node
+<Callout type="info" title="信息">
+
+基于 Mise 部署
+
+</Callout>
+
+版本：Nodejs 22.14.0 LTS
+
+详见【环境调用方法】与【调用信息对应表】
+
+### SteamCMD
+版本：Latest
+
+使用方法详见 SteamCMD 官方文档 / 网上搜索
+
+可直接调用 `steamcmd` 主命令
+
+<Callout type="warn" title="警告">
+
+可使用 root 用户运行，可能遇到 root 警告提示，可忽略
+
+</Callout>
+
+[Steam 控制台客户端 - Valve Developer Community](https://developer.valvesoftware.com/wiki/Zh/SteamCMD)
+
+### Wine
+版本：WineHQ-Stable 10.0
+
+使用方法详见 Wine 官方文档 / 网上搜索
+
+可直接调用 `wine` 主命令
+
+<Callout type="warn" title="警告">
+
+默认模拟 Windows 10.0.19043
+
+</Callout>
+
+<Callout type="warn" title="警告">
+
+可使用 root 用户运行，可能遇到 root 警告提示，可忽略
+
+</Callout>
+
+[Wine · Wiki · wine / wine · GitLab](https://gitlab.winehq.org/wine/wine/-/wikis/zh_CN/home)
+
+## 我在什么时候需要使用自定义镜像？
+在基础镜像和第三方镜像均不能满足需求时，可使用自定义镜像。
+
+<Callout type="error" title="警告">
+
+在简幻欢，我们专注于提供游戏服务器的支持和服务。请注意，我们的平台仅适用于游戏服务器的搭建，若发现在此建立其他服务（如网站，网盘等），**简幻欢将关闭您的服务器并永久封禁您的账户**。
+
+</Callout>
+

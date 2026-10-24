@@ -1,0 +1,72 @@
+---
+title: "浏览器支持说明"
+---
+
+<Callout type="info" title="信息">
+
+由于采用了现代化的 CSS 组件，新版网页需要在 **Chromium 119 或更高版本** 的浏览器中才能正常运行。若使用低于此版本的浏览器，则无法正常使用。
+
+</Callout>
+
+## 一表概述
+若您只想选择合适的浏览器，直接看下表：
+
+| **操作系统** | **浏览器推荐** | **版本要求** | **下载地址** | **备注** |
+| --- | --- | --- | --- | --- |
+| **Windows 10/11** | **Edge、Chrome、Firefox** | **最新版** | **官网** | - |
+| **Windows 7/8/8.1** | **Firefox ESR** | **115** | [**Firefox ESR 115**](https://www.firefox.com/zh-CN/download/all/desktop-esr/win64/zh-CN/) | 支持 Windows 7/8/8.1 |
+| **Windows 7/8/8.1** | **Supermium** | **基于 Chromium** | [**Supermium**](https://www.win32subsystem.live/supermium/) | 保留 Chrome 同步功能 |
+| **Windows 7/8/8.1** | **Chromium-for-windows-7-REWORK** | **复刻官方 Chromium 源代码** | [**Chromium-for-windows-7-REWORK**](https://github.com/e3kskoy7wqk/Chromium-for-windows-7-REWORK/releases/latest) | - |
+| **Android** | **Edge** | - | 手机自带应用商店或[**豌豆荚**](https://www.wandoujia.com/apps/7672441) | 国产应用商店通常更容易下载 |
+| **Android** | **Firefox** | **-** | [**Google Play**](https://play.google.com/store) 或 [**Mozilla FTP**](https://ftp.mozilla.org/pub/fenix/releases/) | - |
+
+## Windows 10/11
+Windows 10/11 请使用最新版的 **Edge、Chrome、Firefox**，或者使用 Chromium 内核版本比较新的国产浏览器。
+
+## Windows 7/8/8.1
+由于 Chrome 和 Edge 在 Windows 7/8/8.1 上的官方最终版本停留在 **109**，无法满足新版网站的运行要求。我们为您推荐以下仍在维护且兼容旧系统的浏览器，请根据需要选择：
+
+### Firefox ESR 115
+Firefox 使用的 Gecko 内核与 Chromium 使用的 Blink 内核不同。因此 Firefox 最后一个支持 Windows 7/8/8.1 的 ESR 版本可以正常访问新版网站。
+
+下载地址：[https://www.firefox.com/zh-CN/download/all/desktop-esr/win64/zh-CN/](https://www.firefox.com/zh-CN/download/all/desktop-esr/win64/zh-CN/)    
+下载时选择如下图所示的 ESR115 版本。
+
+![选择 Firefox ESR 115 版本](/img/pages/web/supported_browsers-1.png)
+
+### Supermium
+Supermium 是一款基于 Chromium 的开源浏览器，它在旧版 Windows 上持续跟进 Chromium 新版内核，并保留了 Chrome 的同步功能。其使用体验与原生 Chrome 基本一致，如需使用谷歌浏览器的同步功能，推荐安装此浏览器。
+
+下载地址：[https://www.win32subsystem.live/supermium/](https://www.win32subsystem.live/supermium/)
+
+![下载 Supermium](/img/pages/web/supported_browsers-2.png)
+
+### Chromium-for-windows-7-REWORK
+该项目直接复刻了官方 Chromium 源代码仓库，并加入了使代码能在 Windows 7/8/8.1 上顺利编译和运行的必要修改。
+
+下载地址：[https://github.com/e3kskoy7wqk/Chromium-for-windows-7-REWORK/releases/latest](https://github.com/e3kskoy7wqk/Chromium-for-windows-7-REWORK/releases/latest)   
+下载时选择如下图所示的 `mini_installer_64.exe` 文件（如果你是 32 位系统则选择 `mini_installer.exe`）。
+
+![选择 mini_installer_64.exe](/img/pages/web/supported_browsers-3.png)
+
+## Android
+国产手机厂商的系统浏览器通常基于旧版本 Chromium 内核，可能无法正常访问新版网站。建议使用以下方式获取其他浏览器。
+
+<Callout type="info" title="提示">
+
+建议优先使用 Edge，因为国产应用商店通常更容易下载到 Edge，若选用 Via 等浏览器，可能会遇到兼容性问题。
+
+自 2023 年 11 月 10 日起，Chrome 不再支持 Android 7.x，在此范围内用户最高仅支持 Chrome 119，即恰好达标，可能遇到兼容性问题，可下载 [Edge v119.0.2151.78](https://www.wandoujia.com/apps/7672441/history_v215107805)。    
+自 2025 年 6 月 19 日起，Chrome 不再支持 Android 8.0-9.0，在此范围内用户最高仅支持 Chrome 138，可下载 [Edge v138.0.3351.121](https://www.wandoujia.com/apps/7672441/history_v335112105)。
+
+</Callout>
+
+### Edge
+在手机自带的应用商店中搜索"Edge"下载安装即可。如需下载安装包，可前往豌豆荚获取：[https://www.wandoujia.com/apps/7672441](https://www.wandoujia.com/apps/7672441)
+
+![应用商店下载 Edge](/img/pages/web/supported_browsers-4.png)
+
+### Firefox
+需要在 **Google Play 商店**安装或在 Mozilla 的 FTP 服务器中获取安装包。
+
+下载地址：[https://ftp.mozilla.org/pub/fenix/releases/](https://ftp.mozilla.org/pub/fenix/releases/)

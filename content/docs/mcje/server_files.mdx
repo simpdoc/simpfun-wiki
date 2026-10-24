@@ -1,0 +1,211 @@
+---
+title: "【MCJE】服务端文件结构"
+---
+
+<Callout type="info" title="信息">
+
+此文档为介绍服务端预设的文件结构，即各个文件夹及其说明。
+
+在简幻欢中，默认条件下，运行服务器的根目录为`/home/container`，下文提到的任何文件及结构，都应该在此文件夹内。
+
+若有不精确或不完备的地方，欢迎指正及补漏。
+
+</Callout>
+
+<Callout type="success" title="提示">
+
+不是所有文件/文件夹都会自动生成。
+
+</Callout>
+
+## 原版服务端
+
+![vanilla](/img/pages/mcje/04-sf-1.webp)
+
+上图为 Vanilla 26.2 版本服务端的根目录下的文件。
+
+| 文件夹 | 说明 |
+| --- | --- |
+| crash-reports | 当游戏崩溃时，生成的崩溃报告将存储在这个目录。 |
+| libraries | 存储文件所需的运行库。 |
+| logs | 存储服务端的运行日志。 |
+| versions | 存储游戏服务端的源代码。各个版本的文件位于其下的`<版本>/server-<版本>.jar`。 |
+
+| 文件 | 说明 |
+| --- | --- |
+| banned-ips.json | 记录被封禁的 IP 地址。 |
+| banned-players.json | 记录被封禁的玩家的 ID 和 UUID（唯一标识符）。 |
+| eula.txt | 这是服务端的许可协议文件，用于确认用户同意遵守[Minecraft的最终用户许可协议（EULA）](https://www.minecraft.net/zh-hans/eula)。 |
+| ops.json | 记录被授予管理员权限的玩家信息。 |
+| server.properties | 服务端的配置文件，用于设置服务器的各种属性。 |
+| server_26.2.jar | 服务端主程序，用于启动和运行服务端（核心文件名可以随便改, 改完记得在启动文件中修改启动参数）。 |
+| server-icon.png | 用于显示在多人游戏列表中的服务器图标。 |
+| usercache.json | 用于缓存玩家的UUID（唯一标识符）和用户名的映射关系。这个文件主要用于加速玩家登录过程。<br/>需要注意的是，**此文件不会存储玩家的数据**。 |
+| whitelist.json | [白名单存储文件](https://zh.minecraft.wiki/w/%E7%99%BD%E5%90%8D%E5%8D%95%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F)，记录允许连接到服务器的玩家列表。 |
+
+## 插件服务端
+
+### Paper(26.1+)
+
+![paper-1](/img/pages/mcje/04-sf-2.webp)
+
+上图为 Paper 26.2 服务端的根目录下的文件。
+
+与原版服务端不同的文件/文件夹如下表所示：
+
+| 文件夹 | 说明 |
+| --- | --- |
+| .paper | Paper 26.2+ 特有的文件夹，存放 `console_history` (控制台命令输入历史)和 `version_history.json` (记录此服务器使用的服务端的历史版本)文件。 |
+| cache | 用于存放某些插件的库文件和原版服务端核心文件。 |
+| config | Paper 服务端核心配置文件（如 `paper-global.yml`）存放位置。 |
+| plugins | 所有插件本体（`.jar` 文件）及其各自生成的配置子文件夹均存放于此。 |
+
+| 文件 | 说明 |
+| --- | --- |
+| bukkit.yml | Bukkit 系服务端的配置文件之一，用于配置一些基本的服务器设置。<br/>尽管 Paper 已在 1.21.4 版本与 Spigot 硬分叉，但仍保留此配置文件以保证兼容性。 |
+| commands.yml | 管理命令方块的命令覆盖（强制使用 Mojang 原版命令）和服务器自定义命令别名（Aliases）。别名系统优先级最高，可用来创建缩写、合并指令或彻底屏蔽原命令。 |
+| spigot.yml | Spigot 系服务端的性能与行为调优文件，涵盖实体激活范围、区块加载、TNT 爆炸限制及掉落物合并等参数。<br/>尽管 Paper 已在 1.21.4 版本与 Spigot 硬分叉，但仍保留此配置文件以保证兼容性。 |
+
+### Paper(1.21.11-)
+
+![paper-2](/img/pages/mcje/04-sf-3.webp)
+
+这是 Leaves 1.21.11 版本（Paper 的一个分支）服务端的根目录下的文件。
+
+与原版服务端不同的文件/文件夹如下表所示：
+
+| 文件夹 | 说明 |
+| --- | --- |
+| cache | 用于存放某些插件的库文件和原版服务端核心文件。 |
+| config | Paper 服务端核心配置文件（如 `paper-global.yml`）存放位置。 |
+| plugins | 所有插件本体（`.jar` 文件）及其各自生成的配置子文件夹均存放于此。 |
+| world<br/>world_nether<br/>world_the_end | (26.1 之前)在**所有 Bukkit 系服务端**内，世界存档**被拆成了三个文件夹**。<br/>同时，[server.properties](https://zh.minecraft.wiki/w/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F?variant=zh-cn) 内的 `level-name` 的值会被同时应用在三个世界上面，即同时替换 `world` 字段。<br/>world 存储主世界维度数据，world_nether 存储下界维度数据，world_the_end 存储末地维度数据。 |
+
+| 文件 | 说明 |
+| --- | --- |
+| .console_history | 存储控制台执行的命令的历史记录。 |
+| bukkit.yml | Bukkit 系服务端的配置文件之一，用于配置一些基本的服务器设置。 |
+| commands.yml | 管理命令方块的命令覆盖（强制使用 Mojang 原版命令）和服务器自定义命令别名（Aliases）。别名系统优先级最高，可用来创建缩写、合并指令或彻底屏蔽原命令。 |
+| help.yml | 此配置文件可用于自定义`/help`命令返回的内容。 |
+| permissions.yml | 用于定义玩家和用户组的权限。<br/>(提示：建议使用插件来配置权限组，例如 [Luckperms](https://luckperms.net/)) |
+| spigot.yml | Spigot 系服务端的性能与行为调优文件，涵盖实体激活范围、区块加载、TNT 爆炸限制及掉落物合并等参数。 |
+| version_history.json | 记录此服务器使用的服务端的历史版本。 |
+
+## 模组服务端
+
+### NeoForge
+
+![neoforge](/img/pages/mcje/04-sf-4.webp)
+
+这是 NeoForge 26.2.0.59 版本服务端的根目录下的文件。
+
+与原版服务端不同的文件/文件夹如下表所示：
+
+| 文件夹 | 说明 |
+| --- | --- |
+| .cache | NeoForge 缓存某些 jar 文件的文件夹。 |
+| config | 存储 FML 和模组的配置文件。 |
+| defaultconfigs | 存储某些模组的默认的配置文件。 |
+| mods | 所有模组文件本体（`.jar` 文件）均存放于此。 |
+
+| 文件 | 说明 |
+| --- | --- |
+| neoforge-26.2.0.59-installer.jar | NeoForge 的安装器文件。仅用于安装服务端，并非服务端的启动入口。  |
+
+与 Forge 1.17.1+ 版本类似，NeoForge 服务端核心及其依赖被封装在 `libraries/` 目录中。根据你的 Minecraft 版本，使用对应的 JDK 和参数启动，命令如下所示：
+
+```shell title="start.sh"
+# 1.20.1
+${openjdk17} -server -Xms1024M -Xmx${maxmem}M  @libraries/net/neoforged/forge/1.20.1-47.1.106/unix_args.txt "$@" --nogui
+# 1.20.2+
+${openjdk21} -server -Xms1024m -Xmx${maxmem}M @libraries/net/neoforged/neoforge/21.1.245/unix_args.txt "$@" --nogui
+```
+
+### Forge(1.17.1+)
+
+![forge-1](/img/pages/mcje/04-sf-5.webp)
+
+这是 Forge 1.20.1-47.4.20 版本服务端根目录下的文件。
+
+与原版服务端不同的文件/文件夹如下表所示：
+
+| 文件夹 | 说明 |
+| --- | --- |
+| config | 存储 FML 和模组的配置文件。 |
+| defaultconfigs | 存储某些模组的默认的配置文件。 |
+| mods | 所有模组文件本体（`.jar` 文件）均存放于此。 |
+
+| 文件 | 说明 |
+| --- | --- |
+| forge-1.20.1-47.4.20-installer.jar | Forge 的安装器文件。仅用于安装服务端，并非服务端的启动入口。  |
+
+需要注意的是，在 1.17.1 及更高版本的 Forge 服务端中， Forge 核心及其依赖被封装在 `libraries/` 目录中。根据你的 Minecraft 版本，使用对应的 JDK 和参数启动，命令如下所示：
+
+```shell
+${openjdk17} -server -Xms1024m -Xmx4096M @libraries/net/minecraftforge/forge/1.20.1-47.4.20/unix_args.txt "$@" --nogui
+```
+
+### Forge(1.16.5-)
+
+![forge-2](/img/pages/mcje/04-sf-6.webp)
+
+这是 Forge 1.16.5-36.2.39 版本服务端根目录下的文件。
+
+与原版服务端不同的文件/文件夹如下表所示：
+
+| 文件夹 | 说明 |
+| --- | --- |
+| config | 存储 FML 和模组的配置文件。 |
+| defaultconfigs | 存储某些模组的默认的配置文件。 |
+| mods | 所有模组文件本体（`.jar` 文件）均存放于此。 |
+
+| 文件 | 说明 |
+| --- | --- |
+| forge-1.16.5-36.2.39.jar | 1.16.5 及以下的版本使用根目录下的此 jar 文件启动 Forge 服务端，以 `forge-mc版本-forge版本` 命名。 |
+| minecraft_server.1.16.5.jar | 原版服务端核心，以 `minecraft_server.mc版本` 命名。<br/>PS：**不要尝试从此 jar 文件启动服务端，不然会不加载 mod！** |
+
+### Fabric
+根据安装方式不同，Fabric 的服务端会出现两种不同的结构。
+
+#### 类型 1
+使用专用安装器安装：
+
+![fabric-1](/img/pages/mcje/04-sf-7.webp)
+
+这是 26.1.2 Fabric-0.19.3 版本服务端根目录下的文件。
+
+与原版服务端不同的文件/文件夹如下表所示：
+
+| 文件夹 | 说明 |
+| --- | --- |
+| .fabric | 存储 Fabric 的一些库文件。 |
+| configs | 存储模组的配置文件。 |
+| mods | 所有模组文件本体（`.jar` 文件）均存放于此。 |
+
+| 文件 | 说明 |
+| --- | --- |
+| fabric-server-mc.26.1.2-loader.0.19.3-launcher.1.1.2.jar | Fabric 服务端的安装器和启动入口，在启动命令中使用此文件即可进行安装+启动一条龙操作。 |
+
+
+#### 类型 2
+使用通用安装器安装：
+
+![fabric-2](/img/pages/mcje/04-sf-8.webp)
+
+这是 1.20.1 Fabric-0.19.3 版本服务端根目录下的文件。
+
+与原版服务端不同的文件/文件夹如下表所示：
+
+| 文件夹 | 说明 |
+| --- | --- |
+| .fabric | 存储 Fabric 的一些库文件。 |
+| configs | 存储模组的配置文件。 |
+| mods | 所有模组文件本体（`.jar` 文件）均存放于此。 |
+
+| 文件 | 说明 |
+| --- | --- |
+| fabric-server-launch.jar | Fabric 服务端的启动入口，在启动命令中使用此文件启动服务端。 |
+| fabric-server-launcher.properties | 服务端启动入口的配置文件，提供 `serverJar` 配置项来设置原版服务端核心的名称。 |
+| server.jar | 原版服务端核心。   如果你改了此文件的名称，那么 `fabric-server-launcher.properties` 内的 `serverJar` 配置项你也得改！   PS：**不要尝试从此文件启动服务端，不然会不加载mod！** |
+
+

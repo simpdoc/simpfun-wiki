@@ -1,0 +1,168 @@
+---
+title: "SFTP 连接指南"
+---
+
+SFTP（SSH 文件传输协议）是一种基于 SSH 加密通道的安全文件传输协议，常用于远程服务器文件的上传与下载。
+
+当你需要在简幻欢中上传/下载**文件夹**、**大于 1GB 的单个文件**、**大批量文件**时，使用 SFTP 无疑是最好的选择。
+
+## 使用软件连接前的准备
+进入实例，点击管理，在"SFTP 文件管理服务器"处找到当前实例的连接信息。
+
+<Callout type="info" title="信息">
+
+显示为 `****` 的信息可以点击👁图标来查看具体内容！
+
+点击对应行的内容即可直接复制。
+
+</Callout>
+
+<Callout type="warn" title="警告">
+
+下文所有“服务器 IP/地址”均指**SFTP 服务器 IP**，**端口同理**（除非特别标注）。
+
+</Callout>
+
+![SFTP 连接信息](/img/pages/web/sftp-1.webp)
+
+### 快速连接
+部分软件支持一键快速连接。您只需点击“SFTP 文件管理服务器”旁的问号图标，再单击“一键启动 SFTP 工具”按钮，即可自动唤起客户端。
+
+请注意：唤起后，仍需手动输入用户名和密码完成登录。
+
+![一键启动 SFTP 工具](/img/pages/web/sftp-2.webp)
+
+## Windows
+可在下方自由选择一个软件使用。
+
+### FileZilla（推荐）
+1. 下载 FileZilla Client 并安装。
+
+<Callout type="info" title="信息">
+
+官网(下载免费版就够用了，没有广告)：[⬇Download FileZilla Client](https://filezilla-project.org/download.php?type=client)
+
+蓝奏云(官网下载速度过慢可使用这个)：[https://wwbgc.lanzouv.com/ipzr23ss7k4b](https://wwbgc.lanzouv.com/ipzr23ss7k4b)
+
+![FileZilla 下载](/img/pages/web/sftp-3.png)
+
+</Callout>
+
+2. 打开 FileZilla，上方快速连接栏处填写**服务器地址**、**用户名**、**密码**、**端口**，然后点击**快速连接**
+
+![FileZilla 快速连接](/img/pages/web/sftp-4.png)
+
+<Callout type="warn" title="警告">
+
+主机处填写服务器地址前需加上`sftp://`前缀，**否则软件将默认使用 ftp 协议进行连接导致连接失败**！
+
+如果你不知道怎么填写就像这样填写：`sftp://sfe4-connect.simpfun.cn`
+
+</Callout>
+
+3. 首次连接会弹出类似下面的提示框，勾选下方的"总是信任该主机"后点击确定继续发起连接
+
+![信任主机提示](/img/pages/web/sftp-5.png)
+
+4. 连接成功后你就可以在本地与远程服务器间互传文件了！
+5. 点击快速连接右侧的三角形即可快速选择之前连接过的服务器进行连接！
+
+![FileZilla 连接历史](/img/pages/web/sftp-6.png)
+
+### WinSCP
+<Callout type="info" title="提示">
+
+本软件支持快速连接功能。
+
+</Callout>
+
+1. 从官网下载 WinSCP：[WinSCP :: Official Site :: Download](https://winscp.net/eng/download.php)
+2. 安装后打开 WinSCP
+
+![WinSCP 打开界面](/img/pages/web/sftp-7.png)
+
+3. 将服务器 IP 填入主机名，服务器端口填入端口，用户名填入用户名，密码填入密码。
+
+![WinSCP 登录](/img/pages/web/sftp-8.png)
+
+4. **点击登录即可。**
+
+### FTP Rush
+1. 从官网下载 FTP Rush 并安装：[FTP Rush 客户端下载](https://www.wftpserver.com/zh/download.htm#ftprush)
+2. 打开 FTP Rush，上方快速连接栏的协议选择 SFTP，主机填写**服务器 IP**，端口改为分配到的**端口**，填写**用户名**和**密码**，点击最右侧图标进行连接。
+
+![FTP Rush 快速连接](/img/pages/web/sftp-9.png)
+
+3. 连接成功后你就可以在本地与远程服务器间互传文件了！
+4. 点击连接图标旁边的三角形即可快速选择之前连接过的服务器进行连接！
+
+![FTP Rush 历史连接](/img/pages/web/sftp-10.png)
+
+## Android
+### FTP Rush
+1. 从官网下载 FTP Rush 安装包并安装：[FTP Rush 客户端下载](https://www.wftpserver.com/zh/download.htm#ftprush)
+
+![FTP Rush 下载](/img/pages/web/sftp-11.png)
+
+2. 打开 FTP Rush，点击右上角的加号添加服务器
+
+![FTP Rush 添加服务器](/img/pages/web/sftp-12.jpeg)
+
+3. 名称随便填，协议选择 SFTP，主机填写**服务器 IP**，端口改为分配到的**端口**，填写**用户名**和**密码**（如下图所示），然后点击**确定**保存连接信息。
+
+![FTP Rush 填写连接信息](/img/pages/web/sftp-13.jpeg)
+
+4. 点击你刚才添加的 SFTP 服务器发起连接。
+
+![FTP Rush 发起连接](/img/pages/web/sftp-14.jpeg)
+
+5. 连接成功后你就可以在本地与远程服务器间互传文件了。
+
+### AndFTP
+<Callout type="info" title="提示">
+
+本软件支持快速连接功能。
+
+</Callout>
+
+1. 从官网下载 AndFTP 并安装：[FTP, FTPS, SCP and SFTP Android client - AndFTP](https://www.lysesoft.com/products/andftp/#download)
+
+![AndFTP 下载](/img/pages/web/sftp-15.png)
+
+2. 打开 AndFTP，点击最上方的加号添加服务器
+
+![AndFTP 添加服务器](/img/pages/web/sftp-16.png)
+
+3. 在域名处填写服务器 IP，类型选择`SFTP`，并填写端口、用户名和密码，然后勾选"启用续传支持"(断点续传)
+
+![AndFTP 填写连接信息](/img/pages/web/sftp-17.jpeg)
+
+4. 点击上方的"高级"，把"编码"从`Default`更改为`UTF-8`，然后点击保存
+
+![AndFTP 设置编码](/img/pages/web/sftp-18.jpeg)
+
+5. 回到主页后点击中间的图标连接 SFTP 服务器
+
+![AndFTP 连接服务器](/img/pages/web/sftp-19.jpeg)
+
+### ES 文件浏览器
+提示：**对广告过敏可以使用其它 SFTP 软件。**
+
+1. 打开[ES 文件浏览器](https://m.app.mi.com/details?id=com.estrongs.android.pop)，点击左上角三个横线进入到侧栏之中。
+
+![ES 文件浏览器侧栏](/img/pages/web/sftp-20.png)
+
+2. 在侧栏的网络下选择 FTP 进入到 FTP 管理界面。
+
+![ES 文件浏览器 FTP 管理](/img/pages/web/sftp-21.png)
+
+3. 点击右边的新建按钮，建立一个 FTP 服务器。
+
+![ES 文件浏览器新建服务器](/img/pages/web/sftp-22.png)
+
+4. 点击 SFTP。
+5. 将服务器 IP 填入服务器，服务器端口填入端口，用户名填入用户名，密码填入密码。
+
+![ES 文件浏览器填写连接信息](/img/pages/web/sftp-23.png)
+
+6. 点击确定后连接服务器，就可以对各种文件编辑管理了。

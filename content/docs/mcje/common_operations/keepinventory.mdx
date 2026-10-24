@@ -1,0 +1,28 @@
+---
+title: "【MCJE】开启死亡不掉落"
+---
+
+想在服务器中开启死亡不掉落（保留物品栏）？
+
+## 使用命令
+打开服务器控制台>终端
+
+![服务器控制台终端](/img/pages/ins-console-2.webp)
+
+输入以下命令(可直接复制，游戏内使用ctrl+v粘贴，控制台输入请去掉斜杠)：
+
+```text
+/gamerule keepInventory true
+```
+
+```text
+/gamerule keep_inventory true
+```
+
+<Callout type="warn" title="警告">
+
+**这条警告只适用于 1.21.11 及更低版本的服务端。**
+
+在Java版的部分服务端中(**绝大部分的Bukkit系服务端，包括但不限于Spigot、Paper及其分支等**)，维度是分文件夹存储的，因此你需要在每一个维度都输入一次这个命令来在所有的维度都开启死亡不掉落！
+
+</Callout>

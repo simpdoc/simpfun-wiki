@@ -1,0 +1,213 @@
+---
+title: "【MCBE】主流服务端介绍"
+---
+
+<Callout type="info" title="提示">
+
+部分服务端可能并不存在于SFE4中。
+
+排序按A-Z排序，不分先后（不是越靠前越好）！
+
+</Callout>
+
+## 省流版表格
+
+| **服务端** | **插件** | **Add-On(附加包)** | **介绍** |
+| --- | --- | --- | --- |
+| Bedrock Dedicated Server(BDS) | ❌ | ✅ | 官方服务端，**不支持插件** |
+| LiteLoaderBDS/LeviLamina | ✅ | ✅ | 加载器式插件服务端，**仅支持 Windows 上使用** |
+| Endstone | ✅ | ✅ | 加载器式插件服务端，同时支持 Windows 与 Linux 版的 BDS |
+| Nukkit 系服务端 | ✅ | ❌ | 使用 Java 编写，拥有强大的多线程性能，**但不推荐一般生存使用** |
+| PocketMine/PocketMine-MP | ✅ | ❌ | 使用 PHP 编写，(PE)BE 最开始的服务端，现在国内基本已查无此端 |
+
+---
+
+## Bedrock Dedicated Server
+
+目前状态：活跃
+
+插件：不支持
+
+Addon：支持
+
+介绍： 
+
+Mojang 发布的原版服务端软件，不支持插件。
+
+<Callout type="warn" title="提示">
+
+此服务器软件仍然存在很多缺陷以及缺少Java版服务端中许多的自带功能。
++ 经常会出现各种漏洞，且官方修复恶性漏洞的积极性非常低。
++ BDS 在某些多核多线程低频率的服务器 CPU 上的性能表现不佳，反而单核性能更强的高主频消费级 CPU 更适合 BDS。
++ 在高负载的情况下（例如大量生物实体堆积/加载复杂区块），有时会出现服务器突然卡顿但是 CPU 占用率很低的情况。
+
+</Callout>
+
+---
+
+## Endstone
+
+目前状态：活跃
+
+插件：支持
+
+Addon：支持
+
+介绍：
+
+[Endstone](https://endstone.dev/) 是一个非官方的插件加载器，专为原版 BDS 服务端设计，支持插件加载功能。可以使用 Python 或 C++ 编写插件。
+
+与 LevLamina 不同的是，此加载器同时支持 Windows 和 Linux 平台的 BDS 服务端。
+
+需要 Python 3.10 或更高版本作为运行环境。
+
+<Callout type="info" title="编者有话说">
+
+一个新的插件加载器，也是基于 BDS 的，目前正在开发中。
+
+</Callout>
+
+---
+
+## LeviLamina（LL3）
+
+目前状态：活跃
+
+插件：支持(根据编写语言不同插件格式也不同)
+
+Addon：支持
+
+介绍：
+
+轻量级、模块化和多功能的 Minecraft Bedrock Server BDS 插件加载器，曾被称为 LiteLoaderBDS。
+
+LeviLamina 是一个非官方的插件加载器，旨在为 BDS 提供必不可少的 API 支持。通过利用插件，扩展BDS功能的过程变得轻而易举，具有用户友好的开发过程和灵活的方法。
+
+仅支持 Windows 环境下的 BDS 服务端。
+
+## LiteLoaderBDS（LL2）
+
+目前状态：停更
+
+插件：支持 (根据编写语言不同插件格式也不同)
+
+Addon：支持
+
+介绍：
+
+LiteLoaderBDS 是一个非官方的 Minecraft 服务端插件加载器，为BDS提供插件开发支持和插件加载服务，弥补了官方行为包开发接口长期以来存在的一些不足。
+
+<Callout type="warn" title="提示">
+
+LL2 已停更，[Github 仓库](https://github.com/LiteLDev/LiteLoaderBDSv2)已于 2023.10.25 归档。最终支持的 BDS 版本为 1.20.31。
+
+</Callout>
+
+---
+
+## NukkitPetteriM1Edition
+
+目前状态：活跃
+
+插件：支持
+
+Addon：不支持
+
+介绍：
+
+NukkitPetteriM1Edition（简称NKPM1E或PM1ENK）是 PetteriM1 为他的服务器SuomiCraft PE制作的 Nukkit 服务器软件的特殊版本，理论上支持Minecraft基岩版1.2.X-最新版本（根据PetteriM1的更新情况而定），但不会积极维护对过旧版本的支持，建议使用 1.12.X 以上进服以获得更好的体验。使用方法与 Nukkit 基本一致。
+
+<Callout type="warn" title="注意">
+
+**由于需要支持多版本，NukkitPM1E删除了一些高版本方块和其他物品，请准备开生存服和RPG服的服主谨慎选择使用。本核心适用于开设小游戏服务器。**
+
+</Callout>
+<Callout type="info" title="编者有话说">
+
+此核心之前发生过闭源试图垄断社区的行为([见这里](https://www.minebbs.com/threads/pm1enk-pm1enk.16912/))，不过现在又重新开源了。
+
+同另外几个一样，都是 Nukkit 的 fork，不过这个是跨版本支持的。
+
+同理，因为是 Nukkit 的 fork，所以不建议开生存服。
+
+存档格式类似于 Java 版 1.12 的存档。
+
+</Callout>
+
+---
+
+## Nukkit-MOT
+
+目前状态：活跃
+
+插件：支持
+
+Addon：不支持
+
+介绍： 
+
+[Nukkit-MOT](https://github.com/MemoriesOfTime/Nukkit-MOT) 是 Nukkit Minecraft Bedrock Edition 服务器软件的特殊版本。 它是基于 NukkitPetteriM1Edition 的最后一个开源版本开发的。支持 1.2.X 到最新版本。
+
+<Callout type="info" title="编者有话说">
+
+NKPM1E 的替代品，适合开设小游戏服务器。
+
+</Callout>
+
+## Nukkit（NukkitX）
+
+目前状态：活跃
+
+插件：支持
+
+Addon：不支持
+
+介绍： 
+
+[Nukkit](https://github.com/CloudburstMC/Nukkit) 是一款性能高效、基于 Java 的基岩版服务端。它的结构十分类似于 Bukkit/Spigot，同样由 Java 编写。
+
+<Callout type="warn" title="警告">
+
+NukkitX 没有生物生成且对原版特性支持很差，非常不建议用于生存服！
+
+</Callout>
+
+---
+
+## PowerNukkitX
+
+目前状态：活跃
+
+插件：支持
+
+Addon：不支持
+
+介绍：
+
+[PowerNukkitX](https://github.com/PowerNukkitX/PowerNukkitX)（简称PNX）是由包括 BlocklyNukkit 团队在内的中国 Nukkit 开发者们负责开发维护的 Nukkit 分支版本，修复了众多 BUG，改善了性能，及时跟进新版本支持、支持1.19所有新方块和新物品、支持新版下界、支持史诗地形生成器(Terra)。在这些大更改的情况下，PNX 仍然保持了良好的插件支持性，Nukkit 生态中的数千个插件仍然可以在 PNX 上运行。
+
+---
+
+## PocketMine-MP
+
+目前状态：活跃
+
+插件：支持
+
+Addon：不支持
+
+介绍：
+
+[PocketMine](https://github.com/PocketMine/PocketMine-MP) 的一个分支，到现在还在维护和更新。
+
+[PocketMine-MP](https://github.com/pmmp/pocketmine-mp) 是一款高度可定制的 MCBE 服务器软件，完全使用 PHP 从头构建，拥有超过十年的历史。
+
+如果你想创建一个具备自定义功能的 MCBE 服务器，这里就是你的最佳选择。
+
+<Callout type="info" title="编者有话说">
+
+基本没什么人用这个服务端，能查到的资料和可用的插件啥的也是少之又少。
+
+不过 PMMP 的官方文档说了不建议用于生存服（非BDS端的通病）。
+
+</Callout>

@@ -1,0 +1,65 @@
+---
+title: "【Java 镜像】默认启动脚本"
+---
+
+推荐：？
+
+暂无，让第三方贡献者参与一下吧？~
+
+## 切换为 container 用户
+在使用 Java、Wine、SteamCMD、Python 等环境时，您可能会遇到推荐使用非 root 用户去运行程序，而简幻欢提供了一个 container 用户以应对这种情况。
+
+## 直接在 start.sh 切换并继续执行（单行）
+使用这个命令来执行单行命令（适用于启动如 SteamCMD 这种交互式终端）
+
+```bash
+su container -c "命令"
+```
+
+例如
+
+```bash
+su container -c "steamcmd“
+```
+
+## 直接在 start.sh 切换并继续执行（多行）
+![示例图](/img/pages/web/custom-java-default_shell-1.png)
+
+您需要在定义 所有变量后，使用这个命令切换为 container 以继续执行下面的命令（例如 whoami 和 ls）
+
+```bash
+su container << 'EOF'
+```
+
+并且，您需要在行尾写入 `EOF` 以保证与上文 `su -l container << 'EOF'` 的连接。
+
+![su container 多行命令示例](/img/pages/web/custom-java-default_shell-2.png)
+
+执行后如图所示：
+![su container 执行结果](/img/pages/web/custom-java-default_shell-3.png)
+
+## 以 container 的身份启动另一个脚本
+![示例图](/img/pages/web/custom-java-default_shell-4.png)
+
+如果您不希望看到 EOF 出现在您的脚本，可以这样操作：
+
+先写入一个
+
+```bash
+chmod +x "/home/container/run.sh"
+```
+
+给 `run.sh` 可执行权限后，再写入一行
+
+```bash
+su container -c '/bin/bash /home/container/run.sh'
+```
+
+它将以 `container` 用户的身份，执行 `/home/container` 目录下的 `run.sh`
+更清爽！
+
+我们写入一个 `run.sh` 来测试：
+![编写脚本示例](/img/pages/web/custom-java-default_shell-5.png)
+
+执行后如图所示：
+![脚本执行结果](/img/pages/web/custom-java-default_shell-6.png)

@@ -1,0 +1,78 @@
+---
+title: "【AIO V1】环境调用方法"
+---
+
+不管是什么方法，请阅读后查看【调用信息对应表】后才可使用
+
+[调用信息对应表](/docs/web/custom_image/aio_v1/path_list)
+
+## Mise 变量调用（可对 全局 / 仅单文件夹 生效）
+<Callout type="error" title="警告">
+
+使用本方法需要环境标注 `基于 Mise 部署`
+
+</Callout>
+
+> 使用 Mise 时，您可以不强制指定具体版本
+>
+> 如 Python 3.9.22
+您既可以采用 python@3.9.22 作为包名
+也可以采用 python@3.9 一键指定我们给您提供的版本
+>
+
+以 `Java` 为例，如果您需要使用`java`环境变量（如 java --version），您可以根据下述提示进行操作
+
+<Callout type="warn" title="警告">
+
+请对应《调用信息对应表》的 `Mise 包名`
+
+</Callout>
+
+## 全局调用一个版本的 Mise 包
+```bash
+mise use -g {mise 包名}
+```
+
+> Mise 包名详见 [调用信息对应表](/docs/web/custom_image/aio_v1/path_list)
+>
+
+（如 mise use -g java@zulu-21，运行`java --version`）后，将显示
+
+![mise 全局调用 java 示例](/img/pages/web/customer-aio_v1-how_to_use-1.png)
+
+它将在全局（如 `/tmp` 和 `/home`及所有文件夹下都能够调用 java）
+
+## 仅在当前文件夹及所有子文件夹调用一个版本的 Mise 包
+```bash
+mise use --env local {mise 包名}
+```
+
+> Mise 包名详见 [调用信息对应表](/docs/web/custom_image/aio_v1/path_list)
+>
+
+（如 mise use --env local java@zulu-21，运行`java --version`）后，将显示![mise 局部调用 java 示例](/img/pages/web/customer-aio_v1-how_to_use-2.png)
+
+仅`/home/container`或例如`/home/container/test/1.jar`这类在`/home/container`目录下的文件或文件夹中，这个环境变量将生效。
+
+## 环境变量调用（通用）
+<Callout type="warn" title="警告">
+
+请对应【调用信息对应表】的 `环境变量`
+
+</Callout>
+
+以 `Java` 为例，一个 `${openjdk+版本号}` （如 `${openjdk8}` 表示 Java 8），可替换`java`使用
+如图所示：
+![环境变量调用 java 示例](/img/pages/web/customer-aio_v1-how_to_use-3.png)
+
+## 绝对路径调用（通用）
+<Callout type="warn" title="警告">
+
+请对应【调用信息对应表】的 `绝对路径`
+
+</Callout>
+
+一个 `绝对路径`，（如 /mise/installs/java/zulu-8/bin/java 表示 Java 8），可替换`java`或其他（如 `node` `python`） 使用。
+
+如图所示：
+![绝对路径调用 java 示例](/img/pages/web/customer-aio_v1-how_to_use-4.png)

@@ -1,0 +1,16 @@
+{
+  "title": "官网使用指南",
+  "root": true,
+  "pages": [
+    "intro",
+    "register",
+    "create_server",
+    "easy_to_use",
+    "supported_browsers",
+    "faq",
+    "gethelp",
+    "web_usage",
+    "advanced",
+    "custom_image"
+  ]
+}

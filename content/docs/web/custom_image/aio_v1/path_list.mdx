@@ -1,0 +1,56 @@
+---
+title: "【AIO V1】调用信息对应表"
+---
+
+## 系统变量
+| 变量名 | 变量含义 | 默认值 | 调用示例（bash） | 调用示例含义 |
+| --- | --- | --- | --- | --- |
+| SERVER_MEMORY | 服务器内存，单位 M | 以你目前使用实例规格为准 | maxmem=$((SERVER_MEMORY - 1000)) | 定义名为 maxmem 的变量，值为（服务器内存-1000）M |
+| SERVER_PORT | 服务器主端口 | 以你目前使用实例规格为准 | sed -i "s/^server-port=.*/server-port=$SERVER_PORT/; t; a server-port=$SERVER_PORT" server.properties | 将服务器端口写进 server.properties 中 server-port 项 |
+| TZ | 时区 | Asia/Shanghai | java -Duser.timezone=$TZ -jar your-app.jar | 启动 java 程序，使用 TZ 变量作为时区 |
+
+## mise 变量
+
+列出有关已安装/激活工具的信息：
+
+```bash
+mise ls | cat
+```
+
+![mise ls 命令输出](/img/pages/web/customer-aio_v1-path_list-1.png)
+
+### Go
+| 版本 | Mise 包名 | 环境变量 | 绝对路径 |
+| --- | --- | --- | --- |
+| Go 1.24.2 | go@1.24.2 | `${go1_24}` | /mise/installs/go/1.24/bin/go |
+
+### Java
+| 版本 | Mise 包名 | 环境变量 | 绝对路径 |
+| --- | --- | --- | --- |
+| ZuluJDK 8 | java@zulu-8 | `${openjdk8}` | /mise/installs/java/zulu-8/bin/java |
+| ZuluJDK 11 | java@zulu-11 | `${openjdk11}` | /mise/installs/java/zulu-11/bin/java |
+| ZuluJDK 16 | java@zulu-16 | `${openjdk16}` | /mise/installs/java/zulu-16/bin/java |
+| ZuluJDK 17 | java@zulu-17 | `${openjdk17}` | /mise/installs/java/zulu-17/bin/java |
+| ZuluJDK 19 | java@zulu-19 | `${openjdk19}` | /mise/installs/java/zulu-19/bin/java |
+| ZuluJDK 21 | java@zulu-21 | `${openjdk21}` | /mise/installs/java/zulu-21/bin/java |
+
+### .NET
+| 版本 | Mise 包名 | 环境变量 | 绝对路径 |
+| --- | --- | --- | --- |
+| .NET 6 | dotnet-@6 | `${dotnet6}` | /mise/installs/dotnet/6/dotnet |
+| .NET 7 | dotnet@7 | `${dotnet7}` | /mise/installs/dotnet/7/dotnet |
+| .NET 8 | dotnet@8 | `${dotnet8}` | /mise/installs/dotnet/8/dotnet |
+| .NET 9 | dotnet@9 | `${dotnet9}` | /mise/installs/dotnet/9/dotnet |
+
+### Node
+| 版本 | Mise 包名 | 环境变量 | 绝对路径 |
+| --- | --- | --- | --- |
+| Node 22.14.0 | node@22.14.0 | `${node22}` | /mise/installs/node/22/bin/node |
+
+### Python
+| 版本 | Mise 包名 | 环境变量 | 绝对路径 |
+| --- | --- | --- | --- |
+| Python 3.9.22 | python@3.9.22 | `${python3_9}` | /mise/installs/python/3.9/bin/python |
+| Python 3.10.17 | python@3.10.17 | `${python3_10}` | /mise/installs/python/3.10/bin/python |
+| Python 3.12.10 | python@3.12.10 | `${python3_12}` | /mise/installs/python/3.12/bin/python |
+| Python 3.13.3 | python@3.13.3 | `${python3_13}` | /mise/installs/python/3.13/bin/python |

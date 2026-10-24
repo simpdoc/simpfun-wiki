@@ -1,0 +1,400 @@
+---
+title: "【MCBE】服务端配置文件介绍"
+---
+
+本篇文档为 server.properties 的配置详解。
+
+开服前建议先熟悉一遍 server.properties 的配置。
+
+## 配置文件注释翻译
+
+<Callout type="info" title="提示">
+
+以下内容取自 BDS 1.26.43.1 并使用 DeepSeek 进行翻译，由人工进行校对。
+
+</Callout>
+
+```properties title="server.properties"
+server-name=Dedicated Server
+# 用作服务器名称
+# 允许值：不含分号（;）的任何字符串
+
+gamemode=survival
+# 设置新玩家的游戏模式。
+# 允许值："survival"（生存模式）、"creative"（创造模式）或 "adventure"（冒险模式）
+
+force-gamemode=false
+# force-gamemode=false（或 server.properties 中未定义 force-gamemode）
+# 会阻止服务器向客户端发送除世界创建时保存的游戏模式值以外的其他游戏模式值，
+# 即使这些值是在世界创建后在 server.properties 中设置的。
+#
+# force-gamemode=true 会强制服务器向客户端发送除世界创建时保存的游戏模式值以外的其他游戏模式值，
+# 如果这些值是在世界创建后在 server.properties 中设置的。
+
+difficulty=easy
+# 设置世界的难度。
+# 允许值："peaceful"（和平）、"easy"（简单）、"normal"（普通）或 "hard"（困难）
+
+allow-cheats=false
+# 如果为 true，则可以使用命令等作弊功能。
+# 允许值："true" 或 "false"
+
+max-players=10
+# 服务器上可以同时游戏的最大玩家数。
+# 允许值：任何正整数
+
+online-mode=true
+# 如果为 true，则所有连接的玩家都必须通过 Xbox Live 身份验证。
+# 连接到远程（非 LAN）服务器的客户端无论此设置如何，都将始终需要 Xbox Live 身份验证。
+# 如果服务器接受来自 Internet 的连接，则强烈建议启用 online-mode。
+# 允许值："true" 或 "false"
+
+allow-list=true
+# 如果为 true，则所有连接的玩家都必须列在单独的 allowlist.json 文件中。
+# 允许值："true" 或 "false"
+
+server-port=19132
+# 服务器应监听的 IPv4 端口。
+# 允许值：范围 [1, 65535] 内的整数
+
+server-portv6=19133
+# 服务器应监听的 IPv6 端口。当 `transport=nethernet` 时此属性将被忽略，
+# 此时将在 `server-port` 上打开一个双栈套接字。
+# 允许值：范围 [1, 65535] 内的整数
+
+# server-ip=
+# 留空以绑定到所有接口。当 `transport=raknet` 时此属性将被忽略。
+# 允许值：IPv4 或 IPv6 字面量，或留空。
+
+# server-udp-ports=
+# 配置 UDP 客户端传输端口。允许多个逗号分隔的条目，
+# 此属性也可以出现在多行中以累积配置。
+# 当 `transport=raknet` 时此属性将被忽略。
+# 允许值：
+#   * `internal` 或 `start-end` —— 内部端口（或范围）约束 UDP 本地端口分配窗口。
+#   * `[ip:]external[-external]:internal[-internal]` —— 额外发布一个客户端可访问的外部映射。
+#     冒号两边的范围长度必须相同。
+#
+# 示例：
+#   server-udp-ports=49152-49200（仅内部端口范围）
+#   server-udp-ports=19132:32000（外部端口 19132 映射到内部端口 32000）
+#   server-udp-ports=203.0.113.10:19132-19140:32000-32008
+#   server-udp-ports=[2001:db8::1]:19132:32000,32000
+
+transport=raknet
+# 服务器应使用的传输协议。
+# 允许值："raknet" 或 "nethernet"
+#
+# 注释：raknet 是传统基岩服务器网络协议，稳定且兼容性最好；nethernet 是面向未来的新版传输协议，目前主要用于 Xbox Live/WebRTC 场景，普通 BDS 服务器不要改。
+
+enable-lan-visibility=true
+# 监听并响应在 LAN 上寻找服务器的客户端。
+# 当 `transport=raknet` 时，即使 `server-port` 和 `server-portv6` 使用了非默认值，
+# 此设置也会使服务器绑定到默认端口（19132、19133）。
+# 如果不需要 LAN 发现，或在同一主机上运行多个服务器可能导致端口冲突时，
+# 请考虑关闭此选项。
+# 允许值："true" 或 "false"
+#
+# 注：在 26.30 及以上版本中，关闭此项会导致广域网玩家无法连接，因此不建议关闭。
+
+view-distance=32
+# 最大允许视距（以区块数为单位）。
+# 允许值：大于或等于 5 的正整数
+
+tick-distance=4
+# 世界将在距离任何玩家此数量的区块范围内进行 tick 更新。
+# 允许值：范围 [4, 12] 内的整数
+
+player-idle-timeout=30
+# 玩家空闲达到此分钟数后将被踢出。如果设为 0，则玩家可以无限期空闲。
+# 允许值：任何非负整数
+
+# allow-player-joining=true
+# 设为 'false' 时，除非通过脚本（通过 AsyncPlayerJoinBeforeEvent）明确允许，
+# 否则玩家将无法加入服务器。
+# 允许值：true, false
+# 默认值：true
+
+max-threads=8
+# 服务器尝试使用的最大线程数。如果设为 0 或删除此配置，则将尽可能多地使用线程。
+# 允许值：任何正整数
+
+level-name=Bedrock level
+# 允许值：不含分号（;）或文件名非法字符（/\n\r\t\f`?*\\<>|\":）的任何字符串
+
+level-seed=
+# 用于随机化世界
+# 允许值：任何字符串
+
+default-player-permission-level=member
+# 首次加入的新玩家的权限等级。
+# 允许值："visitor"（访客）、"member"（成员）、"operator"（操作员）
+
+texturepack-required=false
+# 强制客户端使用当前世界中的纹理包
+# 允许值："true" 或 "false"
+
+content-log-file-enabled=false
+# 启用将内容错误记录到文件
+# 允许值："true" 或 "false"
+
+content-log-console-output-enabled=false
+# 启用将内容错误输出到 stdout
+# 允许值："true" 或 "false"
+
+content-log-level=info
+# 设置最低内容日志级别（error 为最高级别）
+# 允许值："error"、"warning"、"info"、"verbose"
+
+compression-threshold=1
+# 确定要压缩的原始网络有效负载的最小大小
+# 允许值：0-65535
+
+compression-algorithm=zlib
+# 确定网络传输使用的压缩算法
+# 允许值："zlib"、"snappy"
+
+server-authoritative-movement-strict=false
+# 设为 true 以对玩家位置更加严格，并更少接受客户端信息。
+# 这意味着客户端将收到更多位置修正。在高延迟情况下，这会影响玩家在移动方块周围的行为。
+
+server-authoritative-dismount-strict=false
+# 设为 true 以对玩家下马位置更加严格。
+# 这意味着在高延迟情况下，客户端将在下马位置收到修正。
+
+server-authoritative-entity-interactions-strict=false
+# 设为 true 以对实体交互更加严格。
+# 这意味着客户端将对实体交互更加严格。在高延迟情况下，这会影响玩家之间的交互。
+
+player-position-acceptance-threshold=0.5
+# 这是客户端与服务器玩家位置之间差异的容差值。这有助于在服务器和客户端对动作开始时间
+# 有不同理解的情况下（例如伤害击退或被活塞推动），避免过于频繁地发送修正。
+# 数值越高，服务器在要求修正之前的容忍度就越高。超过 1.0 的数值会增加允许作弊的可能性。
+
+player-movement-action-direction-threshold=0.85
+# 玩家攻击方向与视线方向可允许的差异量。
+# 允许值：范围 [0, 1] 内的任何值，其中 1 表示玩家视线方向
+# 与攻击方向必须完全匹配，0 表示两个方向可以
+# 相差最大 90 度（含）。
+
+server-authoritative-block-breaking-pick-range-scalar=1.5
+# 如果为 true，服务器将与客户端同步计算方块挖掘操作，以便验证客户端在认为自己可以破坏方块时是否确实应该能够破坏方块。
+
+chat-restriction=None
+# 允许值："None"、"Dropped"、"Disabled"
+# 这表示对加入服务器的每个玩家应用聊天限制的级别。
+# "None" 是默认值，表示正常的自由聊天。
+# "Dropped" 表示聊天消息将被丢弃且永远不会发送给任何客户端。玩家会收到一条消息告知该功能已禁用。
+# "Disabled" 表示除非玩家是操作员，否则聊天 UI 根本不会出现。不会向玩家显示任何信息。
+
+disable-player-interaction=false
+# 如果为 true，服务器将通知客户端在与世界交互时应忽略其他玩家。此设置并非服务器权威性的。
+
+client-side-chunk-generation-enabled=true
+# 如果为 true，服务器将通知客户端它们有能力在玩家交互距离之外生成可视化的区块。
+
+block-network-ids-are-hashes=true
+# 如果为 true，服务器将发送哈希后的方块网络 ID，而不是从 0 开始递增的 ID。
+# 这些 ID 是稳定的，不会因其他方块更改而改变。
+
+disable-persona=false
+# 仅供内部使用
+
+disable-custom-skins=false
+# 如果为 true，则禁用玩家在 Minecraft 商店资源或游戏内资源之外自定义的皮肤。
+# 此设置用于禁用玩家可能制作的不当自定义皮肤。
+
+server-build-radius-ratio=Disabled
+# 允许值："Disabled" 或范围 [0.0, 1.0] 内的任何值
+# 如果为 "Disabled"，服务器将动态计算要生成玩家视野的多少部分，将剩余部分分配给客户端构建。
+# 否则，使用覆盖比例告诉服务器生成玩家视野的多少部分，忽略客户端硬件能力。
+# 仅在 client-side-chunk-generation-enabled 启用时有效
+
+allow-outbound-script-debugging=false
+# 允许脚本调试器 'connect' 命令和 script-debugger-auto-attach=connect 模式。
+
+allow-inbound-script-debugging=false
+# 允许脚本调试器 'listen' 命令和 script-debugger-auto-attach=listen 模式。
+
+#force-inbound-debug-port=19144
+# 锁定入站（监听）调试器端口，如果未设置则默认使用 19144。使用 script-debugger-auto-attach=listen 模式时需要此项。
+
+script-debugger-auto-attach=disabled
+# 尝试在关卡加载时附加脚本调试器，需要设置入站端口或连接地址，并启用入站或出站连接。
+# "disabled" 不会自动附加。
+# "connect" 服务器将尝试连接到指定端口上处于监听模式的调试器。
+# "listen" 服务器将监听来自调试器的入站连接尝试，使用指定端口上的 connect 模式。
+
+#script-debugger-auto-attach-connect-address=localhost:19144
+# 当自动附加模式设为 'connect' 时，使用 host:port 格式的此地址。script-debugger-auto-attach=connect 模式需要此项。
+
+#script-debugger-auto-attach-timeout=0
+# 在世界加载时等待调试器附加的时间量。
+
+#script-debugger-passcode=
+# VSCode 将提示用户输入密码以连接。
+
+#script-watchdog-enable=true
+# 启用看门狗（默认 = true）。
+
+#script-watchdog-enable-exception-handling=true
+# 启用通过 events.beforeWatchdogTerminate 事件的看门狗异常处理（默认 = true）。
+
+#script-watchdog-enable-shutdown=true
+# 在未处理的看门狗异常情况下启用服务器关闭（默认 = true）。
+
+#script-watchdog-hang-exception=true
+# 当发生挂起时抛出严重异常，中断脚本执行（默认 = true）。
+
+#script-watchdog-hang-threshold=10000
+# 设置单 Tick 挂起的看门狗阈值（默认 = 10000 毫秒）。
+
+#script-watchdog-spike-threshold=100
+# 设置单 Tick 峰值的看门狗阈值。
+# 如果未设置此属性，则禁用警告。
+
+#script-watchdog-slow-threshold=10
+# 设置跨多个 Tick 的慢脚本看门狗阈值。
+# 如果未设置此属性，则禁用警告。
+
+#script-watchdog-memory-warning=100
+# 当组合内存使用量超过给定阈值（以 MB 为单位）时生成内容日志警告。
+# 将此值设为 0 将禁用警告。（默认 = 100，最大 = 2000）
+
+#script-watchdog-memory-limit=250
+# 当组合脚本内存使用量超过给定阈值（以 MB 为单位）时保存并关闭世界。
+# 将此值设为 0 将禁用限制。（默认 = 250，最大 = 2000）
+
+#diagnostics-capture-auto-start=false
+# 在关卡加载时启动诊断捕获会话（默认 = false）
+
+#diagnostics-capture-max-files=5
+# 在循环覆盖之前要保留的最大诊断捕获文件数。（默认 = 5）
+
+#diagnostics-capture-max-file-size=2097152
+# 当前诊断捕获文件在系统循环到新文件前的最大字节数。（默认 = 2097152，2 MB）
+
+#disable-client-vibrant-visuals=true
+# 如果为 true，服务器将告知客户端使用次优可用的图形设置，而不是 Vibrant Visuals。
+
+#sentry-rate-limit-window=60
+# 对发送到 Sentry 的脚本错误应用限制的时间窗口（秒）。
+# 默认值：60
+# 允许值：任何正整数，或 0 以禁用限制
+
+#sentry-max-events-per-window=10
+# 在指定时间窗口内允许的最大事件数。
+# 默认值：10
+# 允许值：任何正整数，或 0 以禁用向 Sentry 发送事件
+
+#enable-profiler=true
+# 如果为 true，启用性能分析支持。
+
+#enable-editor-network-metrics=true
+# 如果为 true，启用网络指标收集，以便在调试器中显示实时诊断信息
+
+#convert-world-to-editor-project=false
+# 如果为 true 且服务器使用 Editor=true 命令行标志启动，则现有
+# 原版世界将在加载时升级为编辑器项目。如果没有 Editor=true 则无效。
+# 默认值：false
+```
+
+## 隐藏的配置项
+
+基岩版的服务器有部分配置默认情况下是隐藏的，不会写在 `server.properties` 、BDS 内置文档中。 Minecraft Wiki 上也没有介绍这些内容。
+
+### op-permission-level
+
+该配置项在 Java 版中默认写入 server.properties 文件，但基岩版的配置文件中并未包含此项。
+
+不过该配置在基岩版中仍然生效。将其值设置为 `4` 后，最明显的变化是:“**暂停菜单 → 设置 → 游戏**”中的世界选项和作弊选项将变为**可调整状态**，例如开启坐标显示、启用死亡不掉落等，具体效果如下方动图所示。
+
+该配置的默认值为 `1`，相关说明可参阅 Minecraft Wiki 中"命令"页面的"权限等级"章节。
+
+如需应用此配置，请在 `server.properties` 文件中另起一行添加以下内容，然后重新启动服务器即可：
+
+```properties
+op-permission-level=4
+```
+
+<img src="/img/pages/mcbe/03-sp-1.gif" alt="演示"width="50%" />
+
+### level-type
+
+该配置项在 Java 版中默认写入 `server.properties` 文件，但基岩版的配置文件中并未包含此项。
+
+此配置用于决定新生成世界的类型，默认值为 `DEFAULT` 。可选值及对应的世界类型如下：
+
+| 值 | 世界类型 |
+| --- | --- |
+| `DEFAULT` | 默认(无限世界) |
+| `FLAT` | 超平坦 |
+| `LEGACY` | [旧世界](https://zh.minecraft.wiki/w/%E6%97%A7%E4%B8%96%E7%95%8C%E7%B1%BB%E5%9E%8B) |
+
+如需应用此配置，请在`server.properties`文件中另起一行添加该项。配置生效前，请先关闭服务器并删除现有地图，重新启动服务器后，新生成的世界将按所选类型创建。
+
+```properties
+level-type=DEFAULT
+```
+
+### language
+此配置项为基岩版独有，用于调整服务器控制台的部分文本语言（如命令执行时的提示信息），默认值为`en_US`。
+
+如需将控制台语言调整为中文，请在`server.properties`文件中另起一行添加以下配置，然后重新启动服务器即可生效：
+
+```properties
+language=zh_CN
+```
+
+<img src="/img/pages/mcbe/03-sp-2.png" alt="语言更改为zhcn后效果" width="70%" />
+
+<Accordions>
+<Accordion title="附：可以使用的语言列表(点击展开)">
+
+| 语言代码 | 语言名称 |
+|---------|---------|
+| `en_US` | 英语（美国） |
+| `en_GB` | 英语（英国） |
+| `de_DE` | 德语（德国） |
+| `es_ES` | 西班牙语（西班牙） |
+| `es_MX` | 西班牙语（墨西哥） |
+| `fr_FR` | 法语（法国） |
+| `fr_CA` | 法语（加拿大） |
+| `it_IT` | 意大利语（意大利） |
+| `ja_JP` | 日语（日本） |
+| `ko_KR` | 韩语（韩国） |
+| `pt_BR` | 葡萄牙语（巴西） |
+| `pt_PT` | 葡萄牙语（葡萄牙） |
+| `ru_RU` | 俄语（俄罗斯） |
+| `zh_CN` | 简体中文（中国） |
+| `zh_TW` | 繁体中文（中国台湾） |
+| `nl_NL` | 荷兰语（荷兰） |
+| `bg_BG` | 保加利亚语（保加利亚） |
+| `cs_CZ` | 捷克语（捷克） |
+| `da_DK` | 丹麦语（丹麦） |
+| `el_GR` | 希腊语（希腊） |
+| `fi_FI` | 芬兰语（芬兰） |
+| `hu_HU` | 匈牙利语（匈牙利） |
+| `id_ID` | 印尼语（印度尼西亚） |
+| `nb_NO` | 挪威博克马尔语（挪威） |
+| `pl_PL` | 波兰语（波兰） |
+| `sk_SK` | 斯洛伐克语（斯洛伐克） |
+| `sv_SE` | 瑞典语（瑞典） |
+| `tr_TR` | 土耳其语（土耳其） |
+| `uk_UA` | 乌克兰语（乌克兰） |
+
+</Accordion>
+</Accordions>
+
+### emit-server-telemetry
+此配置项为基岩版独有，用于控制服务端是否向 Mojang 发送遥测数据。启用后，服务端将定期向官方发送运行数据，以帮助开发者改进游戏品质。
+
+默认值为`false`（不启用）。
+
+如需启用遥测数据上报，请在`server.properties`文件中另起一行添加以下配置，然后重新启动服务器即可生效：
+
+```properties
+emit-server-telemetry=true
+```
+
+（你为什么要启用这玩意？）

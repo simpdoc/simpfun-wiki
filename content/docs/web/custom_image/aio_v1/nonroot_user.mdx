@@ -1,0 +1,58 @@
+---
+title: "【AIO V1】使用非 root 用户运行命令"
+---
+
+<Callout type="info" title="信息">
+
+在使用 Java、Wine、SteamCMD、Python 等环境时，您可能会遇到推荐使用非 root 用户去运行程序，而简幻欢提供了一个 container 用户以应对这种情况。
+
+</Callout>
+
+## 使用 container 用户执行单行命令
+使用这个命令来执行单行命令（适用于启动交互式终端）
+
+```bash
+# 使用方法：
+su container -c "命令"
+# 示例：
+su container -c "java --version"
+```
+
+![su container 执行单行命令](/img/pages/web/custom-aio_v1-user-1.png)
+
+## 使用 container 用户执行多行命令
+```bash
+# 使用方法
+
+# su container << 'EOF'
+# 填写多行需要执行的命令
+# ...
+# EOF
+# 示例：
+su container << 'EOF'
+
+whoami
+ls
+
+EOF
+```
+
+该脚本执行后如图所示：
+![su container 执行多行命令](/img/pages/web/custom-aio_v1-user-2.png)
+
+## 以 container 的身份启动另一个脚本
+```bash
+#!/bin/bash
+
+# 如果您不希望看到 EOF 出现在您的脚本，可以这样操作：
+# 1.给予脚本可执行权限
+chmod +x /home/container/run.sh
+
+# 2.使用su切换到container用户并执行脚本，如 run.sh：
+su container -c '/bin/bash /home/container/run.sh'
+
+# 它将以 container 用户的身份，执行 /home/container 目录下的 run.sh,更清爽！
+```
+
+执行后如图所示：
+![container 用户执行脚本结果](/img/pages/web/custom-aio_v1-user-3.png)

@@ -1,0 +1,12 @@
+{
+  "title": "Java 版常用操作",
+  "pages": [
+    "op",
+    "keepinventory",
+    "enable_commandblock",
+    "setworldspawn",
+    "allow_flight",
+    "mobgriefing",
+    "locatorbar"
+  ]
+}

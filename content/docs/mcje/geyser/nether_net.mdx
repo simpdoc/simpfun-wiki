@@ -1,0 +1,78 @@
+---
+title: "允许基岩高版本玩家进入互通服"
+---
+
+<Callout type="warn" title="警告">
+
+本文档于 2026 年 10 月 19 日编写。后续 Geyser 官方可能修改配置；若配置发生变化或失效，请以 [Geyser 官方信息](https://geysermc.org/) 为准。
+
+</Callout>
+
+Geyser 从 1237 版本起提供 NetherNet 支持。
+
+![Geyser 官方文档说明从 1237 版本起支持 NetherNet](/img/pages/mcje/geyser/03-nether_net-1.png)
+
+如果目前仍使用 RakNet 模式，控制台可能会给出以下警告：
+
+![Geyser 控制台提示 NetherNet 支持未启用，10 月 27 日后新版客户端可能无法连接](/img/pages/mcje/geyser/03-nether_net-2.png)
+
+这意味着，从 10 月 27 日起，如果玩家更新了客户端，可能无法访问服务器。
+
+<Callout type="warn" title="警告">
+
+必须使用 AIO 镜像或基于 AIO 镜像的第三方镜像，否则会因依赖问题导致无法使用！
+
+</Callout>
+
+## 新建端口
+
+从【控制台】->【您的实例】->【管理】处添加端口。除 Java 版端口外，还需要基岩版端口和 NetherNet 使用的 WebRTC UDP 端口，加上 Java 版端口一共需要三个端口。
+
+![在控制台端口映射页面新增 10326、38194 和 39565 三个端口并点击“新建端口”](/img/pages/mcje/geyser/03-nether_net-3.png)
+
+示例中使用 `10326` 作为基岩版玩家连接端口、`38194` 作为 NetherNet 的 WebRTC UDP 端口，Java 版端口为 `39565`。请按服务商控制台的要求完成对应端口映射，实际端口以服务器配置为准。
+
+## 新版配置 Geyser
+
+Geyser 的配置文件位置随运行方式变化：Spigot/Paper 插件版通常位于 `plugins/Geyser-Spigot/config.yml`；独立端位于 Geyser 安装目录下的 `config.yml`；其他代理端或模组端以实际生成的配置目录为准。
+
+以下配置示例以 Spigot/Paper 插件版为例。无论使用插件版还是独立端，都需要修改对应 `config.yml` 中的 `bedrock` 段，并按以下示例调整：
+
+```yaml
+bedrock:
+  address: 0.0.0.0
+  port: 10326                 # 基岩版玩家连接端口
+  webrtc-port: 38194          # NetherNet 使用的 WebRTC UDP 端口；both 模式下必须与 port 不同
+  transport: both             # 同时兼容旧版 RakNet 客户端与新版 NetherNet 客户端
+  clone-remote-port: false
+
+  signaling:
+    mode: builtin
+    builtin:
+      advertise-addresses:
+        - "103.85.86.51:38194"  # 必须为 play.simpfun.cn 解析的 IPv4地址，端口必须与 webrtc-port 一致
+
+      https:
+        certificate: ''
+        private-key: ''
+        password: ''
+
+java:
+  auth-type: floodgate  # 安装 Floodgate 时使用；未安装 Floodgate 时改为 offline
+```
+
+关键配置说明：
+
+- `transport: both`：同时启用 RakNet 和 NetherNet，兼容旧版与新版客户端。
+- `port`：基岩版玩家的连接端口，示例为 `10326`。
+- `webrtc-port`：NetherNet 使用的 WebRTC UDP 端口，示例为 `38194`；在 `both` 模式下不能与 `port` 相同。
+- `advertise-addresses`：必须填写 IP 字面量，不能填写域名。先执行 `nslookup play.simpfun.cn` 获取当前解析 IP，再与 `webrtc-port` 组合；当前解析结果为 `103.85.86.51`，因此示例为 `103.85.86.51:38194`。若使用 IPv6，格式为 `[IPv6]:端口`。DNS 解析结果变化时，需要同步更新此配置。
+
+修改完成后重启服务器，使配置生效。
+
+## 认证模式
+
+`java.auth-type` 需要与服务器的认证方式对应：
+
+- 安装 Floodgate 的服务器必须使用 `floodgate`。
+- 未安装 Floodgate 的服务器使用 `offline`。

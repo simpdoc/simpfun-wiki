@@ -1,0 +1,9 @@
+{
+  "title": "MCBE 文档",
+  "root": true,
+  "pages": [
+    "intro",
+    "select_server",
+    "server_properties"
+  ]
+}
