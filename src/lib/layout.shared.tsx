@@ -13,7 +13,7 @@ export function baseOptions(): BaseLayoutProps {
       title: (
         <span className="flex items-center gap-2">
           <img src="/img/simpfun.png" alt="" className="h-7 w-auto" />
-          <span>{appName}</span>
+          <span className="font-bold">{appName}</span>
         </span>
       ),
     },
