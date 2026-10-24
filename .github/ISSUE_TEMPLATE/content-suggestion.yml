@@ -1,0 +1,86 @@
+name: 文档内容建议
+description: 建议新增文档、补充内容或改进说明方式
+title: "[内容建议] "
+labels:
+  - documentation
+  - suggestion
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你为简幻欢社区维基提出建议！
+
+        提交前请先搜索一下 [已有 Issue](https://github.com/simpdoc/simpfun-wiki/issues)，避免重复。
+
+  - type: dropdown
+    id: target
+    attributes:
+      label: 相关文档
+      description: 这条建议和哪一套文档有关？
+      options:
+        - Web（官网使用指南）
+        - MCJE（Minecraft Java 版）
+        - MCBE（Minecraft 基岩版）
+        - 站点整体 / 首页 / 导航
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: 相关页面或位置
+      description: 如果已经有相关页面，请填写页面链接或标题。
+      placeholder: 例如：https://simpdoc.top/mcje/server-setup/ 或「服务端选型与开服」一节
+    validations:
+      required: false
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 建议类型
+      options:
+        - 新增一篇文档
+        - 补充现有内容
+        - 调整说明方式，降低理解门槛
+        - 补充配图或示例
+        - 内容重组或结构调整
+        - 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: 建议内容
+      description: 请说明你希望补充或修改什么，越具体越好。
+      placeholder: 例如：希望补充「如何在 4G 内存实例下设置 view-distance」的说明……
+    validations:
+      required: true
+
+  - type: textarea
+    id: reason
+    attributes:
+      label: 为什么需要
+      description: 说明这个建议解决的问题、适用场景，或你遇到的困惑。
+      placeholder: 例如：默认配置会让 4G 实例频繁卡顿，新用户容易踩坑……
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: 补充信息
+      description: 参考链接、截图（请先打码敏感信息）、相关讨论等。
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认事项
+      options:
+        - label: 我已搜索过已有 Issue，确认这不是重复建议
+          required: true
+        - label: 我上传的截图已清理掉 Token、IP、账号等敏感信息
+          required: false

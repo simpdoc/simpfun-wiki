@@ -1,5 +1,7 @@
 {
   "title": "官网使用指南",
+  "description": "简幻欢官网使用指南",
+  "icon": "/img/simpfun-logo.png",
   "root": true,
   "pages": [
     "intro",

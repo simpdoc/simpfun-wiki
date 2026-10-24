@@ -12,6 +12,7 @@
 *.tsbuildinfo
 
 # misc
+# 。大帅_商店
 .DS_Store
 *.pem
 /.pnp
@@ -24,3 +25,9 @@ yarn-error.log*
 .env*.local
 .vercel
 next-env.d.ts
+
+# AI coding agent
+.codex
+.claude
+.opencode
+.mimocode

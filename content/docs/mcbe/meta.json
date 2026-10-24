@@ -1,5 +1,7 @@
 {
   "title": "MCBE 文档",
+  "description": "Minecraft 基岩版文档",
+  "icon": "/img/mcbe-logo.png",
   "root": true,
   "pages": [
     "intro",

@@ -1,5 +1,7 @@
 {
   "title": "MCJE 文档",
+  "description": "Minecraft Java 版文档",
+  "icon": "/img/mcje-logo.png",
   "root": true,
   "pages": [
     "intro",

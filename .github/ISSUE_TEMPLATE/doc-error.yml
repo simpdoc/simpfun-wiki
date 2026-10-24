@@ -1,0 +1,95 @@
+name: 文档错误提交
+description: 报告文档中的错误、失效内容或与实际情况不符之处
+title: "[文档错误] "
+labels:
+  - documentation
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你帮忙揪出问题！
+
+        如果只是**错别字或小笔误**，你也可以直接点开对应页面底部的 **「编辑此页」**，改完直接提 PR，会更快。
+
+  - type: dropdown
+    id: target
+    attributes:
+      label: 相关文档
+      description: 出错的内容属于哪一套文档？
+      options:
+        - Web（官网使用指南）
+        - MCJE（Minecraft Java 版）
+        - MCBE（Minecraft 基岩版）
+        - 站点整体 / 首页 / 导航
+        - 其他
+    validations:
+      required: true
+
+  - type: input
+    id: location
+    attributes:
+      label: 错误所在页面
+      description: 请尽量填写页面链接或标题，方便我们快速定位。
+      placeholder: 例如：https://simpdoc.top/web/register/ 或「【MCJE】主流服务端介绍与选择」的「Paper」一节
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 错误类型
+      options:
+        - 内容错误（说法与实际不符）
+        - 内容过时（版本或界面已更新）
+        - 步骤缺失或顺序错误，无法照做
+        - 链接失效
+        - 排版或渲染问题
+        - 错别字或语句不通
+        - 其他
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际是什么样
+      description: 请引用出错的原文，或描述你看到的情况。
+      placeholder: 例如：文档写「变配不会中断服务」，但实际操作时实例会重启……
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 正确的情况应该是什么
+      description: 说明正确的做法、正确说法，或你验证过的结果。
+    validations:
+      required: true
+
+  - type: input
+    id: env
+    attributes:
+      label: 你的环境
+      description: 涉及面板、游戏版本或系统时请补充，便于我们判断是否与版本有关。
+      placeholder: 例如：Windows 11 / Chrome 131；MCJE 1.21.4 Paper
+    validations:
+      required: false
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 截图或日志
+      description: 可直接拖拽图片或粘贴日志文本。**请务必先打码 Token、IP、账号等敏感信息。**
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: 确认事项
+      options:
+        - label: 我已搜索过已有 Issue，确认这不是重复报告
+          required: true
+        - label: 我上传的截图与日志已清理掉 Token、IP、账号等敏感信息
+          required: true
