@@ -4,7 +4,7 @@
   "icon": "/img/simpfun-logo.png",
   "root": true,
   "pages": [
-    "intro",
+    "index",
     "register",
     "create_server",
     "easy_to_use",

@@ -3,29 +3,12 @@ import type { Metadata } from 'next';
 import { ArrowRight, BookOpen, HeartHandshake, Sparkles } from 'lucide-react';
 import { source } from '@/lib/source';
 import { appName } from '@/lib/shared';
+import { collectDocsSections } from '@/lib/docs-sections';
 
 export const metadata: Metadata = {
   title: { absolute: appName },
   description: 'Not Official, but still useful.',
 };
-
-const docEntries = [
-  {
-    id: 'web',
-    title: '官网使用指南',
-    href: '/docs/web/intro',
-  },
-  {
-    id: 'mcje',
-    title: 'MCJE 文档',
-    href: '/docs/mcje/intro',
-  },
-  {
-    id: 'mcbe',
-    title: 'MCBE 文档',
-    href: '/docs/mcbe/intro',
-  },
-];
 
 const features = [
   {
@@ -45,11 +28,7 @@ const features = [
   },
 ];
 
-const footerLinks = [
-  {
-    title: '文档列表',
-    items: docEntries.map((doc) => ({ label: doc.title, href: doc.href })),
-  },
+const footerLinkGroups = [
   {
     title: '官方链接',
     items: [
@@ -74,6 +53,14 @@ function isExternal(href: string) {
 
 export default function HomePage() {
   const pages = source.getPages();
+  const docEntries = collectDocsSections(source.getPageTree());
+  const footerLinks = [
+    {
+      title: '文档列表',
+      items: docEntries.map((doc) => ({ label: doc.name, href: doc.url })),
+    },
+    ...footerLinkGroups,
+  ];
 
   return (
     <main className="flex flex-1 flex-col">
@@ -88,15 +75,15 @@ export default function HomePage() {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           {docEntries.map((doc, index) => (
             <Link
-              key={doc.href}
-              href={doc.href}
+              key={doc.url}
+              href={doc.url}
               className={
                 index === 0
                   ? 'rounded-lg bg-fd-primary px-4 py-2 text-sm font-medium text-fd-primary-foreground transition-opacity hover:opacity-90'
                   : 'rounded-lg border bg-fd-card px-4 py-2 text-sm font-medium transition-colors hover:bg-fd-accent/60'
               }
             >
-              {doc.title}
+              {doc.name}
             </Link>
           ))}
         </div>
@@ -105,18 +92,19 @@ export default function HomePage() {
       <section className="mx-auto w-full max-w-5xl px-4 pb-16">
         <div className="grid gap-4 md:grid-cols-3">
           {docEntries.map((doc) => {
-            const count = pages.filter((page) => page.slugs[0] === doc.id).length;
+            const count = pages.filter((page) => page.slugs[0] === doc.slug).length;
 
             return (
               <Link
-                key={doc.href}
-                href={doc.href}
+                key={doc.url}
+                href={doc.url}
                 className="group flex flex-col rounded-xl border bg-fd-card p-5 transition-colors hover:bg-fd-accent/40"
               >
                 <div className="flex items-center justify-between gap-2">
-                  <h2 className="font-semibold">{doc.title}</h2>
+                  <h2 className="font-semibold">{doc.name}</h2>
                   <span className="text-xs text-fd-muted-foreground">{count} 篇</span>
                 </div>
+                <p className="mt-2 text-sm text-fd-muted-foreground">{doc.description}</p>
                 <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium">
                   开始阅读
                   <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />

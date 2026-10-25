@@ -4,7 +4,7 @@
   "icon": "/img/mcbe-logo.png",
   "root": true,
   "pages": [
-    "intro",
+    "index",
     "select_server",
     "server_properties"
   ]

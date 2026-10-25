@@ -4,7 +4,7 @@
   "icon": "/img/mcje-logo.png",
   "root": true,
   "pages": [
-    "intro",
+    "index",
     "select_server",
     "server_properties",
     "server_files",

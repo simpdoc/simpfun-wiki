@@ -146,12 +146,8 @@ Fumadocs 的三个包各司其职：
 
 ## Markdown 与 LLM 视图
 
-每篇文档同时存在多个「视图」，这是本站刻意的设计——方便引用、存档和 AI 工具消费：
-
-- 页面 URL 后加 `.md`（如 `/docs/mcje/intro.md`）→ 得到纯 Markdown
-- 请求头带 `Accept: text/markdown` 访问普通文档 URL → 同样返回 Markdown（内容协商）
-- 以上两者实际都由 **`src/proxy.ts`** 重写到 `/llms.mdx/docs/<路径>/content.md`；`proxy.ts` 是 Next.js 16 对原 `middleware.ts` 的新命名，逻辑只有一条：命中就重写，否则放行
 - `/llms.txt`（索引）与 `/llms-full.txt`（全量）由 `src/lib/source.ts` 中的 `docsLlms` 生成
+- 单页 Markdown 由 `src/app/llms.mdx/docs/[[...slug]]/route.ts` 在构建时静态生成，地址为 `/llms.mdx/docs/<路径>/content.md`（如 `/llms.mdx/docs/mcje/content.md`）
 
 > `edgeone.json` 里为 `/llms.mdx/*` 配置了 `Content-Type: text/markdown; charset=utf-8` 响应头，让 Markdown 视图以正确的类型返回。静态导出后这些路由会变成 `out/` 下的静态文件，托管平台需要支持这类 header 配置。
 
@@ -184,7 +180,7 @@ Fumadocs 的三个包各司其职：
 - [ ] `pnpm lint` 通过
 - [ ] `pnpm types:check` 通过
 - [ ] `pnpm build` 通过
-- [ ] `pnpm start` 后抽查 `/`、`/docs/web/intro`、`/docs/mcje/intro`、`/docs/mcbe/intro` 均正常
+- [ ] `pnpm start` 后抽查 `/`、`/docs/web`、`/docs/mcje`、`/docs/mcbe` 均正常
 - [ ] 抽查搜索可用，抽查任一文档页的 `.md` 视图与分享图正常
 - [ ] 新增图片已放入 `public/img/` 且路径以 `/` 开头
 
