@@ -1,6 +1,7 @@
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import type { MDXComponents } from 'mdx/types';
 
 export function getMDXComponents(components?: MDXComponents) {
@@ -10,6 +11,8 @@ export function getMDXComponents(components?: MDXComponents) {
     ImageZoom,
     Accordion,
     Accordions,
+    Tabs,
+    Tab,
     ...components,
   } satisfies MDXComponents;
 }
