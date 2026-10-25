@@ -170,16 +170,14 @@ Initialized environment for MCDReforged in /home/container
 
 在实例`文件`管理处，你能看到如下 MCDR 结构：
 
-```text
-/home/container/
-├── config/
-├── logs/
-├── plugins/
-├── server/
-├── config.yml
-├── permission.yml
-└── ...
-```
+<Files className="mb-4">
+  <Folder name="config" disabled />
+  <Folder name="logs" disabled />
+  <Folder name="plugins" disabled />
+  <Folder name="server" disabled />
+  <File name="config.yml" />
+  <File name="permission.yml" />
+</Files>
 
 <Accordions>
 <Accordion title="ℹ️图示">
@@ -196,21 +194,20 @@ Initialized environment for MCDReforged in /home/container
 > 例如，这是典型的原版 Minecraft 服务端目录结构：
 >
 
-```text
-./
-├── libraries/
-├── logs/
-├── versions/
-├── world/
-├── banned-ips.json
-├── banned-players.json
-├── eula.txt
-├── ops.json
-├── minecraft_server.jar
-├── server.properties
-├── usercache.json
-└── whitelist.json
-```
+<Files>
+  <Folder name="libraries" disabled />
+  <Folder name="logs" disabled />
+  <Folder name="versions" disabled />
+  <Folder name="world" disabled />
+  <File name="banned-ips.json" />
+  <File name="banned-players.json" />
+  <File name="eula.txt" />
+  <File name="ops.json" />
+  <File name="minecraft_server.jar" />
+  <File name="server.properties" />
+  <File name="usercache.json" />
+  <File name="whitelist.json" />
+</Files>
 
 <Callout type="info" title="已准备好服务端了？">
 
