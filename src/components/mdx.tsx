@@ -3,6 +3,7 @@ import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { File, Files, Folder } from 'fumadocs-ui/components/files';
+import { Step, Steps } from 'fumadocs-ui/components/steps';
 import type { MDXComponents } from 'mdx/types';
 
 export function getMDXComponents(components?: MDXComponents) {
@@ -17,6 +18,8 @@ export function getMDXComponents(components?: MDXComponents) {
     Files,
     Folder,
     File,
+    Steps,
+    Step,
     ...components,
   } satisfies MDXComponents;
 }
