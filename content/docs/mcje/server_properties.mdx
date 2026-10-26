@@ -30,10 +30,15 @@ title: "server.properties 详解"
 
 ## 配置文件原文
 
-<Accordions>
-<Accordion title="（点击展开）以下内容来自 Minecraft 26.2：">
+<CodeBlockTabs defaultValue="26.2">
+  <CodeBlockTabsList>
+    <CodeBlockTabsTrigger value="26.2">Minecraft 26.2</CodeBlockTabsTrigger>
+    <CodeBlockTabsTrigger value="1.21.1">Minecraft 1.21.1</CodeBlockTabsTrigger>
+    <CodeBlockTabsTrigger value="1.12.2">Minecraft 1.12.2</CodeBlockTabsTrigger>
+  </CodeBlockTabsList>
+  <CodeBlockTab value="26.2">
 
-```properties title="server.properties"
+```properties
 #Minecraft server properties
 #Wed Jul 15 23:26:16 CST 2026
 accepts-transfers=false
@@ -108,13 +113,10 @@ view-distance=10
 white-list=false
 ```
 
-</Accordion>
-</Accordions>
+  </CodeBlockTab>
+  <CodeBlockTab value="1.21.1">
 
-<Accordions>
-<Accordion title="（点击展开）以下内容来自 Minecraft 1.21.1：">
-
-```properties title="server.properties"
+```properties
 #Minecraft server properties
 #Sun Jul 05 21:08:25 CST 2026
 accepts-transfers=false
@@ -180,13 +182,10 @@ view-distance=10
 white-list=false
 ```
 
-</Accordion>
-</Accordions>
+  </CodeBlockTab>
+  <CodeBlockTab value="1.12.2">
 
-<Accordions>
-<Accordion title="（点击展开）以下内容来自 Minecraft 1.12.2：">
-
-```properties title="server.properties"
+```properties
 #Minecraft server properties
 #Tue Dec 30 16:22:11 CST 2025
 allow-flight=false
@@ -225,8 +224,8 @@ view-distance=10
 white-list=false
 ```
 
-</Accordion>
-</Accordions>
+  </CodeBlockTab>
+</CodeBlockTabs>
 
 ## 常用配置项解析
 <Callout type="info" title="提示">
