@@ -12,7 +12,7 @@
 *.tsbuildinfo
 
 # misc
-# 。大帅_商店
+[Dd]esktop.ini
 .DS_Store
 *.pem
 /.pnp
