@@ -24,7 +24,7 @@
 
 | 项目 | 要求 |
 | --- | --- |
-| Node.js | **20.9 或更高**（Next.js 16 的最低要求，推荐使用 LTS 版本） |
+| Node.js | **24.15.0 或更高**（推荐使用 LTS 版本） |
 | 包管理器 | **pnpm**（本仓库用 `pnpm-lock.yaml` 锁定依赖，请勿混用 npm/yarn） |
 
 pnpm v10+ 默认拦截依赖的安装脚本。本仓库已在 `pnpm-workspace.yaml` 的 `allowBuilds` 中放行 `esbuild` 与 `unrs-resolver`：
