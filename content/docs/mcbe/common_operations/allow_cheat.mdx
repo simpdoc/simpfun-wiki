@@ -1,0 +1,35 @@
+---
+title: "为服务器启用作弊"
+---
+
+如果发现自己拥有管理员权限却不能执行 `/give`、`/gamemode`、`/time`、`/tp` 和 `/gamerule` 等命令的话，说明服务器未启用作弊。
+
+## 启用作弊
+
+<Callout type="warn" title="提示">
+`server.properties` 不支持热重载，请在关闭服务器的情况下对其进行修改。
+</Callout>
+
+在服务器文件管理根目录找到 `server.properties` 文件并打开，在其中找到这一行：
+
+```properties title="server.properties"
+allow-cheat=false
+# If true then cheats like commands can be used.
+# Allowed values: "true" or "false"
+```
+
+将 `false` 改为 `true` 并重启服务器即可启用作弊。
+
+## 启用作弊后游戏里的设置点不动？
+
+在 `server.properties` 中添加以下配置并重新启动服务器。
+
+```properties title="server.properties"
+op-permission-level=4
+```
+
+如下图所示：
+
+![配置示例](/img/pages/mcbe/co/allow_cheat-1.avif)
+
+然后在有 OP 权限的情况下服务器设置就可以更改了。

@@ -6,6 +6,7 @@
   "pages": [
     "index",
     "select_server",
-    "server_properties"
+    "server_properties",
+    "common_operations"
   ]
 }

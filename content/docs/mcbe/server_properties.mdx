@@ -10,125 +10,143 @@ title: "服务端配置文件介绍"
 
 <Callout type="info" title="提示">
 
-以下内容取自 BDS 1.26.43.1 并使用 DeepSeek 进行翻译，由人工进行校对。
+以下内容取自 BDS 1.26.60.6 并使用 DeepSeek 进行翻译，由人工进行校对。
 
 </Callout>
 
 ```properties title="server.properties"
 server-name=Dedicated Server
 # 用作服务器名称
-# 允许值：不含分号（;）的任何字符串
+# 允许值：任意不含分号符号的字符串。
 
 gamemode=survival
 # 设置新玩家的游戏模式。
-# 允许值："survival"（生存模式）、"creative"（创造模式）或 "adventure"（冒险模式）
+# 允许值："survival"、"creative" 或 "adventure"
 
 force-gamemode=false
 # force-gamemode=false（或 server.properties 中未定义 force-gamemode）
-# 会阻止服务器向客户端发送除世界创建时保存的游戏模式值以外的其他游戏模式值，
-# 即使这些值是在世界创建后在 server.properties 中设置的。
+# 会阻止服务器向客户端发送除世界创建时服务器保存的游戏模式值之外的
+# 游戏模式值，即使这些值是在世界创建后于 server.properties 中设置的。
 #
-# force-gamemode=true 会强制服务器向客户端发送除世界创建时保存的游戏模式值以外的其他游戏模式值，
-# 如果这些值是在世界创建后在 server.properties 中设置的。
+# force-gamemode=true 会强制服务器向客户端发送除世界创建时服务器保存的
+# 游戏模式值之外的游戏模式值，如果这些值是在世界创建后于 server.properties 中设置的。
 
 difficulty=easy
-# 设置世界的难度。
-# 允许值："peaceful"（和平）、"easy"（简单）、"normal"（普通）或 "hard"（困难）
+# 设置世界难度。
+# 允许值："peaceful"、"easy"、"normal" 或 "hard"
 
 allow-cheats=false
 # 如果为 true，则可以使用命令等作弊功能。
 # 允许值："true" 或 "false"
 
 max-players=10
-# 服务器上可以同时游戏的最大玩家数。
-# 允许值：任何正整数
+# 服务器上可同时游玩的最大玩家数。
+# 允许值：任意正整数
 
 online-mode=true
-# 如果为 true，则所有连接的玩家都必须通过 Xbox Live 身份验证。
-# 连接到远程（非 LAN）服务器的客户端无论此设置如何，都将始终需要 Xbox Live 身份验证。
-# 如果服务器接受来自 Internet 的连接，则强烈建议启用 online-mode。
+# 如果为 true，则所有连接的玩家都必须通过 Xbox Live 认证。
+# 连接到远程（非局域网）服务器的客户端无论此设置如何，始终需要 Xbox Live 认证。
+# 如果服务器接受来自互联网的连接，则强烈建议启用 online-mode。
 # 允许值："true" 或 "false"
 
-allow-list=true
+allow-list=false
 # 如果为 true，则所有连接的玩家都必须列在单独的 allowlist.json 文件中。
 # 允许值："true" 或 "false"
 
-server-port=19132
+server-port=25565
 # 服务器应监听的 IPv4 端口。
-# 允许值：范围 [1, 65535] 内的整数
+# 允许值：[1, 65535] 范围内的整数
 
 server-portv6=19133
-# 服务器应监听的 IPv6 端口。当 `transport=nethernet` 时此属性将被忽略，
-# 此时将在 `server-port` 上打开一个双栈套接字。
-# 允许值：范围 [1, 65535] 内的整数
+# 服务器应监听的 IPv6 端口。当 `transport=nethernet` 时会忽略此属性，
+# 并改为在 `server-port` 上打开双栈套接字
+# 允许值：[1, 65535] 范围内的整数
 
-# server-ip=
-# 留空以绑定到所有接口。当 `transport=raknet` 时此属性将被忽略。
-# 允许值：IPv4 或 IPv6 字面量，或留空。
+server-ip=
+# 留空以绑定到所有接口。当 `transport=raknet` 时会忽略此属性
+# 允许值：IPv4 或 IPv6 字面量，或空。
 
-# server-udp-ports=
-# 配置 UDP 客户端传输端口。允许多个逗号分隔的条目，
-# 此属性也可以出现在多行中以累积配置。
-# 当 `transport=raknet` 时此属性将被忽略。
-# 允许值：
-#   * `internal` 或 `start-end` —— 内部端口（或范围）约束 UDP 本地端口分配窗口。
-#   * `[ip:]external[-external]:internal[-internal]` —— 额外发布一个客户端可访问的外部映射。
-#     冒号两边的范围长度必须相同。
-#
+server-udp-ports=25565
+# 配置 UDP 客户端传输端口。
+# 当 `transport=raknet` 时会忽略此属性。
+# 如果未设置，UDP 端口将从操作系统的临时端口范围中分配。
+# 支持两种模式：
+#   1. 所有客户端共享单个 UDP 端口。
+#   2. UDP 端口范围，客户端连接会分布到一系列端口上，但如果范围耗尽则会复用端口。
+# 两种模式都支持本地和公共端口值相同，或 public:local 映射。`:` 两侧的范围长度必须相同。
+# 可选地，使用 IP:public:local（IPv4）或 [IPv6]:public:local（IPv6）指定公共 IP 地址。
+# 带 IP 前缀时两个端口值都必填，即使它们相同。
 # 示例：
-#   server-udp-ports=49152-49200（仅内部端口范围）
-#   server-udp-ports=19132:32000（外部端口 19132 映射到内部端口 32000）
-#   server-udp-ports=203.0.113.10:19132-19140:32000-32008
-#   server-udp-ports=[2001:db8::1]:19132:32000,32000
+#   server-udp-ports=19489                   （所有客户端共享单个 UDP 端口，本地和公共值相同）
+#   server-udp-ports=29489:19489             （所有客户端共享单个 UDP 端口，公共端口 29489 必须映射到本地端口 19489）
+#   server-udp-ports=19400-19500             （UDP 端口范围，本地和公共值相同）
+#   server-udp-ports=21200-21300:19400-19500 （UDP 端口范围，公共端口范围 21200-21300 必须映射到本地端口范围 19400-19500）
+#   server-udp-ports=12.19.20.18:19489:19489 （带公共 IP 的单个 UDP 端口，12.19.20.18:19489 必须映射到服务器的本地 UDP 端口 19489）
+#   server-udp-ports=[2001:db8::2021:26:03]:21200-21300:19400-19500
+#                                            （带公共 IP 的 UDP 端口范围，[2001:db8::2021:26:03]:21200-21300 必须映射到服务器的本地 UDP 端口 19400-19500）
 
 transport=raknet
 # 服务器应使用的传输协议。
 # 允许值："raknet" 或 "nethernet"
 #
-# 注释：raknet 是传统基岩服务器网络协议，稳定且兼容性最好；nethernet 是面向未来的新版传输协议，目前主要用于 Xbox Live/WebRTC 场景，普通 BDS 服务器不要改。
+# 注：在 26.60 版本中，虽然 raknet 已被标记为弃用，但你仍然可以进入使用 raknet 协议的服务器。
 
 enable-lan-visibility=true
-# 监听并响应在 LAN 上寻找服务器的客户端。
-# 当 `transport=raknet` 时，即使 `server-port` 和 `server-portv6` 使用了非默认值，
-# 此设置也会使服务器绑定到默认端口（19132、19133）。
-# 如果不需要 LAN 发现，或在同一主机上运行多个服务器可能导致端口冲突时，
-# 请考虑关闭此选项。
+# 监听并响应正在局域网中寻找服务器的客户端。
+# 当 `transport=raknet` 时，这会导致服务器即使 `server-port` 和 `server-portv6`
+# 为非默认值也绑定到默认端口（19132、19133）。如果不需要 LAN 发现，
+# 或者在同一主机上运行多个服务器可能导致端口冲突时，考虑将其关闭。
 # 允许值："true" 或 "false"
 #
 # 注：在 26.30 及以上版本中，关闭此项会导致广域网玩家无法连接，因此不建议关闭。
 
 view-distance=32
-# 最大允许视距（以区块数为单位）。
-# 允许值：大于或等于 5 的正整数
+# 允许的最大视距，以区块数表示。
+# 允许值：大于或等于 5 的正整数。
 
 tick-distance=4
-# 世界将在距离任何玩家此数量的区块范围内进行 tick 更新。
-# 允许值：范围 [4, 12] 内的整数
+# 世界会从任意玩家向外 tick 这么多区块。
+# 允许值：[4, 12] 范围内的整数
+
+persistent-ticking-area-max-count=10
+# 添加新区域时，跨所有维度允许的最大常加载区域数量。
+# 降低此值时，不会移除已保存的区域。
+# 允许值：不大于 2147483647 的正整数，或 "unlimited"。
+
+persistent-ticking-area-max-chunks=100
+# 添加新常加载区域时允许的最大区块数。
+# 降低此值时，不会移除已保存的区域。
+# 允许值：不大于 2147483647 的正整数，或 "unlimited"。
+
+transient-ticking-area-max-chunks=300
+# 每个行为包的瞬态加载区域中唯一区块的最大总数。
+# 允许值：不大于 2147483647 的正整数，或 "unlimited"。
+# 更高的值和 "unlimited" 会显著影响服务器性能和内存使用。
+# "unlimited" 会移除此配置限制，但系统资源和数据表示限制仍然适用。
 
 player-idle-timeout=30
-# 玩家空闲达到此分钟数后将被踢出。如果设为 0，则玩家可以无限期空闲。
-# 允许值：任何非负整数
+# 玩家空闲这么多分钟后将被踢出。如果设为 0，则玩家可以无限期空闲。
+# 允许值：任意非负整数。
 
 # allow-player-joining=true
-# 设为 'false' 时，除非通过脚本（通过 AsyncPlayerJoinBeforeEvent）明确允许，
-# 否则玩家将无法加入服务器。
-# 允许值：true, false
-# 默认值：true
+# 当设为 'false' 时，除非脚本明确允许（通过 AsyncPlayerJoinBeforeEvent），否则玩家将无法加入服务器
+# 允许值：true、false
+# 默认：true
 
 max-threads=8
-# 服务器尝试使用的最大线程数。如果设为 0 或删除此配置，则将尽可能多地使用线程。
-# 允许值：任何正整数
+# 服务器将尝试使用的最大线程数。如果设为 0 或移除，则将尽可能使用更多线程。
+# 允许值：任意正整数。
 
 level-name=Bedrock level
-# 允许值：不含分号（;）或文件名非法字符（/\n\r\t\f`?*\\<>|\":）的任何字符串
+# 允许值：任意不含分号符号或文件名非法字符的字符串：/\n\r\t\f`?*\\<>|\":
 
 level-seed=
 # 用于随机化世界
-# 允许值：任何字符串
+# 允许值：任意字符串
 
 default-player-permission-level=member
-# 首次加入的新玩家的权限等级。
-# 允许值："visitor"（访客）、"member"（成员）、"operator"（操作员）
+# 首次加入的新玩家的权限级别。
+# 允许值："visitor"、"member"、"operator"
 
 texturepack-required=false
 # 强制客户端使用当前世界中的纹理包
@@ -147,68 +165,76 @@ content-log-level=info
 # 允许值："error"、"warning"、"info"、"verbose"
 
 compression-threshold=1
-# 确定要压缩的原始网络有效负载的最小大小
+# 确定要压缩的原始网络负载的最小大小
 # 允许值：0-65535
 
 compression-algorithm=zlib
-# 确定网络传输使用的压缩算法
+# 确定网络使用的压缩算法
 # 允许值："zlib"、"snappy"
 
 server-authoritative-movement-strict=false
-# 设为 true 以对玩家位置更加严格，并更少接受客户端信息。
-# 这意味着客户端将收到更多位置修正。在高延迟情况下，这会影响玩家在移动方块周围的行为。
+# 设为 true 时，对玩家位置更严格，减少接受客户端信息的宽松度。
+# 这意味着客户端会收到更多位置修正。高延迟时会影响玩家在移动方块附近。
 
 server-authoritative-dismount-strict=false
-# 设为 true 以对玩家下马位置更加严格。
-# 这意味着在高延迟情况下，客户端将在下马位置收到修正。
+# 设为 true 时，对玩家下马位置更严格。
+# 这意味着在高延迟情况下，客户端会收到下马位置修正
 
 server-authoritative-entity-interactions-strict=false
-# 设为 true 以对实体交互更加严格。
-# 这意味着客户端将对实体交互更加严格。在高延迟情况下，这会影响玩家之间的交互。
+# 设为 true 时，对实体交互更严格。
+# 这意味着在高延迟情况下，服务器对实体交互会更严格，并影响玩家彼此交互。
+
+server-authoritative-entity-attack-request-validation=disabled
+# 控制对攻击请求类型是否与权威物品行为匹配的验证。
+# 允许值："disabled"、"observe"、"enforce"
+
+server-authoritative-entity-attack-range-validation=disabled
+# 控制服务器对目标 Actor 攻击范围的验证。
+# 允许值："disabled"、"observe"、"enforce"
+
+server-authoritative-entity-attack-range-tolerance=0.5
+# 在正常目标 Actor 游戏范围之外额外接受的方块数。必须为有限非负数。
 
 player-position-acceptance-threshold=0.5
-# 这是客户端与服务器玩家位置之间差异的容差值。这有助于在服务器和客户端对动作开始时间
-# 有不同理解的情况下（例如伤害击退或被活塞推动），避免过于频繁地发送修正。
-# 数值越高，服务器在要求修正之前的容忍度就越高。超过 1.0 的数值会增加允许作弊的可能性。
+# 客户端与服务器玩家位置差异的容差。有助于避免对非作弊玩家过于频繁地发送修正，
+# 例如在伤害击退或被活塞推动时，服务器和客户端对运动开始时间的感知不同。
+# 数值越高，服务器在请求修正前越宽容。超过 1.0 会增加允许作弊的可能性。
 
 player-movement-action-direction-threshold=0.85
-# 玩家攻击方向与视线方向可允许的差异量。
-# 允许值：范围 [0, 1] 内的任何值，其中 1 表示玩家视线方向
-# 与攻击方向必须完全匹配，0 表示两个方向可以
-# 相差最大 90 度（含）。
+# 玩家攻击方向与视线方向允许的差异量。
+# 允许值：[0, 1] 范围内的任意值，其中 1 表示玩家视线方向与攻击方向
+# 必须完全匹配，0 表示两个方向最多可相差 90 度（含）。
 
 server-authoritative-block-breaking-pick-range-scalar=1.5
-# 如果为 true，服务器将与客户端同步计算方块挖掘操作，以便验证客户端在认为自己可以破坏方块时是否确实应该能够破坏方块。
+# 如果为 true，服务器将与客户端同步计算方块挖掘操作，以便在客户端认为可以破坏方块时验证其是否确实可以破坏。
 
 chat-restriction=None
 # 允许值："None"、"Dropped"、"Disabled"
-# 这表示对加入服务器的每个玩家应用聊天限制的级别。
-# "None" 是默认值，表示正常的自由聊天。
-# "Dropped" 表示聊天消息将被丢弃且永远不会发送给任何客户端。玩家会收到一条消息告知该功能已禁用。
-# "Disabled" 表示除非玩家是操作员，否则聊天 UI 根本不会出现。不会向玩家显示任何信息。
+# 这表示对加入服务器的每个玩家聊天应用的限制级别。
+# "None" 是默认值，表示普通自由聊天。
+# "Dropped" 表示聊天消息会被丢弃，且从不发送给任何客户端。玩家会收到一条消息告知该功能已禁用。
+# "Disabled" 表示除非玩家是操作员，否则聊天 UI 甚至不会显示。不会向玩家显示任何信息。
 
 disable-player-interaction=false
-# 如果为 true，服务器将通知客户端在与世界交互时应忽略其他玩家。此设置并非服务器权威性的。
+# 如果为 true，服务器会通知客户端在与世界交互时忽略其他玩家。这不是服务器权威的。
 
 client-side-chunk-generation-enabled=true
-# 如果为 true，服务器将通知客户端它们有能力在玩家交互距离之外生成可视化的区块。
+# 如果为 true，服务器会通知客户端它们能够在玩家交互距离之外生成可视关卡区块。
 
 block-network-ids-are-hashes=true
-# 如果为 true，服务器将发送哈希后的方块网络 ID，而不是从 0 开始递增的 ID。
-# 这些 ID 是稳定的，不会因其他方块更改而改变。
+# 如果为 true，服务器将发送哈希后的方块网络 ID，而不是从 0 开始递增的 ID。这些 ID 稳定，不会因其他方块变化而改变。
 
 disable-persona=false
 # 仅供内部使用
 
 disable-custom-skins=false
-# 如果为 true，则禁用玩家在 Minecraft 商店资源或游戏内资源之外自定义的皮肤。
-# 此设置用于禁用玩家可能制作的不当自定义皮肤。
+# 如果为 true，禁用玩家在 Minecraft 商店资产或游戏内资产之外自定义的皮肤。用于禁用玩家制作的可能具有冒犯性的自定义皮肤。
 
 server-build-radius-ratio=Disabled
-# 允许值："Disabled" 或范围 [0.0, 1.0] 内的任何值
-# 如果为 "Disabled"，服务器将动态计算要生成玩家视野的多少部分，将剩余部分分配给客户端构建。
-# 否则，使用覆盖比例告诉服务器生成玩家视野的多少部分，忽略客户端硬件能力。
-# 仅在 client-side-chunk-generation-enabled 启用时有效
+# 允许值："Disabled" 或 [0.0, 1.0] 范围内的任意值
+# 如果为 "Disabled"，服务器将动态计算将生成玩家视野的多少，其余分配给客户端构建。
+# 否则，从覆盖比例告诉服务器生成玩家视野的多少，忽略客户端硬件能力。
+# 仅当 client-side-chunk-generation-enabled 启用时有效
 
 allow-outbound-script-debugging=false
 # 允许脚本调试器 'connect' 命令和 script-debugger-auto-attach=connect 模式。
@@ -217,19 +243,22 @@ allow-inbound-script-debugging=false
 # 允许脚本调试器 'listen' 命令和 script-debugger-auto-attach=listen 模式。
 
 #force-inbound-debug-port=19144
-# 锁定入站（监听）调试器端口，如果未设置则默认使用 19144。使用 script-debugger-auto-attach=listen 模式时需要此项。
+# 锁定入站（监听）调试器端口；如果未设置，则使用默认 19144。使用 script-debugger-auto-attach=listen 模式时必需。
+
+#script-debugger-listen-address=127.0.0.1
+# 入站（监听）调试器模式使用的地址。默认回环地址。非回环地址需要 script-debugger-passcode，并会将调试访问暴露到网络。
 
 script-debugger-auto-attach=disabled
-# 尝试在关卡加载时附加脚本调试器，需要设置入站端口或连接地址，并启用入站或出站连接。
+# 尝试在关卡加载时附加脚本调试器；要求设置了入站端口或连接地址，并启用了入站或出站连接。
 # "disabled" 不会自动附加。
 # "connect" 服务器将尝试连接到指定端口上处于监听模式的调试器。
-# "listen" 服务器将监听来自调试器的入站连接尝试，使用指定端口上的 connect 模式。
+# "listen" 服务器将监听来自使用 connect 模式的调试器在指定端口上的入站连接尝试。
 
 #script-debugger-auto-attach-connect-address=localhost:19144
-# 当自动附加模式设为 'connect' 时，使用 host:port 格式的此地址。script-debugger-auto-attach=connect 模式需要此项。
+# 当自动附加模式设为 'connect' 时，使用 host:port 形式的地址。script-debugger-auto-attach=connect 模式必需。
 
 #script-debugger-auto-attach-timeout=0
-# 在世界加载时等待调试器附加的时间量。
+# 世界加载时等待调试器附加的时间。
 
 #script-debugger-passcode=
 # VSCode 将提示用户输入密码以连接。
@@ -238,65 +267,64 @@ script-debugger-auto-attach=disabled
 # 启用看门狗（默认 = true）。
 
 #script-watchdog-enable-exception-handling=true
-# 启用通过 events.beforeWatchdogTerminate 事件的看门狗异常处理（默认 = true）。
+# 通过 events.beforeWatchdogTerminate 事件启用看门狗异常处理（默认 = true）。
 
 #script-watchdog-enable-shutdown=true
 # 在未处理的看门狗异常情况下启用服务器关闭（默认 = true）。
 
 #script-watchdog-hang-exception=true
-# 当发生挂起时抛出严重异常，中断脚本执行（默认 = true）。
+# 发生挂起时抛出严重异常，中断脚本执行（默认 = true）。
 
 #script-watchdog-hang-threshold=10000
-# 设置单 Tick 挂起的看门狗阈值（默认 = 10000 毫秒）。
+# 设置单 tick 挂起的看门狗阈值（默认 = 10000 ms）。
 
 #script-watchdog-spike-threshold=100
-# 设置单 Tick 峰值的看门狗阈值。
-# 如果未设置此属性，则禁用警告。
+# 设置单 tick 尖峰的看门狗阈值。
+# 如果属性未设置，则禁用警告。
 
 #script-watchdog-slow-threshold=10
-# 设置跨多个 Tick 的慢脚本看门狗阈值。
-# 如果未设置此属性，则禁用警告。
+# 设置跨多个 tick 的慢脚本看门狗阈值。
+# 如果属性未设置，则禁用警告。
 
 #script-watchdog-memory-warning=100
-# 当组合内存使用量超过给定阈值（以 MB 为单位）时生成内容日志警告。
-# 将此值设为 0 将禁用警告。（默认 = 100，最大 = 2000）
+# 当组合内存使用超过给定阈值（单位：兆字节）时生成内容日志警告。
+# 将此值设为 0 可禁用警告。（默认 = 100，最大 = 2000）
 
 #script-watchdog-memory-limit=250
-# 当组合脚本内存使用量超过给定阈值（以 MB 为单位）时保存并关闭世界。
-# 将此值设为 0 将禁用限制。（默认 = 250，最大 = 2000）
+# 当组合脚本内存使用超过给定阈值（单位：兆字节）时保存并关闭世界。
+# 将此值设为 0 可禁用限制。（默认 = 250，最大 = 2000）
 
 #diagnostics-capture-auto-start=false
 # 在关卡加载时启动诊断捕获会话（默认 = false）
 
 #diagnostics-capture-max-files=5
-# 在循环覆盖之前要保留的最大诊断捕获文件数。（默认 = 5）
+# 循环前保留的最大诊断捕获文件数。（默认 = 5）
 
 #diagnostics-capture-max-file-size=2097152
-# 当前诊断捕获文件在系统循环到新文件前的最大字节数。（默认 = 2097152，2 MB）
+# 当前诊断捕获文件在系统循环到新文件前的最大字节大小。（默认 = 2097152，2mb）
 
 #disable-client-vibrant-visuals=true
-# 如果为 true，服务器将告知客户端使用次优可用的图形设置，而不是 Vibrant Visuals。
+# 如果为 true，服务器将告诉客户端使用下一个最佳可用图形设置，而不是 Vibrant Visuals。
 
 #sentry-rate-limit-window=60
-# 对发送到 Sentry 的脚本错误应用限制的时间窗口（秒）。
-# 默认值：60
-# 允许值：任何正整数，或 0 以禁用限制
+# 对发送到 Sentry 的脚本错误应用限制的时间窗口秒数。
+# 默认：60
+# 允许值：任意正整数，或 0 以禁用限制
 
 #sentry-max-events-per-window=10
-# 在指定时间窗口内允许的最大事件数。
-# 默认值：10
-# 允许值：任何正整数，或 0 以禁用向 Sentry 发送事件
+# 指定时间窗口内允许的最大事件数。
+# 默认：10
+# 允许值：任意正整数，或 0 以禁用向 Sentry 发送事件
 
 #enable-profiler=true
-# 如果为 true，启用性能分析支持。
+# 如果为 true，启用性能分析器支持以进行性能分析。
 
 #enable-editor-network-metrics=true
-# 如果为 true，启用网络指标收集，以便在调试器中显示实时诊断信息
+# 如果为 true，启用网络指标收集，以在调试器中显示实时诊断
 
 #convert-world-to-editor-project=false
-# 如果为 true 且服务器使用 Editor=true 命令行标志启动，则现有
-# 原版世界将在加载时升级为编辑器项目。如果没有 Editor=true 则无效。
-# 默认值：false
+# 如果为 true 且服务器使用 Editor=true 命令行标志启动，现有原版世界将在加载时升级为编辑器项目。没有 Editor=true 时无效。
+# 默认：false
 ```
 
 ## 隐藏的配置项
@@ -317,7 +345,13 @@ script-debugger-auto-attach=disabled
 op-permission-level=4
 ```
 
-<img src="/img/pages/mcbe/03-sp-1.gif" alt="演示"width="50%" />
+<ImageZoom
+  src="/img/pages/mcbe/03-sp-1.gif"
+  alt="演示"
+  width={1708}
+  height={1006}
+  style={{ width: '55%', height: 'auto' }}
+/>
 
 ### level-type
 
@@ -346,7 +380,13 @@ level-type=DEFAULT
 language=zh_CN
 ```
 
-<img src="/img/pages/mcbe/03-sp-2.png" alt="语言更改为zhcn后效果" width="70%" />
+<ImageZoom
+  src="/img/pages/mcbe/03-sp-2.png"
+  alt="语言更改为zhcn后效果"
+  width={703}
+  height={192}
+  style={{ width: '70%', height: 'auto' }}
+/>
 
 <Accordions>
 <Accordion title="附：可以使用的语言列表(点击展开)">
