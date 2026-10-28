@@ -30,17 +30,17 @@ title: "server.properties 详解"
 
 ## 配置文件原文
 
-<CodeBlockTabs defaultValue="26.2">
+<CodeBlockTabs defaultValue="26.3">
   <CodeBlockTabsList>
-    <CodeBlockTabsTrigger value="26.2">Minecraft 26.2</CodeBlockTabsTrigger>
+    <CodeBlockTabsTrigger value="26.3">Minecraft 26.3</CodeBlockTabsTrigger>
     <CodeBlockTabsTrigger value="1.21.1">Minecraft 1.21.1</CodeBlockTabsTrigger>
     <CodeBlockTabsTrigger value="1.12.2">Minecraft 1.12.2</CodeBlockTabsTrigger>
   </CodeBlockTabsList>
-  <CodeBlockTab value="26.2">
+  <CodeBlockTab value="26.3">
 
 ```properties
 #Minecraft server properties
-#Wed Jul 15 23:26:16 CST 2026
+#Wed Oct 28 14:57:22 CST 2026
 accepts-transfers=false
 allow-flight=false
 broadcast-console-to-ops=true
@@ -48,7 +48,6 @@ broadcast-rcon-to-ops=true
 bug-report-link=
 chat-spam-threshold-seconds=10
 command-spam-threshold-seconds=10
-debug=false
 difficulty=easy
 enable-code-of-conduct=false
 enable-jmx-monitoring=false
@@ -75,7 +74,7 @@ management-server-allowed-origins=
 management-server-enabled=false
 management-server-host=localhost
 management-server-port=0
-management-server-secret=XtSEeXuxcIa8ShlAX32VCkgJ4un02KG13vstJvzL
+management-server-secret=g0X7a5RQVOjbeBj57WSnK9ZoyaNcd7Oy4WKNSdHR
 management-server-tls-enabled=true
 management-server-tls-keystore=
 management-server-tls-keystore-password=
@@ -83,11 +82,11 @@ max-chained-neighbor-updates=1000000
 max-players=20
 max-tick-time=60000
 max-world-size=29999984
-motd=Paper 26.2
+motd=Vanilla 26.3
 network-compression-threshold=256
 online-mode=true
 op-permission-level=4
-pause-when-empty-seconds=-1
+pause-when-empty-seconds=60
 player-idle-timeout=0
 prevent-proxy-connections=false
 query.port=25565
@@ -100,7 +99,7 @@ resource-pack=
 resource-pack-id=
 resource-pack-prompt=
 resource-pack-sha1=
-server-ip=
+server-ip=0.0.0.0
 server-port=25565
 simulation-distance=10
 spawn-protection=16
@@ -110,7 +109,7 @@ text-filtering-config=
 text-filtering-version=0
 use-native-transport=true
 view-distance=10
-white-list=false
+white-list=true
 ```
 
   </CodeBlockTab>
