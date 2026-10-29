@@ -24,12 +24,9 @@ enable-command-block=false
 
 在控制台或游戏内(需要有管理员权限)输入以下命令即可启用：
 
-<CodeBlockTabs defaultValue="before">
-  <CodeBlockTabsList>
-    <CodeBlockTabsTrigger value="before">1.21.11(快照25w43a)前</CodeBlockTabsTrigger>
-    <CodeBlockTabsTrigger value="after">1.21.11(快照25w44a)后</CodeBlockTabsTrigger>
-  </CodeBlockTabsList>
-  <CodeBlockTab value="before">
+<Tabs items={['1.21.11(快照25w43a)前', '1.21.11(快照25w44a)后']}>
+
+  <Tab>
 
 1.21.9、1.21.10 这两个正式版及 1.21.11 的部分快照版(25w43a 前)使用下面的命令：
 
@@ -37,8 +34,8 @@ enable-command-block=false
 /gamerule enableCommandBlocks false
 ```
 
-  </CodeBlockTab>
-  <CodeBlockTab value="after">
+  </Tab>
+  <Tab>
 
 1.21.11(25w44a) 和之后的版本使用下面的命令：
 
@@ -46,6 +43,6 @@ enable-command-block=false
 /gamerule command_blocks_work false
 ```
 
-  </CodeBlockTab>
-</CodeBlockTabs>
+  </Tab>
+</Tabs>
 
