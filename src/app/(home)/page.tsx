@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { ArrowRight, BookOpen, HeartHandshake, Sparkles } from 'lucide-react';
+import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import { source } from '@/lib/source';
 import { appName } from '@/lib/shared';
 import { collectDocsSections } from '@/lib/docs-sections';
@@ -77,11 +78,10 @@ export default function HomePage() {
             <Link
               key={doc.url}
               href={doc.url}
-              className={
-                index === 0
-                  ? 'rounded-lg bg-fd-primary px-4 py-2 text-sm font-medium text-fd-primary-foreground transition-opacity hover:opacity-90'
-                  : 'rounded-lg border bg-fd-card px-4 py-2 text-sm font-medium transition-colors hover:bg-fd-accent/60'
-              }
+              className={buttonVariants({
+                variant: index === 0 ? 'default' : 'secondary',
+                className: 'px-4',
+              })}
             >
               {doc.name}
             </Link>

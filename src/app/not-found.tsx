@@ -18,7 +18,9 @@ export default function NotFound() {
         url: section.url,
       }))}
     >
-      <DefaultNotFound />
+      <div className="not-found-content flex flex-1">
+        <DefaultNotFound />
+      </div>
     </HomeLayout>
   );
 }
