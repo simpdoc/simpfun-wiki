@@ -1,0 +1,40 @@
+---
+title: "【Java 镜像】默认的启动脚本"
+---
+
+这是 Java 镜像下默认的 `start.sh` ，如果你“一不小心”把默认的删了就可以来这里恢复。
+
+<Callout type="warning" title="提示">
+以 "#" 开头的行为注释，不会被终端执行！
+</Callout>
+
+<Callout type="tip" title="提示">
+部分基础镜像内的 `start.sh` 没有完整的内容，如缺少相关路径或变量定义请来此处复制！
+</Callout>
+
+## 默认的启动脚本
+
+```shell title="start.sh"
+#!/bin/bash
+
+#启动变量说明，修改前务必查看
+#https://www.yuque.com/simpfun/sfe/startup
+
+openjdk8="/usr/bin/jdk/jdk1.8.0_361/bin/java"
+openjdk11="/usr/bin/jdk/jdk-11.0.18/bin/java"
+openjdk17="/usr/bin/jdk/jdk-17.0.6/bin/java"
+openjdk19="/usr/bin/jdk/jdk-19.0.2/bin/java"
+openjdk21="/usr/bin/jdk/jdk-21.0.2/bin/java"
+openjdk25="/usr/bin/jdk/jdk-25.0.2/bin/java"
+
+maxmem=$((SERVER_MEMORY - 1000))
+
+# 示例：使用JDK17 启动server-release.jar
+#${openjdk17} -Xms1024M -Xmx${maxmem}M -jar server-release.jar nogui
+
+```
+
+<Callout type="info" title="提示">
+自 2024.4.30 起，所有 Java 镜像(包括所有 MinecraftJE 的预设镜像)均已预装 Java 21，路径如上所示。[具体内容详见此文章](https://www.wuye2004.top/archives/4)。   
+自 2026.3.24 起，所有 Java 镜像(包括所有 MinecraftJE 的预设镜像)均已预装 Java 25，路径如上所示。
+</Callout>
