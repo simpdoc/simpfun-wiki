@@ -162,14 +162,25 @@ export default function HomePage() {
         </div>
         <div className="border-t px-4 py-4 text-center text-xs text-fd-muted-foreground">
           <p>Copyright © {new Date().getFullYear()} 简幻欢社区维基</p>
-          <a
-            href="https://beian.miit.gov.cn/"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="transition-colors hover:text-fd-foreground"
-          >
-            黑ICP备2024025211号-2
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            <a
+              href="https://beian.miit.gov.cn/"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="transition-colors hover:text-fd-foreground"
+            >
+              黑ICP备2024025211号-2
+            </a>
+            <a
+              href="https://beian.mps.gov.cn/#/query/webSearch?code=23030002000215"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="inline-flex items-center gap-1 transition-colors hover:text-fd-foreground"
+            >
+              <img src="/img/gongan.png" alt="公安备案图标" className="h-4 w-auto" />
+              黑公网安备23030002000215号
+            </a>
+          </div>
         </div>
       </footer>
     </main>
