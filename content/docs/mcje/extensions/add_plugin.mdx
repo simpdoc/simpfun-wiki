@@ -1,0 +1,85 @@
+---
+title: "如何添加插件"
+description: "区分 Bukkit 插件、Paper 插件与 Sponge 插件，并把它们放进正确的文件夹。"
+---
+
+<Callout type="warn" title="仅适用">
+
+此教程仅适用于以下服务端：
+
++ Spigot、Paper、Leaves **等**插件端
++ Arclight、CatServer、Mohist 等混合端
++ SpongeForge（与 Bukkit 系服务端的添加方法不一致）
+
+</Callout>
+
+<Callout type="info" title="去哪里找插件">
+
+如果你正在寻找插件，可以访问 [苦力怕论坛](https://klpbbs.com/)、[MineBBS](https://www.minebbs.com/)、[Modrinth](https://modrinth.com/discover/plugins) 等网站。
+
+</Callout>
+
+## 插件类型区分
+
+### Bukkit 插件
+
+使用 BukkitAPI 开发的插件。绝大部分插件端（例如 Spigot、Paper、Purpur、Leaves 等），以及 Arclight、CatServer、Mohist 等混合端，都使用 Bukkit 插件。
+
+<Callout type="info" title="向上兼容">
+
++ 大部分 Bukkit 插件支持**向上兼容**。例如 Vault 的作者标注支持 1.8——1.17.x，其实际支持版本可能一直到 1.8——26.3。
++ 插件的实际兼容情况请自行测试，或在群聊、论坛等地方寻求帮助。
+
+</Callout>
+
+### Paper 插件
+
+引入了 Paper 一些特有 API 进行开发的 Bukkit 插件。Paper 及其分支支持此类插件。
+
+### Sponge 插件
+
+使用 SpongeAPI 进行开发的插件。目前仅有 SpongeVanilla、SpongeForge，以及某些服务端（例如 Lantern）支持 Sponge 插件。
+
+<Callout type="error" title="不支持向上兼容">
+
+大部分 Sponge 插件**不支持向上兼容**。例如你不能把 API 7 的插件扔进 API 8 的服务器里，除非插件作者主动同时适配不同版本的 Sponge。
+
+</Callout>
+
+## Bukkit 系服务端
+
+<Callout type="warn" title="不适用">
+
+此段内容不适用于以下服务端：SpongeForge。
+
+</Callout>
+
+1. 进入实例，点击「文件」。
+2. 进入 `plugins` 文件夹。
+3. 上传你的插件。
+
+<Callout type="info" title="提示">
+
++ 注意检查插件版本、前置等。
++ **混合端可能出现部分插件不兼容的情况。**
++ 不支持 Sponge 或其他服务端的插件。
+
+</Callout>
+
+## Sponge 服务端
+
+<Callout type="warn" title="仅适用">
+
+此段内容**仅**适用于以下服务端：SpongeForge、SpongeVanilla。
+
+</Callout>
+
+1. 进入实例，点击「文件」。
+2. 进入 `mods` 文件夹。
+3. 上传你的 Sponge 插件。
+
+<Callout type="error" title="警告">
+
+本服务端不支持 Bukkit 插件，你需要下载专门的 Sponge 插件。
+
+</Callout>

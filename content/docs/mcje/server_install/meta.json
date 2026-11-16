@@ -1,0 +1,11 @@
+{
+  "title": "安装其它版本的服务端",
+  "pages": [
+    "vanilla_bukkit",
+    "forge",
+    "fabric",
+    "neoforge",
+    "mix",
+    "serverpackcreator"
+  ]
+}

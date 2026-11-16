@@ -1,0 +1,112 @@
+---
+title: "安装由 ServerPackCreator 生成的整合包"
+description: "识别 SPC 生成的服务端整合包，并通过 AIO 镜像或第三方镜像完成安装。"
+---
+
+## 什么是由 SPC 生成的整合包？
+
+ServerPackCreator 是一款专为简化 Minecraft 服务器包（Modpack）创建流程而设计的自动化工具，由此工具打包出来的服务端整合包即为 SPC 生成的服务端。
+
+### 快速判断整合包服务端是否由 SPC 生成
+
+检查服务端压缩包内是否有下图红框圈出的文件（尤其是有无 `variables.txt`），如果都有，则为 SPC 打包的服务端。
+
+或者查看压缩包附带的信息（如下图右侧明确写明了 `Server pack made with SPC 7.2.4`）。
+
+![压缩包中 SPC 生成的文件与 Server pack made with SPC 标识](/img/pages/mcje/mcje-serverpackcreator-1.png)
+
+## 使用 AIO 镜像安装
+
+1. 新建/重装实例为「自定义——AIO 镜像」。
+
+![新建实例时选择自定义 AIO 镜像](/img/pages/mcje/mcje-serverpackcreator-2.png)
+
+2. 上传服务端整合包到实例根目录，然后解压缩。
+3. 解压缩完成后打开 `variables.txt`，找到 `RECOMMENDED_JAVA_VERSION` 这行（下图中 ① 处），记下等号后的数字。
+4. 然后将 `JAVA` 等号后的内容（下图中 ② 处）修改为 `${openjdk*}`，`*` 为上方记下的数字。
+
+![variables.txt 中需要修改的 JAVA 版本与 JAVA 变量](/img/pages/mcje/mcje-serverpackcreator-3.png)
+
+修改完成后应如下所示：
+
+```bash title="variables.txt"
+RECOMMENDED_JAVA_VERSION=17
+JAVA_ARGS="-Xmx5G -Xms5G"
+JAVA="${openjdk17}"
+```
+
+<Callout type="info" title="提示">
+
+AIO v1 镜像默认仅包含 Java 8/11/16/17/19/21。如果整合包需要的 Java 版本不是这 6 个，请自行下载后[使用环境变量调用](/docs/web/custom_image/aio_v1/path_list)。
+
+</Callout>
+
+5. 回到终端，启动服务器。此时 SPC 启动脚本应开始下载服务端，需要你同意 EULA，输入 `I agree` 后回车。
+
+![SPC 启动脚本提示输入 I agree 同意 EULA](/img/pages/mcje/mcje-serverpackcreator-4.png)
+
+6. 等待服务端下载完成（此过程可能会非常长，请耐心等待）。
+7. 安装完成后，根据需要修改 `server.properties`。
+
+<Callout type="info" title="提示">
+
+如果出现服务端下载失败的情况，可以多重试几次；也可以在本地下载完成后上传至实例根目录。
+
+</Callout>
+
+### 附加教程：更改 JVM 参数
+
+打开 `variables.txt`，找到如下图所示的这一行来修改 JVM 参数。
+
+![variables.txt 中的 JAVA_ARGS 参数行](/img/pages/mcje/mcje-serverpackcreator-5.png)
+
+例如，可以把 Xmx 参数改为 `-Xmx11G`（建议将 JVM 最大内存设为「实例内存 − 1G」，如实例有 12G 内存，则 Xmx 设置为 11G），然后添加一个 `-server` 参数，如下所示：
+
+```bash title="variables.txt"
+JAVA_ARGS="-server -Xmx11G -Xms5G"
+```
+
+## 使用第三方镜像安装
+
+<Callout type="info" title="信息">
+
+该第三方镜像由 jdnjk 提供。
+
+支持镜像发布者，注册时使用他的推荐码，同时你也会获得更多积分。推荐码：**`1332029`**
+
+</Callout>
+
+1. 新建/重装实例为「第三方镜像 → MinecraftJE → AutoInstall」，版本选择最新版。
+
+![第三方镜像中选择 MinecraftJE 的 AutoInstall 镜像](/img/pages/mcje/mcje-serverpackcreator-6.png)
+
+2. 上传服务器整合包到实例根目录。
+3. 回到终端，启动服务器，耐心等待服务器启动（若安装失败可重试，多次失败请反馈）。
+4. 安装完成后，根据需要修改 `server.properties`。
+
+## 视频教程
+
+<Callout type="error" title="提示">
+
+**仅为其中一种整合包类型**，若出现无法运行的情况请查看其他教程。
+
+</Callout>
+
+<Callout type="error" title="提示">
+
+本文档中的视频已经过 [moonmc66666](https://space.bilibili.com/329026053) 授权使用，不允许二次创作及售卖！
+
+</Callout>
+
+<Callout type="info" title="信息">
+
+支持创作者，注册时使用他的推荐码，同时你也会获得更多积分。推荐码：**`1374890`**
+
+</Callout>
+
+<iframe
+  src="https://player.bilibili.com/player.html?bvid=BV1qXJgzxE6K&autoplay=0"
+  width="100%"
+  height="480"
+  allowFullScreen
+></iframe>
