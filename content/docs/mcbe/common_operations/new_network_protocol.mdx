@@ -24,11 +24,11 @@ enable-lan-visibility=true
 
 然后对这些配置项进行如下修改：
 
-#### server-port
+### server-port
 
 将其修改为你的实例分配到的端口（一般会自动修改）。
 
-#### server-ip
+### server-ip
 
 取消注释（删掉前面的 `#` ），修改为 `play.simpfun.cn` 解析出来的 IP 地址，一般情况下为 `103.85.86.51`，如果有变动则以当前解析出的最新结果为准。
 
@@ -40,7 +40,7 @@ Linux ：打开终端，输入 `dig play.simpfun.cn`，回车后即可看到解�
 手机：使用网页工具在线查询。
 </Callout>
 
-#### server-udp-ports
+### server-udp-ports
 
 将其修改为如下格式：
 
@@ -52,11 +52,11 @@ Linux ：打开终端，输入 `dig play.simpfun.cn`，回车后即可看到解�
 server-udp-ports=103.85.86.51:10002:10002
 ```
 
-#### transport
+### transport
 
 将其修改为 `nethernet`。
 
-#### enable-lan-visibility
+### enable-lan-visibility
 
 不要去动这项配置，保持为 `true` 即可。
 

@@ -3,6 +3,7 @@ import { docsContentRoute, docsImageRoute, docsRoute } from './shared';
 import { imgIcons } from './img-icons';
 import { defineDocs } from 'fumadocs-mdx/macro';
 import { metaSchema, pageSchema } from 'fumadocs-core/source/schema';
+import { licenseNoticeMarkdown } from './license';
 
 const docs = defineDocs({
   dir: 'content/docs',
@@ -27,5 +28,9 @@ export const source = loader({
 export const docsLlms = llms(source, {
   renderPage: async (page) => `# ${page.data.title} (${page.url})
 
-${await page.data.getText('processed')}`,
+${await page.data.getText('processed')}
+
+---
+
+${licenseNoticeMarkdown}`,
 });

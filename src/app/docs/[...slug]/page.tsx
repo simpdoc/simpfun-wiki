@@ -13,6 +13,7 @@ import { ViewOptions } from '@/components/view-options';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { appName, getPageImageUrl, getPageMarkdownUrl, gitConfig } from '@/lib/shared';
+import { LicenseNotice } from '@/components/license-notice';
 
 export default async function Page(props: PageProps<'/docs/[...slug]'>) {
   const params = await props.params;
@@ -41,6 +42,7 @@ export default async function Page(props: PageProps<'/docs/[...slug]'>) {
             a: createRelativeLink(source, page),
           })}
         />
+        <LicenseNotice />
       </DocsBody>
     </DocsPage>
   );

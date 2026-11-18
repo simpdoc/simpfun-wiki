@@ -1,0 +1,36 @@
+name: Docs Format Check
+
+# 文档格式静态检查
+# 当前为非阻断模式（脚本始终退出 0，违规以注解 + Job Summary 呈现）。
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths:
+      - "content/docs/**"
+      - "public/img/**"
+      - "scripts/check_docs_format.mjs"
+      - ".github/workflows/docs-format-check.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  format-check:
+    name: Docs format check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 需要 merge-base 计算变更文件
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Check docs format
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: node scripts/check_docs_format.mjs --base "origin/$BASE_REF"
