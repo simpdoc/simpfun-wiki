@@ -71,7 +71,7 @@ export default function HomePage() {
         </p>
         <h1 className="mt-6 text-4xl font-bold tracking-tight md:text-6xl">简幻欢社区维基</h1>
         <p className="mt-5 max-w-2xl text-fd-muted-foreground md:text-lg">
-          简幻欢与简幻云的社区文档，涵盖官网使用、MCJE 与 MCBE 服务端配置和常见操作。
+          简幻欢社区文档，涵盖官网使用、游戏服务端配置和常见操作。
         </p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           {docEntries.map((doc, index) => (

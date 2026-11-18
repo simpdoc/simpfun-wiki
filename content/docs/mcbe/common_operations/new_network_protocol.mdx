@@ -1,34 +1,63 @@
 ---
-title: "NethetNet 网络协议相关问题"
+title: "使用 NetherNet 网络协议"
 ---
 
-Minecraft 基岩版 1.26.50 起，联机传输层从 RakNet 切换到了 NetherNet（基于 WebRTC 的 P2P 传输）：
+Minecraft 基岩版自 26.50 起，联机传输层从 RakNet 切换到了 NetherNet（基于 WebRTC 的 P2P 传输），同时使用 TCP 端口与 UDP 端口来为玩家提供游戏服务。
 
-- 信令走 BDS 的 HTTP 端口（`server-port`，TCP），客户端 POST SDP offer，BDS 返回 answer；
-- 游戏数据走 WebRTC DataChannel（DTLS/SCTP over UDP），**每个玩家连接由 BDS 分配独立的 UDP 端口**（`server-udp-ports`）。
+26.60 版本起，RakNet 协议被标记为废弃，未来将会被彻底移除。
 
-在端口受限的 NAT 服务器和面板服上，只放行了有限端口，NetherNet 的"每玩家一个 UDP 端口"模式直接崩坏：第一个玩家占掉唯一端口后，第二个玩家无法加入。
+早期版本的 NetherNet 协议同时使用了复数个 UDP 端口为多人游戏提供服务，这对所有玩家与服务商来说都是非常不便的。
 
-在当前版本（26.60），旧版的 RakNet 协议仍能使用。
+现版本的 NetherNet 协议仅使用一个 UDP 端口来为所有玩家提供游戏服务，因此你可以放心的将服务器使用的网络协议切换为 NetherNet。
 
-## 继续使用 RakNet 协议
+## 使用新版 NetherNet 网络协议
 
-我们建议在 RakNet 协议被彻底弃用前继续使用 RakNet 协议。
-
-在服务器文件管理根目录找到 `server.properties` 文件并打开，在其中找到这一行：
+在 server.properties 中，找到下面这些配置项：
 
 ```properties title="server.properties"
+server-port=10002
+#server-ip=
+server-udp-ports=19132
 transport=nethernet
-# Which transport protocol the server should use.
-# Allowed values: "raknet" or "nethernet"
+enable-lan-visibility=true
 ```
 
-把 `nethernet` 改成 `raknet` ，以便继续使用 RakNet 网络协议。
+然后对这些配置项进行如下修改：
 
-## 未来的版本该怎么办
+#### server-port
 
-LeviLamina 与 Endstone 已经实现了 NetherNet 的单端口复用。开启后，一条 TCP 信令隧道 + 一条 UDP 媒体隧道即可支撑多名玩家同时在线，不再需要“一人一端口”。
+将其修改为你的实例分配到的端口（一般会自动修改）。
 
-同时，Java 版的 Geyser 互通插件也实现了 NetherNet 协议的支持。
+#### server-ip
 
-因此我们建议，有条件的服主可以选择使用 Endstone 服务端，或者直接转向 Java 版服务器+ Geyser 的组合配置。
+取消注释（删掉前面的 `#` ），修改为 `play.simpfun.cn` 解析出来的 IP 地址，一般情况下为 `103.85.86.51`，如果有变动则以当前解析出的最新结果为准。
+
+<Callout type="idea" title="提示">
+如何查询 play.simpfun.cn 解析出来的 IP 地址？
+
+Windows ：打开命令提示符，输入 `nslookup play.simpfun.cn`，回车后即可看到解析出来的 IP 地址。   
+Linux ：打开终端，输入 `dig play.simpfun.cn`，回车后即可看到解析出来的 IP 地址。   
+手机：使用网页工具在线查询。
+</Callout>
+
+#### server-udp-ports
+
+将其修改为如下格式：
+
+`简幻欢公网IP:实例端口:实例端口`
+
+例如，实例分配到的端口为 `10002`，那么这项配置就应该修改为：
+
+```properties
+server-udp-ports=103.85.86.51:10002:10002
+```
+
+#### transport
+
+将其修改为 `nethernet`。
+
+#### enable-lan-visibility
+
+不要去动这项配置，保持为 `true` 即可。
+
+修改完成后保存配置，然后启动服务器就可以正常游玩了。
