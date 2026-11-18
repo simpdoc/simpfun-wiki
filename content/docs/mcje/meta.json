@@ -6,9 +6,11 @@
   "pages": [
     "index",
     "select_server",
+    "server_install",
     "server_properties",
     "server_files",
     "playerdata",
+    "extensions",
     "common_operations",
     "advanced",
     "geyser"

@@ -1,0 +1,68 @@
+---
+title: "更改 MOTD 和图标来美化服务器"
+description: "修改服务器列表里显示的描述文字与图标，并可借助插件为 MOTD 添加颜色。"
+---
+
+<Callout type="info" title="提示">
+
+你可以更改服务器的 MOTD 和图标，从而使服务器在服务器列表里更好看一些。
+
+![服务器列表中显示的 MOTD 与服务器图标效果](/img/pages/mcje/mcje-set_motd-1.png)
+
+</Callout>
+
+## 服务器描述
+
+### 修改 motd
+
+`motd` 的作用、默认值与允许值见 [server.properties 详解](/docs/mcje/server_properties#motd)。
+
+在 `server.properties` 中修改这一行：
+
+```properties title="server.properties"
+motd=SFE4 SERVER
+```
+
+将 `motd=` 后的内容改为自己想要的描述即可。如果只是单纯更改文字，描述会显示为灰色。
+
+<Callout type="warn" title="中文需要转码">
+
+1.19.4 及以下的版本需要将非英文字符（例如中文）转码为 Unicode 编码（[在线工具](https://www.metools.info/code/c39.html) / [离线工具下载](https://wwd.lanzouo.com/iE2Jh26kpvxi)）。
+
+1.20 及以上版本的 `server.properties` 已经默认使用 UTF-8 编码读取/写入，因此无需再进行转码。
+
+</Callout>
+
+### 使用插件来丰富描述
+
+原版的 motd 设置中只有灰色，那 Hypixel 和上图里那些**花里胡哨的字体**是怎么来的？
+
+实际上，有针对 motd 的插件/mod 可以帮助你丰富 motd 设置。
+
+#### MiniMOTD
+
+MiniMOTD 是一个基本的 MOTD 插件，兼容 Minecraft 1.8 以上的版本（还支持 BungeeCord、Sponge、Velocity、Fabric、Forge、NeoForge 等）。
+
+该插件可以增加 RGB 颜色、添加渐变色等。
+
+使用教程可以参照 [MC 百科上的这篇帖子](https://www.mcmod.cn/post/3950.html)。
+
+<Callout type="info" title="下载地址">
+
++ 所有插件端/代理端：[MiniMOTD - Minecraft Plugin](https://modrinth.com/plugin/minimotd/versions?l=sponge&l=velocity&l=folia&l=paper&l=waterfall)
++ Fabric（1.16+）/ NeoForge（1.21.1+）：[MiniMOTD - Minecraft Plugin](https://modrinth.com/plugin/minimotd/versions?l=neoforge&l=fabric)
++ Forge（1.12.2——1.20.1）/ NeoForge（1.20.6——1.21.4）：[MiniMOTD Reforged - MC 百科](https://www.mcmod.cn/download/7670.html)
+
+</Callout>
+
+#### ColorMOTD
+
+与此相似的插件还有 ColorMOTD，教程参见[这篇专栏](https://www.bilibili.com/read/cv9428815/)。
+
+## 服务器图标
+
+很明显，让服务器更好看不仅仅只有抛弃白字，还有自定义图标。
+
+你需要准备一个 `.png` 后缀的图片文件，分辨率为 16×16、32×32 或 64×64。
+
+将图片命名为 `server-icon.png`，然后上传到服务器根目录，重启服务器即可应用图标。

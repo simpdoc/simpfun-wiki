@@ -1,0 +1,10 @@
+{
+  "title": "为服务器添加额外内容",
+  "pages": [
+    "add_mod",
+    "add_plugin",
+    "add_datapack",
+    "add_shaders",
+    "set_motd"
+  ]
+}

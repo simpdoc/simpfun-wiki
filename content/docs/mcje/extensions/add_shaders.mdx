@@ -1,0 +1,152 @@
+---
+title: "如何添加光影"
+description: "光影只能在客户端加载，这里介绍 OptiFine、Sodium + Iris、Embeddium + Oculus 等几种主流方案。"
+---
+
+本篇文档将教你如何**正确**地添加光影。
+
+## 给服务器装光影
+
+![交流群中多位玩家询问“服务器怎么加光影”的聊天记录](/img/pages/mcje/mcje-add_shaders-1.png)
+
+*摘自简幻欢交流群的部分聊天记录*
+
+<Callout type="error" title="千万注意！">
+
+服务器是不能加光影的！**光影只能在客户端装载！**
+
+与资源包不同，光影需要 mod 才能加载，因此**服务器无法强制让客户端启用光影**！
+
+</Callout>
+
+## 给客户端装光影
+
+在以下 **4** 种方案中选择一种：
+
++ **使用 OptiFine**
++ **使用 Sodium + Iris Shaders（Fabric）**
++ **使用 Embeddium + Oculus（Forge 1.16——1.20.1）**
++ **使用 Sodium + Iris Shaders（NeoForge 1.21+）**
+
+### 使用 OptiFine
+
+<Callout type="error" title="警告">
+
+**Forge**
+
++ 由于兼容性问题，不推荐在 1.17.1 或更高版本的 Forge 版中使用高清修复。
++ 在高版本中，建议使用 **Embeddium + Oculus** 来加载光影。
+
+**Fabric**
+
++ 不推荐在 Fabric 下使用 OptiFine。如果你非要用，需要以 [OptiFabric](https://www.mcmod.cn/class/1703.html) 作为前置。
++ 推荐使用 **Sodium + Iris Shaders** 来加载光影。
+
+</Callout>
+
+国内御三家启动器（[HMCL](https://hmcl.huangyuhui.net/)、[PCL2](https://afdian.net/a/LTCat)、[BakaXL](https://www.bakaxl.com/)）均支持一键安装 OptiFine。
+
+**HMCL：**
+
+![HMCL 启动器中一键安装 OptiFine 的选项](/img/pages/mcje/mcje-add_shaders-2.png)
+
+**PCL 2：**
+
+![PCL2 启动器中安装 OptiFine 的选项](/img/pages/mcje/mcje-add_shaders-3.png)
+
+**BakaXL：**
+
+![BakaXL 自动安装核心界面中高亮标注的 OptiFine 组件](/img/pages/mcje/mcje-add_shaders-9.png)
+![BakaXL 中选择需要安装的 OptiFine 版本](/img/pages/mcje/mcje-add_shaders-4.png)
+
+安装完成后启动游戏。
+
+点击`选项`——`视频设置...`——`光影...`，打开光影设置界面。
+
+![OptiFine 视频设置中的光影界面](/img/pages/mcje/mcje-add_shaders-5.png)
+
+默认情况下，除了一个（内置）光影外，OptiFine 是不自带光影的。
+
+点击左下角的「打开包文件夹」，将你的光影包复制到这个目录。回到游戏后，OptiFine 会自动显示能读取到的光影包，选择一个启用即可。
+
+### 使用 Sodium + Iris Shaders（Fabric）
+
+<Callout type="info" title="什么是 Sodium">
+
+Sodium 是适用于 Minecraft 1.16+ 客户端的免费的强大渲染引擎暨优化模组，它在修复一些图形问题的同时大大提高了渲染性能。与其他以渲染为重点的模组相比，它与 Fabric 的模组生态系统具有广泛的兼容性，且不会影响游戏的画面，让你体验到原汁原味的方块游戏。
+
+（[摘自 MC 百科的 Sodium 页面](https://www.mcmod.cn/class/2785.html)）
+
+</Callout>
+
+<Callout type="info" title="什么是 Iris Shaders">
+
+Iris Shaders 是一个旨在与现有的 ShadersModCore / 高清修复光影兼容的 Fabric 渲染模组。
+
+Iris Shaders 使用 Mixin，致力于兼容来自 ShadersModCore / 高清修复的光影，是 Fabric 下 OptiFabric + OptiFine 光影解决方案的有效替代品。
+
+（[摘自 MC 百科的 Iris Shaders 页面](https://www.mcmod.cn/class/3697.html)）
+
+</Callout>
+
+1. 前往 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sodium) 或 [Modrinth](https://www.modrinth.com/mod/sodium) 下载对应版本的 Sodium。
+2. 前往 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/irisshaders) 或 [Modrinth](https://modrinth.com/mod/irisshaders) 下载对应版本的 Iris Shaders。
+3. 推荐安装 [Reese 的钠视频界面（RSO）](https://www.mcmod.cn/class/4905.html) 改善体验。
+4. 将下载好的 2 个（不安装 RSO）/ 3 个（安装 RSO）文件移入 `mods` 文件夹。
+5. 启动游戏。
+6. 点击`选项`——`视频设置...`——`光影包`，或者在游戏内按下快捷键（默认为 `O` 键）打开光影设置界面。
+
+![Iris Shaders 的光影包设置界面](/img/pages/mcje/mcje-add_shaders-6.png)
+
+默认情况下，Iris 是不自带光影的。
+
+7. 点击左下角的「打开光影包文件夹」，将你的光影包复制到这个目录。回到游戏后，Iris 会自动显示能读取到的光影包，选择一个启用即可。
+
+### 使用 Embeddium + Oculus（Forge 1.16——1.20.1）
+
+<Callout type="info" title="什么是 Embeddium">
+
+Embeddium 是钠（Sodium）的非官方分支，基于铷（Rubidium），但有着额外的更改和错误修复，以更好地融入 Forge 的模组生态。
+
+（[摘自 MC 百科的 Embeddium 页面](https://www.mcmod.cn/class/12028.html)）
+
+</Callout>
+
+<Callout type="info" title="什么是 Oculus">
+
+这是一个 Iris 的非官方 Forge 移植版，你可以叫它 Oculus。
+
+Oculus 与铷（Rubidium）或 Embeddium 等优化 Mod 搭配时，可以充分利用你的显卡。
+
+（[摘自 MC 百科的 Oculus 页面](https://www.mcmod.cn/class/5741.html)）
+
+</Callout>
+
+1. 前往 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/embeddium) 或 [Modrinth](https://www.modrinth.com/mod/embeddium) 下载对应版本的 Embeddium。
+2. 前往 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/oculus) 或 [Modrinth](https://modrinth.com/mod/oculus) 下载对应版本的 Oculus。
+3. 将下载好的 2 个文件移入 `mods` 文件夹。
+4. 启动游戏。
+5. 点击`选项`——`视频设置...`——`光影包`，或者在游戏内按下快捷键（默认为 `O` 键）打开光影设置界面。
+
+![Oculus 的光影包设置界面](/img/pages/mcje/mcje-add_shaders-7.png)
+
+默认情况下，Oculus 是不自带光影的。
+
+6. 点击左下角的「打开光影包文件夹」，将你的光影包复制到这个目录。回到游戏后，Oculus 会自动显示能读取到的光影包，选择一个启用即可。
+
+### 使用 Sodium + Iris Shaders（NeoForge 1.21+）
+
+Sodium 与 Iris Shaders 的介绍见上文「使用 Sodium + Iris Shaders（Fabric）」。
+
+1. 前往 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/sodium) 或 [Modrinth](https://www.modrinth.com/mod/sodium) 下载对应版本的 Sodium。
+2. 前往 [CurseForge](https://www.curseforge.com/minecraft/mc-mods/irisshaders) 或 [Modrinth](https://modrinth.com/mod/irisshaders) 下载对应版本的 Iris Shaders。
+3. 推荐安装 [Reese 的钠视频界面（RSO）](https://www.mcmod.cn/class/4905.html) 改善体验。
+4. 将下载好的 2 个（不安装 RSO）/ 3 个（安装 RSO）文件移入 `mods` 文件夹。
+5. 启动游戏。
+6. 点击`选项`——`视频设置...`——`光影包`，或者在游戏内按下快捷键（默认为 `O` 键）打开光影设置界面。
+
+![NeoForge 下 Iris Shaders 的光影包设置界面](/img/pages/mcje/mcje-add_shaders-8.webp)
+
+默认情况下，Iris 是不自带光影的。
+
+7. 点击左下角的「打开光影包文件夹」，将你的光影包复制到这个目录。回到游戏后，Iris 会自动显示能读取到的光影包，选择一个启用即可。
