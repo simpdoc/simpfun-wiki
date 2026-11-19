@@ -13,7 +13,7 @@ Vanilla 端与大部分 Bukkit 系服务端（Spigot 除外）的安装过程较
 
 在 [Paper 官网](https://fill-ui.papermc.io/projects/paper)下载对应版本的服务端核心。
 
-![PaperMC Fill 页面上按 Minecraft 版本分类的核心列表](/img/pages/mcje/mcje-vanilla_bukkit-1.png)
+![PaperMC Fill 页面上按 Minecraft 版本分类的核心列表](/img/pages/mcje/mcje-vanilla_bukkit-1.webp)
 
 <Callout type="info" title="其它服务端下载地址">
 
@@ -57,7 +57,7 @@ ${openjdk17} -server -Xms1024M -Xmx${maxmem}M -jar paper-1.19.2-307.jar nogui
 
 调整完的启动命令应类似下图所示：
 
-![start.sh 中修改后的启动命令](/img/pages/mcje/mcje-vanilla_bukkit-2.png)
+![start.sh 中修改后的启动命令](/img/pages/mcje/mcje-vanilla_bukkit-2.webp)
 
 ### 第三步：初始化服务器
 
@@ -150,7 +150,7 @@ Bukkit 系服务端需要装载插件的话，将插件放到 `plugins` 文件�
 
   前往 [Spigot 构建站](https://hub.spigotmc.org/jenkins/job/BuildTools/)下载 `BuildTools.jar`。
 
-  ![Spigot 构建站中 BuildTools.jar 的下载入口](/img/pages/mcje/mcje-vanilla_bukkit-3.png)
+  ![Spigot 构建站中 BuildTools.jar 的下载入口](/img/pages/mcje/mcje-vanilla_bukkit-3.webp)
 
   将 `BuildTools.jar` 上传至实例文件的根目录，并在根目录下的 `start.sh` 内添加一行下面的命令后保存（不要删除 `start.sh` 自带的东西，`echo` 那一行除外）：
 
@@ -160,7 +160,7 @@ Bukkit 系服务端需要装载插件的话，将插件放到 `plugins` 文件�
 
   `--rev` 后的版本号换成你想构建的版本，例如 `1.19.3`；设置为 `latest` 时构建最新版本。
 
-  ![start.sh 中新增的 BuildTools 构建命令](/img/pages/mcje/mcje-vanilla_bukkit-4.png)
+  ![start.sh 中新增的 BuildTools 构建命令](/img/pages/mcje/mcje-vanilla_bukkit-4.webp)
 
   保存完成后启动实例，等待服务端构建完毕。
 
@@ -186,7 +186,7 @@ Bukkit 系服务端需要装载插件的话，将插件放到 `plugins` 文件�
 
   调整完的启动命令应类似下图所示：
 
-  ![start.sh 中修改后的 Spigot 启动命令](/img/pages/mcje/mcje-vanilla_bukkit-5.png)
+  ![start.sh 中修改后的 Spigot 启动命令](/img/pages/mcje/mcje-vanilla_bukkit-5.webp)
 
   此时你可以将 `BuildTools.jar` 删除了。
 

@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import type { LoaderPlugin } from 'fumadocs-core/source';
 
 /**
- * Render `icon` strings in meta files (e.g. `/img/logo.png`) as `<img>` elements.
+ * Render `icon` strings in meta files (e.g. `/img/logo.webp`) as `<img>` elements.
  *
  * Icon containers in the sidebar only size SVG descendants (`[&_svg]:size-4`),
  * so the image must carry its own fixed size to match text height. Tab boxes

@@ -3,6 +3,11 @@
     "pages": [
         "new_network_protocol",
         "op",
-        "allow_cheat"
+        "allow_cheat",
+        "keepinventory",
+        "coords",
+        "showplaydays",
+        "locatorbar",
+        "enable_commandblock"
     ]
 }

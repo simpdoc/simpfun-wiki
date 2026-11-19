@@ -1,0 +1,54 @@
+---
+title: "关闭/启用定位栏"
+description: "使用命令或修改 server.properties 控制定位栏显示。"
+---
+
+
+定位栏是 JE1.21.6/BE1.21.90 后加入的一种显示其他玩家大致方位的功能。此功能默认开启，但是在某些服务器中可能并不需要开启这个功能。
+
+## 方法A：使用命令关闭
+
+打开服务器控制台>终端
+
+![服务器控制台终端](/img/pages/mcbe/mcbe-locatorbar-1.webp)
+
+输入以下命令(可直接复制，游戏内使用ctrl+v粘贴，控制台输入请去掉斜杠)：
+
+```text title="26.30 之前"
+/gamerule locatorBar false
+```
+
+```text title="26.30 之后"
+/gamerule playerWaypoints false
+```
+
+### 开启定位栏
+
+```text title="26.30 之前"
+/gamerule locatorBar true
+```
+
+```text title="26.30 之后"
+/gamerule playerWaypoints true
+```
+
+## 方法B：修改配置文件
+
+<Callout type="info" title="提示">
+
+这段内容是隶属于[关于 server.properties](/docs/mcbe/server_properties)文档的。   
+看完这段内容后想了解更多信息，请阅读父文档。
+
+</Callout>
+
+在 **server.properties** 中添加以下配置并重新启动服务器。
+
+```properties
+op-permission-level=4
+```
+
+如图所示：
+
+![server.properties 中的 op-permission-level 配置](/img/pages/mcbe/bds-setworldspawn-2.webp)
+
+然后在有OP权限的情况下游戏内的设置就可以更改了。

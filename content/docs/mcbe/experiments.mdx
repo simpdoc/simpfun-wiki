@@ -1,0 +1,99 @@
+---
+title: "开启作弊和实验性游戏玩法"
+description: "通过本地存档或修改 level.dat 启用基岩版实验性玩法。"
+---
+
+
+<Callout type="warn" title="提示">
+
+本文档适用于官方文件结构的基岩版存档，即 BDS 和所有 mc 客户端一定可用。   
+本文档目前只含 Windows 系统的操作教程。
+
+</Callout>
+
+简幻欢的官方基岩版服务器镜像，如果创建实例后没有更改任何设置，启动时使用的游戏设置默认**关闭**所有实验性游戏内容。同时，玩家（即使拥有op权限）也**无法**在游戏内更改**实验性游戏内容**设置（如下图所示），且SFE4的网页中也**没有**能够直接更改该内容的方法。
+
+![游戏内不可调整的实验性玩法设置](/img/pages/mcbe/experiments-1.webp)
+
+## 怎么办呢？
+
+### 本地创建存档并导入服务器
+
+基岩版客户端创建存档时，**可以**自行更改世界设置。
+
+![本地创建存档时可调整的世界设置](/img/pages/mcbe/experiments-2.webp)
+
+如果您不需要保留服务器上的存档数据，可以在本地按照自己的需要创建存档后，上传至简幻欢服务器（详见[【MCBE】导入存档到服务端](/docs/mcbe/upload_worlds)）。   
+如果您需要使用服务器上的存档并更改实验性游戏内容设置，请看下一步。
+
+### 更改已有存档中的实验性游戏内容
+
+根据[Wiki](https://zh.minecraft.wiki/w/%E5%AE%9E%E9%AA%8C%E6%80%A7%E7%8E%A9%E6%B3%95?variant=zh-cn)，世界的实验性设置以<u>NBT格式</u>储存在<u>level.dat</u>文件内。因此，修改该文件内的NBT数据，可以更改实验性游戏内容设置。
+
+#### 第一步：从 SFE4 中下载 level.dat 文件
+
+打开文件管理面板，找到worlds文件夹并打开。如果您没有更改存档名称，则存档文件夹默认为Bedrock Level；如果更改，则为您自行设定的名称。   
+进入存档文件夹，找到level.dat文件并选中，点击右下角三个点，点击下载，将level.dat文件下载到您的电脑上。   
+不要关闭网页，下面还有用。
+
+#### 第二步：使用NBT修改工具修改文件
+
+[NBTExplorer](https://github.com/jaquadro/NBTExplorer) 的上次更新已经是 2017 年了，它不太能够正常打开高版本基岩版服务器的文件。   
+在本文档中，将使用较新的工具 [nbt-studio](https://github.com/tryashtar/nbt-studio) 来对 level.dat 进行修改。   
+~~虽然这个东西也是22年的了，不过比explorer更能用~~
+
+<Callout type="info" title="信息">
+
+下载链接：
+- GitHub原地址：[Releases · tryashtar/nbt-studio](https://github.com/tryashtar/nbt-studio/releases)
+
+因为该项目并未在GitHub页面里提供LICENSE文件，所以我们并不能保证未经作者本人同意的再分发是合法的，因此，此文档仅提供原GitHub链接。   
+不过，如果你实在访问不了GitHub，可以去找电脑里有该 exe 的群友私信索要，这种情况下没有太大的法律风险。   
+顺带一提，微软商店里有一个原价 104￥，打折 71￥ 的[NBT Studio](https://apps.microsoft.com/detail/9mtdh6mqddzr?hl=zh-CN&gl=CN)，不过该版本与 GitHub 版本的作者名字不一样，此文档也并不提供它的使用教程~~因为没钱买~~。
+
+</Callout>
+
+打开NBT-Studio，点击左上角File，选择Open File。
+
+![NBT Studio 的 File 菜单和 Open File 入口](/img/pages/mcbe/experiments-3.webp)
+
+选择自己的level.dat文件，点击打开。
+
+![在 NBT Studio 中选择 level.dat 文件](/img/pages/mcbe/experiments-4.webp)
+
+在NBT-Studio中，找到大类experiments，双击打开。
+
+![NBT Studio 中 level.dat 的 experiments 节点](/img/pages/mcbe/experiments-5.webp)
+
+观察到，experiments下存储着以每项实验性玩法对应的命名空间ID为名的Byte Tag，Tag的值决定了该玩法是否启用。   
+_如果你听不懂这句话里的“命名空间”“Byte Tag”“值”这些名词，没有任何影响，按照下面的步骤照做就行_   
+（若您已启用的实验性玩法较少，则**不会**看到过多Byte Tag。这是因为，大部分设置因为默认不启用，若未更改则不用特别标出，沿用游戏内部默认设置即可。）   
+如果要启用过去没有启用过的设置，则需要新建 Byte Tag。
+
+![experiments 节点下的 Byte Tag 列表](/img/pages/mcbe/experiments-6.webp)
+
+如上图所示，_点击直接跳转→_[Wiki](https://zh.minecraft.wiki/w/%E5%AE%9E%E9%AA%8C%E6%80%A7%E7%8E%A9%E6%B3%95?variant=zh-cn)记录了所有的实验性玩法和对应命名空间ID。对照 Wiki，找到自己需要打开的设置，复制其命名空间ID，回到 NBT-Studio。   
+以“定位栏”（命名空间ID：locator_bar）为例：   
+选中experiments（标蓝），在上方菜单中找到按钮“Add Byte Tag”_（该按钮为红色，在一堆带字母的按钮中排最前面）_，点击。
+
+![NBT Studio 的 Add Byte Tag 按钮](/img/pages/mcbe/experiments-7.webp)
+
+在弹出的窗口中，Name栏填入复制到的命名空间ID，我这里是locator_bar；Value栏填入“1”（即启用）.
+
+![填写 locator_bar 命名空间 ID 和启用值的窗口](/img/pages/mcbe/experiments-8.webp)
+
+点击OK按钮保存。
+
+![NBT Studio 中新增的 locator_bar Byte Tag](/img/pages/mcbe/experiments-9.webp)
+
+此时，NBT Studio中已有我们想要添加的设置，如果需要启用更多设置，重复以上步骤。   
+当设置添加完毕后，点击左上角File，保存更改后的level.dat文件。
+
+![NBT Studio 的 File 菜单和保存入口](/img/pages/mcbe/experiments-10.webp)
+
+如果选择“Save”，则NBT Studio会覆盖原文件；如果选择“Save As”，则会在其他自选目录保存修改后的文件。
+
+#### 第三步：将修改后的level.dat文件传回服务器
+
+找到新的文件，回到第一步中留下的网页，选择修改后的文件并上传，也可直接拖拽至网页后点击上传。   
+开启服务器，即可发现世界设置已成功更改。

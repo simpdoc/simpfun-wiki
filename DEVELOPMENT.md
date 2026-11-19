@@ -102,7 +102,7 @@ Fumadocs 的三个包各司其职：
 
 ## 内容管线
 
-1. **`source.config.ts`**：fumadocs-mdx 的编译配置。当前只做了一件事——`remarkImageOptions.useImport: false`，让 Markdown 图片可以直接用路径引用（如 `![x](/img/pages/a.png)`），不必写 import
+1. **`source.config.ts`**：fumadocs-mdx 的编译配置。当前只做了一件事——`remarkImageOptions.useImport: false`，让 Markdown 图片可以直接用路径引用（如 `![x](/img/pages/a.webp)`），不必写 import
 2. **`src/lib/source.ts`**：用 `defineDocs()` 声明内容目录为 `content/docs`，页面 schema 用 `pageSchema`、meta 用 `metaSchema`；`postprocess.includeProcessedMarkdown: true` 让每页的 Markdown 纯文本被保留，供 `/llms.mdx` 视图使用；最后 `loader()` 导出 `source`，同时用 `llms()` 生成 `docsLlms`
 3. **`.source/`**：`pnpm dev` / `pnpm build` 时由 fumadocs-mdx 自动生成，已被 `.gitignore` 忽略。**不要手改、不要提交**；报奇怪的编译错误时可以整个删掉重新生成
 

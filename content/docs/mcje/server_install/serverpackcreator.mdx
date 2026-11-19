@@ -13,19 +13,19 @@ ServerPackCreator 是一款专为简化 Minecraft 服务器包（Modpack）创�
 
 或者查看压缩包附带的信息（如下图右侧明确写明了 `Server pack made with SPC 7.2.4`）。
 
-![压缩包中 SPC 生成的文件与 Server pack made with SPC 标识](/img/pages/mcje/mcje-serverpackcreator-1.png)
+![压缩包中 SPC 生成的文件与 Server pack made with SPC 标识](/img/pages/mcje/mcje-serverpackcreator-1.webp)
 
 ## 使用 AIO 镜像安装
 
 1. 新建/重装实例为「自定义——AIO 镜像」。
 
-![新建实例时选择自定义 AIO 镜像](/img/pages/mcje/mcje-serverpackcreator-2.png)
+![新建实例时选择自定义 AIO 镜像](/img/pages/mcje/mcje-serverpackcreator-2.webp)
 
 2. 上传服务端整合包到实例根目录，然后解压缩。
 3. 解压缩完成后打开 `variables.txt`，找到 `RECOMMENDED_JAVA_VERSION` 这行（下图中 ① 处），记下等号后的数字。
 4. 然后将 `JAVA` 等号后的内容（下图中 ② 处）修改为 `${openjdk*}`，`*` 为上方记下的数字。
 
-![variables.txt 中需要修改的 JAVA 版本与 JAVA 变量](/img/pages/mcje/mcje-serverpackcreator-3.png)
+![variables.txt 中需要修改的 JAVA 版本与 JAVA 变量](/img/pages/mcje/mcje-serverpackcreator-3.webp)
 
 修改完成后应如下所示：
 
@@ -43,7 +43,7 @@ AIO v1 镜像默认仅包含 Java 8/11/16/17/19/21。如果整合包需要的 Ja
 
 5. 回到终端，启动服务器。此时 SPC 启动脚本应开始下载服务端，需要你同意 EULA，输入 `I agree` 后回车。
 
-![SPC 启动脚本提示输入 I agree 同意 EULA](/img/pages/mcje/mcje-serverpackcreator-4.png)
+![SPC 启动脚本提示输入 I agree 同意 EULA](/img/pages/mcje/mcje-serverpackcreator-4.webp)
 
 6. 等待服务端下载完成（此过程可能会非常长，请耐心等待）。
 7. 安装完成后，根据需要修改 `server.properties`。
@@ -58,7 +58,7 @@ AIO v1 镜像默认仅包含 Java 8/11/16/17/19/21。如果整合包需要的 Ja
 
 打开 `variables.txt`，找到如下图所示的这一行来修改 JVM 参数。
 
-![variables.txt 中的 JAVA_ARGS 参数行](/img/pages/mcje/mcje-serverpackcreator-5.png)
+![variables.txt 中的 JAVA_ARGS 参数行](/img/pages/mcje/mcje-serverpackcreator-5.webp)
 
 例如，可以把 Xmx 参数改为 `-Xmx11G`（建议将 JVM 最大内存设为「实例内存 − 1G」，如实例有 12G 内存，则 Xmx 设置为 11G），然后添加一个 `-server` 参数，如下所示：
 
@@ -78,7 +78,7 @@ JAVA_ARGS="-server -Xmx11G -Xms5G"
 
 1. 新建/重装实例为「第三方镜像 → MinecraftJE → AutoInstall」，版本选择最新版。
 
-![第三方镜像中选择 MinecraftJE 的 AutoInstall 镜像](/img/pages/mcje/mcje-serverpackcreator-6.png)
+![第三方镜像中选择 MinecraftJE 的 AutoInstall 镜像](/img/pages/mcje/mcje-serverpackcreator-6.webp)
 
 2. 上传服务器整合包到实例根目录。
 3. 回到终端，启动服务器，耐心等待服务器启动（若安装失败可重试，多次失败请反馈）。

@@ -1,0 +1,42 @@
+---
+title: "启用坐标显示"
+description: "使用命令或修改 server.properties 启用基岩版坐标显示。"
+---
+
+
+进入游戏后左上角不显示坐标，游戏设置里的坐标显示又点不动？那你就需要这个！
+
+## 方法A：使用命令
+
+打开控制台
+
+![服务器控制台终端](/img/pages/mcbe/bds-setworldspawn-1.webp)
+
+在控制台输入以下命令：
+
+```text
+gamerule showcoordinates true
+```
+
+**注：需要[启用作弊](/docs/mcbe/common_operations/allow_cheat)**
+
+## 方法B：修改配置文件
+
+<Callout type="info" title="提示">
+
+这段内容是隶属于[关于 server.properties](/docs/mcbe/server_properties) 文档的。   
+看完这段内容后想了解更多信息，请阅读父文档。
+
+</Callout>
+
+在 **server.properties** 中添加以下配置并重新启动服务器。
+
+```properties
+op-permission-level=4
+```
+
+如图所示：
+
+![server.properties 中的 op-permission-level 配置](/img/pages/mcbe/bds-setworldspawn-2.webp)
+
+然后在有OP权限的情况下游戏内的设置就可以更改了。

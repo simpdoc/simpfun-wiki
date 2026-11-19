@@ -12,7 +12,7 @@ export function baseOptions(): BaseLayoutProps {
       // JSX supported
       title: (
         <span className="flex items-center gap-2">
-          <img src="/img/simpfun.png" alt="" className="h-7 w-auto" />
+          <img src="/img/simpfun.webp" alt="" className="h-7 w-auto" />
           <span className="font-bold">{appName}</span>
         </span>
       ),

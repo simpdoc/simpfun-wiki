@@ -1,0 +1,137 @@
+---
+title: "导入存档到服务端"
+description: "从 Android、Windows、iOS 或移动端资源包导出基岩版存档，并上传到 BDS 服务端。"
+---
+
+<Callout type="warn" title="提示">
+
+适用服务端：BDS，LLBDS，Endstone   
+不适用服务端：Nukkit 系，Pocketmine 系等非 BDS 服务端
+
+</Callout>
+
+---
+
+## 从客户端导出存档
+
+### Android导出教程
+
+由于谷歌对App做出了限制，在BE1.18后，"外部存储"的存储目录被移动至`Android/data/com.mojang.minecraftpe/files/games/com.mojang/minecraftWorlds/`下。   
+如果是您本地创建的存档，其文件夹名称将会是一串无规则英文字符or数字+等号(=)，如下图所示。     
+请打开文件夹内的`levelname.txt`查看存档名，确保你选择的是需要导出的存档。
+
+![Minecraft Worlds 文件夹中的存档目录和 levelname.txt](/img/pages/mcbe/bds-upload-worlds-1.webp)
+
+回到`minecraftWorlds`文件夹，选择对应的存档文件夹，压缩成zip格式，如下图所示：
+
+![在文件管理中压缩选中的基岩版存档文件夹](/img/pages/mcbe/bds-upload-worlds-2.webp)
+
+<Callout type="warn" title="警告">
+
+在Android11及更高的版本中，由于谷歌的限制，您需要将存档文件夹复制到非Android/data的目录下进行压缩！
+
+</Callout>
+
+或者也可以选择不压缩，使用[SFTP 文件管理](/docs/web/advanced/sftp)直接上传整个文件夹。
+
+### Windows导出教程
+
+_是三个教程里最简单的一个端_
+
+在游戏内点击`编辑`
+
+![游戏世界列表中的编辑按钮](/img/pages/mcbe/bds-upload-worlds-3.webp)
+
+在存档详情页拉到最下方，如下图
+
+![存档详情页底部的导出世界入口](/img/pages/mcbe/bds-upload-worlds-4.webp)
+
+直接点击“导出世界”并导出即可
+
+![游戏内导出世界按钮](/img/pages/mcbe/bds-upload-worlds-5.webp)
+
+### iOS导出教程
+
+与安卓端导出教程基本相同。打开“文件”，在我的 iPhone/iPad 里找到 `Minecraft` ，进入以下目录：   
+```text
+/Minecraft/games/com.mojang/minecraftWorlds
+```
+然后根据文件夹内的 `levelname.txt` 寻找需要导出的存档并将整个文件夹压缩为 zip 即可。
+
+![iOS 文件应用中的 Minecraft 存档目录](/img/pages/mcbe/bds-upload-worlds-6.webp)
+
+### 移动端：使用资源包快捷导出
+
+下载“存档导出mod”的资源包，打开方式选择“Minecraft”来导入。   
+这个包在综合交流群10的群文件里存了一份，[或者可以看这里的帖子](https://www.wuye2004.top/archives/3)（←点击即可快捷到达！）
+
+![导入存档导出资源包的打开方式选择界面](/img/pages/mcbe/bds-upload-worlds-7.webp)
+
+在游戏内全局资源里启用该资源包，或者给你想导出的存档单独装上。
+
+![在全局资源中启用存档导出资源包](/img/pages/mcbe/bds-upload-worlds-8.webp)
+
+然后你的游戏就像电脑端一样可以直接导出存档了！
+
+![使用资源包后游戏内的导出存档入口](/img/pages/mcbe/bds-upload-worlds-9.webp)
+
+## 下载的存档
+
+你已经有存档了，请直接快进下一步。
+
+## 导入存档到服务器
+
+### 第零步
+
+在往文件管理里扔存档之前，你应该先检查一下存档文件结构是否正确。   
+基岩版存档内有最少7项、最多（我见过的最多）12项文件/文件夹，只有符合这个格式的存档能被游戏识别。如下表（斜体+下划线部分表示非必须）
+
+| 文件或文件夹 | 说明 |
+| --- | --- |
+| db | 存储存档数据 |
+| behavior_packs | 存放行为包 |
+| resource_packs | 存放资源包 |
+| _texts_ | _<u>特殊文本，在存档切换过语言的情况下出现，存放不同语言下不变的文本</u>_ |
+| levelname.txt | 存放存档名 |
+| world_icon.jpeg | 存档图标 |
+| level.dat | 存放地图数据 |
+| level.dat_old | level.dat的备份 |
+| _world_behavior_packs.json_ | _<u>记录启用的行为包</u>_ |
+| _world_behavior_packs_history.json_ | _<u>记录所有启用过的行为包</u>_ |
+| _world_resource_packs.json_ | _<u>记录启用的资源包</u>_ |
+| _world_resource_packs_history.json_ | _<u>记录所有启用过的资源包</u>_ |
+
+_虽然一般不会有错，但是看看为好，以免套了个文件夹。_
+
+### 第一步
+
+打开SFE4控制台，选择实例，转到文件页面，并转到/worlds/文件夹，如下图所示：
+
+![文件管理中的 worlds 目录](/img/pages/mcbe/bds-upload-worlds-10.webp)
+
+### 第二步
+
+上传存档文件夹（或存档压缩包），如果上传的是压缩包，在上传完毕后解压。   
+如果压缩包后缀名为`.mcworld`，请将其改为`.zip`。   
+
+最终结果应如下图所示：   
+例：此处我上传的新存档文件夹名称为`Fontaine`。
+
+![上传并解压后的存档文件夹](/img/pages/mcbe/bds-upload-worlds-11.webp)
+
+### 第三步
+
+回到服务器根目录，打开`server.properties`，找到下面这行配置：
+
+```properties
+level-name=Bedrock level
+```
+
+将其中的`Bedrock level`更改为你上传的存档文件夹的名字。   
+例：在上一步中我上传的存档文件夹名为 `Fontaine` ，那么我就需要把 `Bedrock level` 更改为 `Fontaine` ，如下图所示：
+
+![server.properties 中修改 level-name](/img/pages/mcbe/bds-upload-worlds-12.webp)
+
+### 第四步
+
+回到终端界面，开启服务器，查看存档是否正确导入。
