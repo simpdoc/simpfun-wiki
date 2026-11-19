@@ -1,7 +1,189 @@
 ---
 title: "使用第三方验证服务器登录"
+description: "通过 authlib-injector 使用 LittleSkin 等第三方验证服务器登录，支持皮肤且无需离线注册插件。"
 ---
 
-{/* 占位：内容待补充 */}
+你还在因为离线模式下多人联机**无法使用皮肤**而苦恼吗？还在因为你认为原版内置皮肤丑得批爆而厌烦吗？加入光荣的**authlib第三方登录**吧！
 
-本页正在整理中，敬请期待。
+第三方登录允许你使用微软自己的正版验证服务器以外的验证服务器进行验证，**可以使用皮肤！！**而且**完美规避了离线模式服务器账号数据不安全，谁来都能登都能玩的问题**而不需要繁琐的注册插件！
+
+[哇袄！](https://minecraft.net/zh-hans/)这么好的登录方式怎么配置？请看本文档！
+
+<Callout type="info" title="提示">
+
+本文档**默认有自定义开服的知识基础。**
+
+</Callout>
+
+<Callout type="info" title="提示">
+
+**为了启用第三方登录验证，请在 server.properties 中将 online-mode 改为 true。**
+
+第三方验证的原理是修改验证服务器，所以你如果不让它验证了则毫无效果。
+
+</Callout>
+
+---
+
+选择一个第三方验证服务器：
+
+[LittleSkin](https://littleskin.cn/) —— 国内首选，目前为国内第一大的第三方皮肤站（因为 Skinme 寄了）
+
+## 服务端操作
+
+非 Leaves 服务端请按照以下方式操作。
+
+### 下载 authlib-injector 插件并上传到服务器
+
+从 [authlib-injector 的官网](https://authlib-injector.yushi.moe/)下载，或者使用 [BMCLAPI](https://bmclapi2.bangbang93.com/mirrors/authlib-injector/artifact/53/authlib-injector-1.2.5.jar) 提供的链接下载。
+
+![authlib-injector 官网下载页面](/img/pages/mcje/mcje-authlib_injector-1.png)
+
+下载后扔到与 `start.sh` 同级的目录。
+
+插件版本相较于截图时已更新数次，下方命令示例中的版本号相应做了更改。不过，仍可能有更改不及时的情况，因此，**请自行留意文件名是否对应你所下载的插件**。
+
+截至 2025 年 11 月 3 日，最新插件版本号为 1.2.6，文件名为 `authlib-injector-1.2.6.jar`。
+
+### 配置 start.sh 文件中的启动命令
+
+为启用第三方登录，请在启动命令中添加参数使 authlib-injector 插件启动服务器核心。
+
+<Callout type="info" title="提示">
+
+注：高版本 forge 服务器启动游戏是运行一个 txt 文件中的指令。请在 start.sh 中找到该文件并在 txt 内配置。
+
+</Callout>
+
+如果你不想自己配置命令，可以使用这个[我的世界服务器启动命令生成器](https://www.wuye2004.top/mcje-start)。
+
+下面是一个服务器启动命令示例：
+
+```bash
+${openjdk17} -Xms1024M -Xmx${maxmem}M -jar server-release.jar
+```
+
+接下来请在启动命令中任意位置插入 `-javaagent` 参数。
+
+以下是一个 -javaagent 参数示例：
+
+```bash
+-javaagent:authlib-injector-1.2.6.jar=https://littleskin.cn/api/yggdrasil
+```
+
+它表示：使用名为 `authlib-injector-1.2.6.jar` 的文件进行第三方登录。
+
+authlib-injector 需要与服务器核心处在同一目录下。
+
+第三方登录服务器验证地址为 `https://littleskin.cn/api/yggdrasil`（此第三方登录服务器为 [LittleSkin](https://littleskin.cn/)）
+
+<Callout type="warn" title="注意">
+
+**start.sh 中各项启动参数之间有空格，同时必须有且只有一个空格。检查你的启动命令确认是否出错！**
+
+</Callout>
+
+将 `-javaagent` 参数正确插入后，该命令如下：
+
+```bash
+${openjdk17} -Xms1024M -Xmx${maxmem}M -javaagent:authlib-injector-1.2.6.jar=https://littleskin.cn/api/yggdrasil -jar server-release.jar
+```
+
+注：此项二级标题下的内容部分参考 [Blessing Skin 用户手册-为游戏服务端加载 authlib-injector](https://blessing.netlify.app/yggdrasil-api/authlib-injector.html#%E4%B8%BA%E6%B8%B8%E6%88%8F%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%8A%A0%E8%BD%BD-authlib-injector)，同时该文档同样介绍了如何为游戏服务端加载 authlib-injector，如果理解此文档有障碍，不妨去该文档看看。
+
+到此为止服务端的配置完成，下面介绍客户端配置。
+
+## 服务端操作（Leaves）
+
+Leaves 端原生支持使用第三方服务器进行登录认证，无须下载额外的认证器！
+
+### 操作方法
+
+打开服务器根目录下的 `leaves.yml`，找到如下内容并进行修改：
+
+```yaml
+#注：在实际的yml文件中并不存在注释
+extra-yggdrasil-service:
+      #是否启用额外的yggdrasil认证器
+      enable: false
+      #是否开启登录保护，开启后将不允许用户名相同但 UUID 不同的玩家加入。
+      login-protect: false
+      #指定 Yggdrasil API 地址。
+      urls:
+      - https://url.with.authlib-injector-yggdrasil
+```
+
+例如，如果你需要使用 LittleSkin 提供的 Yggdrasil API 地址，则应该改为下方的格式：
+
+```yaml
+extra-yggdrasil-service:
+    enable: true
+    login-protect: true
+    urls:
+    - https://littleskin.cn/api/yggdrasil
+```
+
+## 客户端操作
+
+需要在启动器修改登录方式。
+
+<Callout type="info" title="提示">
+
+注：修改了登录方式到第三方的客户端无法用于验证正版，多人游戏下只能加入启用相同第三方验证服务器的服务器和离线服务器；单人游戏不受影响。
+
+</Callout>
+
+<Callout type="info" title="提示">
+
+本部分教程均以 [LittleSkin](https://littleskin.cn/) 为例。
+
+</Callout>
+
+### PCL 2
+
+注册好 [LittleSkin](https://littleskin.cn/) 账号后进入如下页面。
+
+![LittleSkin 网站上的拖动至启动器按钮](/img/pages/mcje/mcje-authlib_injector-2.png)
+
+直接鼠标左键长按那个「将此按钮拖动至启动器」的按钮，然后把它拖到 PCL2 上并松开左键，PCL2 会自动为你开启当前版本的第三方登录验证。
+
+然后你需要在 PCL2 里输入自己的 LittleSkin 账密来获取角色，然后的然后就可以正常游玩了！
+
+### HMCL 3
+
+HMCL3 较新的版本已内置 Littleskin 登录。
+
+1. 点击 HMCL 左侧的账户，在二级页面的左侧选择 LittleSkin，输入你的用户名和密码进行登录。
+2. 登录完成后选择一个角色，然后你就可以开始游戏了。
+
+![HMCL3 账户页面选择 LittleSkin 登录](/img/pages/mcje/mcje-authlib_injector-3.png)
+
+![HMCL3 选择角色页面](/img/pages/mcje/mcje-authlib_injector-4.png)
+
+### BakaXL
+
+配置相较于以上两个启动器较为麻烦。
+
+1. 在 BakaXL 的开始页面点击本体设置。
+
+![BakaXL 开始页面中的本体设置入口](/img/pages/mcje/mcje-authlib_injector-5.png)
+
+2. 在左栏选择账户与档案，下滑找到「Minecraft 用户档案」，选择新增一个档案。
+
+![BakaXL 账户与档案设置页面](/img/pages/mcje/mcje-authlib_injector-6.png)
+
+3. 连续点击「游戏启动模式」三次切换到外置登录，在验证服务器处输入 https://littleskin.cn/api/yggdrasil ，在下方输入你的邮箱和密码，点击进行验证并返回。
+
+![BakaXL 创建新档案页面：填写 LittleSkin 邮箱密码并点击进行验证并返回](/img/pages/mcje/mcje-authlib_injector-8.png)
+
+![BakaXL 创建新档案页面：连续点击游戏启动模式三次并填写验证服务器地址](/img/pages/mcje/mcje-authlib_injector-7.png)
+
+4. 此时它会提示你选择一个角色，选择你需要登录的角色即可。
+
+## 常见问题
+
+**Q：我一个人用 littleskin 登录，其他人在服务器里能看到我皮肤吗？**
+
+A：不能。只更改客户端的登录方式时，服务器本身仍为离线登录。其他玩家需要使用 CustomSkinLoader 才能看到你的皮肤，此时你的 Littleskin 登录对服务器无效：如果你采用与 Littleskin 登录用户名相同的离线 id 进入服务器，与该登录也没有区别。
+
+如果想要所有人都看到皮肤，需要为服务器启用 littleskin 登录。在此之后所有玩家都需要使用 littleskin 进入游戏，且 uuid 可能会变化导致数据丢失。
