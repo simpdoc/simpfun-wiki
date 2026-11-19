@@ -13,7 +13,7 @@ description: "使用 Fabric 服务端专用安装器或通用安装器安装服�
 
 手动安装前，可以先去看一下第三方镜像的这个镜像，可能会有你需要的版本。
 
-![第三方镜像中列出的 Fabric 服务端版本](/img/pages/mcje/mcje-fabric-1.png)
+![第三方镜像中列出的 Fabric 服务端版本](/img/pages/mcje/mcje-fabric-1.webp)
 
 </Callout>
 
@@ -47,11 +47,11 @@ description: "使用 Fabric 服务端专用安装器或通用安装器安装服�
 
 前往 [Fabric 官网](https://fabricmc.net/use/installer/)，在下载页面选择红框内的 `Minecraft Server`：
 
-![Fabric 官网下载页面中的 Minecraft Server 选项](/img/pages/mcje/mcje-fabric-2.png)
+![Fabric 官网下载页面中的 Minecraft Server 选项](/img/pages/mcje/mcje-fabric-2.webp)
 
 在跳转到的新页面中选择 `MC 版本` 与 `Fabric Loader 版本`（Fabric Loader 默认选择最新版即可），然后点击下载：
 
-![Fabric 安装器页面中选择 Minecraft 版本与加载器版本](/img/pages/mcje/mcje-fabric-3.png)
+![Fabric 安装器页面中选择 Minecraft 版本与加载器版本](/img/pages/mcje/mcje-fabric-3.webp)
 
 下载完成后，将文件上传至实例文件的根目录。
 
@@ -65,13 +65,13 @@ ${openjdk21} -server -Xms1024M -Xmx${maxmem}M -jar <服务端文件名>.jar -nog
 
 `<服务端文件名>` 换成你下载到的安装器的文件名，例如 `fabric-server-mc.1.21.3-loader.0.16.9-launcher.1.0.1`：
 
-![下载得到的 Fabric 服务端安装器文件名](/img/pages/mcje/mcje-fabric-4.png)
+![下载得到的 Fabric 服务端安装器文件名](/img/pages/mcje/mcje-fabric-4.webp)
 
 </Callout>
 
 此时的启动命令应如下图所示：
 
-![start.sh 中修改后的 Fabric 启动命令](/img/pages/mcje/mcje-fabric-5.png)
+![start.sh 中修改后的 Fabric 启动命令](/img/pages/mcje/mcje-fabric-5.webp)
 
 <Callout type="info" title="关于各项参数的说明">
 
@@ -142,7 +142,7 @@ eula=false
 
 前往 [Fabric 官网](https://fabricmc.net/use/installer/)，点击 `Download universal jar` 下载通用安装器。
 
-![Fabric 官网中的 Download universal jar 按钮](/img/pages/mcje/mcje-fabric-6.png)
+![Fabric 官网中的 Download universal jar 按钮](/img/pages/mcje/mcje-fabric-6.webp)
 
 下载完成后，将其上传至实例文件的根目录。
 
@@ -160,7 +160,7 @@ ${openjdk17} -jar <安装器文件名>.jar server -mcversion <MC版本号> -down
 
 例如，当安装器文件名为 `fabric-installer-1.0.1`、需要的服务端版本为 `1.20.1` 时，命令应如下图所示（第 14 行）：
 
-![start.sh 中新增的 Fabric 通用安装器命令](/img/pages/mcje/mcje-fabric-7.png)
+![start.sh 中新增的 Fabric 通用安装器命令](/img/pages/mcje/mcje-fabric-7.webp)
 
 保存后回到「终端」页面，启动服务器。此时安装器将会自动安装服务端核心并下载依赖文件，完成后服务器将会停止运行。
 
@@ -190,7 +190,7 @@ ${openjdk17} -server -Xms1024M -Xmx${maxmem}M -jar fabric-server-launch.jar -nog
 
 调整完的启动命令应类似下图所示：
 
-![start.sh 中修改后的 Fabric 通用安装器启动命令](/img/pages/mcje/mcje-fabric-8.png)
+![start.sh 中修改后的 Fabric 通用安装器启动命令](/img/pages/mcje/mcje-fabric-8.webp)
 
 此时你可以删除 Fabric 安装器了。
 

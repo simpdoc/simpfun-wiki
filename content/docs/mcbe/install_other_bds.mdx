@@ -1,0 +1,64 @@
+---
+title: "安装其它版本的BDS"
+description: "下载并安装官方指定版本或其它版本的基岩版 BDS 服务端。"
+---
+
+本篇文档将教你如何安装简幻欢没有的BDS服务端，即可以更新服务器到最新版。
+
+## 下载BDS
+
+完整名字:Bedrock Dedicated Server
+
+<Callout type="warn" title="注意">
+
+确保你有一定动手能力，以及访问 `microsoft.net` `minecraft.azureedge.net` 的能力。
+
+</Callout>
+
+### 官网下载
+
+[https://www.minecraft.net/zh-hans/download/server/bedrock](https://www.minecraft.net/zh-hans/download/server/bedrock)
+
+选择你要下载的Minecraft(我的世界)基岩版专属服务端软件类型：
+
+> + 适用于 WINDOWS 的 MINECRAFT 专属服务端软件
+> + 适用于 UBUNTU (LINUX) 平台的 MINECRAFT 专属服务端软件
+
+![BDS 官方下载页面的 Windows 与 Ubuntu 选项](/img/pages/mcbe/customer-mcbe-installbds-1.webp)
+
+你会看到这两个，根据你的需要选择，然后勾上框框点下载就 ok 了。
+
+(该页面的下载按钮为最新的服务端软件)
+
+### 下载旧版本
+
+<Callout type="error" title="危险">
+
+在1.19.80及以下版本中存在一个高危漏洞，其允许恶意用户以其他人的身份登录并使用操作员权限。因此强烈建议不要在生产环境中使用任何旧版本。
+
+</Callout>
+
+打开Minecraft Wiki 的 [基岩版版本记录(正式版)](https://zh.minecraft.wiki/w/%E5%9F%BA%E5%B2%A9%E7%89%88%E7%89%88%E6%9C%AC%E8%AE%B0%E5%BD%95) 或 [基岩版版本记录/开发版本(Beta/Preview)](https://zh.minecraft.wiki/w/%E5%9F%BA%E5%B2%A9%E7%89%88%E7%89%88%E6%9C%AC%E8%AE%B0%E5%BD%95/%E5%BC%80%E5%8F%91%E7%89%88%E6%9C%AC)，找到你需要下载的游戏版本，此处以 1.21.2 为例。   
+在版本信息框内你能看到一个“下载”栏：
+
+<img src="/img/pages/mcbe/customer-mcbe-installbds-2.webp" alt="wiki页面" width="35%" />
+
+点击对应的操作系统版本即可下载。
+
+## 安装 BDS
+
+### 解压
+
+将压缩包上传到服务器实例的根目录，然后解压即可。
+
+### 启动
+
+你可以编辑你的启动脚本，然后运行它。
+
+Linux版本的启动命令如下所示：
+
+```shell
+./bedrock-server
+```
+
+（如果你没看到启动脚本的话直接启动就行）

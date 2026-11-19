@@ -177,7 +177,7 @@ export default function HomePage() {
               rel="noreferrer noopener"
               className="inline-flex items-center gap-1 transition-colors hover:text-fd-foreground"
             >
-              <img src="/img/gongan.png" alt="公安备案图标" className="h-4 w-auto" />
+              <img src="/img/gongan.webp" alt="公安备案图标" className="h-4 w-auto" />
               黑公网安备23030002000215号
             </a>
           </div>

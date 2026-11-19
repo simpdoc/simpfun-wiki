@@ -1,0 +1,69 @@
+---
+title: "如何添加插件"
+description: "为 LeviLamina、Endstone、LL2 或 Nukkit 系服务端安装插件。"
+---
+
+
+## 前言
+
+### 关于LiteloaderBDS/LevLamina
+
+<Callout type="info" title="提示">
+
+在下文中，LiteloaderBDS 将被简称为 `LL2` ，LevLamina 将被简称为 `LL3` 。
+
+</Callout>
+
++ LL2 与 LL3 不兼容，所有为 LL2 适配的插件无法**直接**安装在 LL3 服务端上。
++ LL3 无法安装LL2的 `.dll` 格式的插件。
++ LL3 想安装 LSE 的插件(包含 `.lua` `.js` `.py` 等格式的插件)需要先安装 [Legacy 转译层](https://github.com/LiteLDev/LegacyScriptEngine)，根据 LSE 插件编写语言的不同，转译层也分为好几种。
+
+### 关于Nukkit系服务端
+
++ Nukkit 系由于各种分支层出不穷，因此在安装插件前请确认插件是否兼容此服务端。
+
+## 如何安装
+
+<Callout type="warn" title="不适用">
+
+此教程不适用于以下服务端：
++ BDS
+
+</Callout>
+
+### LL3
+
+1. 进入实例，点击`文件`；
+2. 进入`plugins`文件夹；
+3. 如果插件打包为了支持 LL3 的格式（如下图，压缩包内**有一个文件夹**，**文件夹内有插件本体和** **`manifest.json`**），则直接将压缩包上传至 `plugins` 文件夹后直接解压缩，启动服务器后插件即可加载。
+
+![支持 LeviLamina 的插件压缩包结构](/img/pages/mcbe/bds-add-plugin-1.webp)
+
+4. 如果插件没有打包为支持 LL3 的格式，则需要将插件本体直接放入 `plugins` 文件夹，然后启动服务器，LL3 加载器会自动为插件创建**以插件文件名命名的文件夹**与 **`manifest.json`**，并把插件移入新的文件夹。然后你需要**关闭服务器后再打开**，插件才能正常加载。
+
+### Endstone
+
+1. 进入实例，点击`文件`；
+2. 进入 `plugins` 文件夹；
+3. 如果你需要安装的插件为一个单独的 `.whl`/`.dll` 文件，则直接将此文件上传到 `plugins` 文件夹内。
+4. 如果你需要安装的插件为一个类似下图所示的压缩包，压缩包里有插件本体和配置文件夹，那么你需要将这个压缩包上传到 `plugins` 文件夹并解压缩。
+
+![Endstone 插件压缩包结构](/img/pages/mcbe/bds-add-plugin-2.webp)
+
+### LL2/Nukkit 系
+
+1. 进入实例，点击`文件`；
+2. 进入 `plugins` 文件夹；
+3. 上传您的插件。
+
+## 注意事项
+
+<Callout type="error" title="危险">
+
++ 注意检查插件版本，前置等。
++ 不要把LL2/LL3插件安装在Nukkit系服务端上，反之亦然！
++ LL3在安装LLSE插件前确保已经安装了对应的转译层。
++ LL3的插件文件夹需要与插件本体名称一致，否则此插件将不会加载！
++ LL2在安装插件时注意插件版本，不要安装成了LL3插件！
+
+</Callout>

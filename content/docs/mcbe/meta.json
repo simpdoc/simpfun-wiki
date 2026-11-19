@@ -1,12 +1,19 @@
 {
   "title": "MCBE 文档",
   "description": "Minecraft 基岩版文档",
-  "icon": "/img/mcbe-logo.png",
+  "icon": "/img/mcbe-logo.webp",
   "root": true,
   "pages": [
     "index",
     "select_server",
     "server_properties",
+    "upload_worlds",
+    "export_worlds",
+    "add_addon",
+    "add_plugin",
+    "install_other_bds",
+    "experiments",
+    "levilamina",
     "common_operations"
   ]
 }

@@ -1,0 +1,141 @@
+---
+title: "从服务端导出存档"
+description: "从服务端打包下载存档，并导入本地基岩版客户端。"
+---
+
+
+<Callout type="info" title="提示">
+
+**任何**对服务器文件的操作均建议在服务器**关闭**状态下进行！
+
+</Callout>
+
+## 从服务端导出存档
+
+### 第一步 找到服务器存档
+
+在文件管理中找到文件夹`worlds`后打开，进入目录`/worlds`，如下图：
+
+![文件管理中的 worlds 目录](/img/pages/mcbe/bds-input-worlds-1.webp)
+
+在文件夹内找到你的存档。如果没有更改过地图名称，存档名应为Bedrock Level（见下图）。
+
+![worlds 目录中的存档文件夹](/img/pages/mcbe/bds-input-worlds-2.webp)
+
+### 第二步 打包并下载存档
+选中存档后点击压缩，格式任意。
+
+![选中存档后的压缩操作菜单](/img/pages/mcbe/bds-input-worlds-3.webp)
+
+使用下载将存档下载到本地。
+
+![压缩文件操作菜单中的下载按钮](/img/pages/mcbe/bds-input-worlds-4.webp)
+
+<Callout type="warn" title="提示">
+
+如果浏览器无法创建下载任务或下载失败，请尝试更换浏览器！   
+推荐的浏览器：   
+PC端：[Chrome](https://www.google.cn/chrome/)，[Edge](https://www.microsoft.com/zh-cn/edge/download)，[Supermium](https://win32subsystem.live/supermium/)，[FireFox](https://www.firefox.com.cn/)   
+安卓端(前往手机应用商店即可下载)：[Edge](https://learn.microsoft.com/zh-cn/deployedge/microsoft-edge-install-mobile-china)，[Chrome](https://www.techspot.com/downloads/5818-google-chrome-for-android.html)
+
+</Callout>
+
+如果您只是在本地备份存档，那么教程到此为止。   
+如果您想把存档导入至客户端，请接着往下看。
+
+## 导入存档到游戏客户端
+
+向游戏导入存档有两种方法：将存档打包给游戏识别和直接添加到游戏文件。
+
+### 检查存档内文件格式
+
+打开下载的压缩包，在里面找到以存档名为名的文件夹（真正的存档）。
+
+![压缩包中的存档目录](/img/pages/mcbe/bds-input-worlds-5.webp)
+
+打开此文件夹，确保目录`Bedrock Level/`下格式为——正确的存档格式：
+
+| 文件或文件夹 | 说明 |
+| --- | --- |
+| db | 存储存档数据 |
+| behavior_packs | 存放行为包 |
+| resource_packs | 存放资源包 |
+| _texts_ | _特殊文本，在存档切换过语言的情况下出现，存放不同语言下不变的文本_ |
+| levelname.txt | 存放存档名 |
+| world_icon.jpeg | 存档图标 |
+| level.dat | 存放地图数据 |
+| level.dat_old | level.dat的备份 |
+| _world_behavior_packs.json_ | _记录启用的行为包_ |
+| _world_behavior_packs_history.json_ | _记录所有启用过的行为包_ |
+| _world_resource_packs.json_ | _记录启用的资源包_ |
+| _world_resource_packs_history.json_ | _记录所有启用过的资源包_ |
+
+### 方法一 将存档打包给游戏识别
+
+此方法在**所有系统**上都适用，所以截图可能来自于不同系统的终端。   
+将备份文件里的存档目录（如 `Bedrock Level`）解压到任意文件夹，然后压缩为 .zip 格式的压缩包。
+
+<img src="/img/pages/mcbe/bds-input-worlds-6.webp" alt="重新压缩" width="40%" />
+
+将压缩包后缀名**直接更改**为 `.mcworld`，然后打开，打开方式选择 `Minecraft`。_（如果弹出“打开为：文档/音乐/视频 等”的窗口，选择文档/其他后选择 `Minecraft`）_
+
+<img src="/img/pages/mcbe/bds-input-worlds-7.webp" alt="打开方式" width="50%" />
+
+如果存档格式正确，游戏会自动识别并导入。
+
+### 方法二 直接添加到游戏文件
+
+<Callout type="info" title="提示">
+
+请确保您的游戏开启了“将文件保存到外部存储”，否则以下目录可能不存在！
+
+</Callout>
+
+#### iOS/iPadOS
+
+在“文件”App中打开以下目录：`(我的iPhone/iPad)/Minecraft/games/com.mojang/minecraftWorlds`
+
+<img src="/img/pages/mcbe/bds-input-worlds-8.webp" alt="ios" width="50%" />
+
+将上一步中的文件夹Bedrock Level直接复制到此文件夹内，打开游戏即可发现存档已经导入。
+
+#### Android
+
+在文件管理(推荐使用第三方文件管理器，例如ES，MT等)内打开以下目录：`Android/data/com.mojang.minecraftpe/files/games/com.mojang/minecraftWorlds/`
+
+<img src="/img/pages/mcbe/bds-input-worlds-9.webp" alt="Android" width="50%" />
+
+将上一步中的文件夹Bedrock Level直接复制到此文件夹内，打开游戏即可发现存档已经导入。
+
+#### Windows 10/11（BE1.21.120前）
+
+在文件资源管理器种打开以下目录：
+
+```text
+C:\Users\（这里是你电脑的用户名）\AppData\Local\Packages\Microsoft.MinecraftUWP_8wekyb3d8bbwe\LocalState\games\com.mojang\minecraftWorlds
+```
+
+![Windows 游戏数据中的 Minecraft Worlds 目录](/img/pages/mcbe/bds-input-worlds-10.webp)
+
+将上一步中的文件夹`Bedrock Level`直接复制到此文件夹内，打开游戏即可发现存档已经导入。
+
+#### Windows 10/11（BE1.21.120后）
+
+Win+R打开运行，输入下方内容后回车打开文件夹：
+
+```text
+%appdata%\Minecraft Bedrock
+```
+
+<img src="/img/pages/mcbe/bds-input-worlds-11.webp" alt="运行窗口" width="50%" />
+
+<img src="/img/pages/mcbe/bds-input-worlds-12.webp" alt="打开的文件夹1" width="70%" />
+
+
+然后打开`Users\<一串数字>\games\com.mojang\minecraftWorlds\`这个文件夹：
+
+> 关于一串数字：目前不知道这串数字对应的是什么，但总之是跟微软账户相关的，登录过多个账户需要注意
+
+<img src="/img/pages/mcbe/bds-input-worlds-13.webp" alt="打开的文件夹2" width="70%" />
+
+将上一步中的文件夹`Bedrock Level`直接复制到此文件夹内，打开游戏即可发现存档已经导入。

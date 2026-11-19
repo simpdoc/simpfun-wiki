@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="public/img/simpfun.png" alt="Logo" width="96"/>
+    <img src="public/img/simpfun.webp" alt="Logo" width="96"/>
 </div>
 
 <h1 align="center">简幻欢社区维基</h1>
