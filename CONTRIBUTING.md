@@ -111,7 +111,7 @@ max-players=20
 
 ### 图片
 
-图片放在 `public/img/pages/<平台>/`（如 `public/img/pages/mcje/`），可被多篇文档复用的放 `public/img/pages/`。
+图片放在 `public/img/pages/<平台>/`（如 `public/img/pages/mcje/`），可被多篇文档复用的放 `public/img/pages/`，一篇文档内有多张独有的图片可放 `public/img/pages/<平台>/<类别>/`。
 
 **引用时路径必须以 `/` 开头**——`/img/...` 指向 `public/img/...`：
 

@@ -38,7 +38,7 @@ mise use -g {mise 包名}
 
 （如 mise use -g java@zulu-21，运行`java --version`）后，将显示
 
-![mise 全局调用 java 示例](/img/pages/web/customer-aio_v1-how_to_use-1.webp)
+![mise 全局调用 java 示例](/img/pages/web/custom/aio/customer-aio_v1-how_to_use-1.webp)
 
 它将在全局（如 `/tmp` 和 `/home`及所有文件夹下都能够调用 java）
 
@@ -50,7 +50,7 @@ mise use --env local {mise 包名}
 > Mise 包名详见 [调用信息对应表](/docs/web/custom_image/aio_v1/path_list)
 >
 
-（如 mise use --env local java@zulu-21，运行`java --version`）后，将显示![mise 局部调用 java 示例](/img/pages/web/customer-aio_v1-how_to_use-2.webp)
+（如 mise use --env local java@zulu-21，运行`java --version`）后，将显示![mise 局部调用 java 示例](/img/pages/web/custom/aio/customer-aio_v1-how_to_use-2.webp)
 
 仅`/home/container`或例如`/home/container/test/1.jar`这类在`/home/container`目录下的文件或文件夹中，这个环境变量将生效。
 
@@ -63,7 +63,7 @@ mise use --env local {mise 包名}
 
 以 `Java` 为例，一个 `${openjdk+版本号}` （如 `${openjdk8}` 表示 Java 8），可替换`java`使用
 如图所示：
-![环境变量调用 java 示例](/img/pages/web/customer-aio_v1-how_to_use-3.webp)
+![环境变量调用 java 示例](/img/pages/web/custom/aio/customer-aio_v1-how_to_use-3.webp)
 
 ## 绝对路径调用（通用）
 <Callout type="warn" title="警告">
@@ -75,4 +75,4 @@ mise use --env local {mise 包名}
 一个 `绝对路径`，（如 /mise/installs/java/zulu-8/bin/java 表示 Java 8），可替换`java`或其他（如 `node` `python`） 使用。
 
 如图所示：
-![绝对路径调用 java 示例](/img/pages/web/customer-aio_v1-how_to_use-4.webp)
+![绝对路径调用 java 示例](/img/pages/web/custom/aio/customer-aio_v1-how_to_use-4.webp)
