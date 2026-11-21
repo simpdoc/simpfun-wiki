@@ -1,6 +1,7 @@
 import { createGetUrl } from 'fumadocs-core/source';
 
 export const appName = '简幻欢社区维基';
+export const siteUrl = new URL('https://next.simpdoc.top/');
 export const docsRoute = '/docs';
 export const docsImageRoute = '/og/docs';
 export const docsContentRoute = '/llms.mdx/docs';

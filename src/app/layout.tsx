@@ -1,7 +1,7 @@
 import { Inter } from 'next/font/google';
 import type { Metadata } from 'next';
 import { Provider } from '@/components/provider';
-import { appName } from '@/lib/shared';
+import { appName, siteUrl } from '@/lib/shared';
 import { source } from '@/lib/source';
 import { collectDocsSections } from '@/lib/docs-sections';
 import './global.css';
@@ -11,6 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: siteUrl,
   title: {
     default: appName,
     template: `%s | ${appName}`,
