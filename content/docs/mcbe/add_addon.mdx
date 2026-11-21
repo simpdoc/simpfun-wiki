@@ -41,17 +41,13 @@ description: "为基岩版 BDS 服务端安装行为包和资源包的方法与�
 
 ## 方法一：替换存档文件夹
 
-<Callout type="warn" title="提示">
-
+<Callout type="info" title="提示">
 适用服务端：BDS，LLBDS，Endstone   
 不适用服务端：所有Nukkit系服务端
-
 </Callout>
 
-<Callout type="error" title="警告">
-
+<Callout type="warning" title="警告">
 这种方法只适合在新存档安装 Addon，已有的存档无法通过此方法安装！
-
 </Callout>
 
 ### 第一步
@@ -88,13 +84,11 @@ level-name=Bedrock level
 
 ## 方法二：手动导入
 
-<Callout type="warn" title="提示">
-
+<Callout type="info" title="提示">
 适用服务端：BDS，LLBDS，Endstone   
 不适用服务端：所有Nukkit系服务端   
 
 挺麻烦的，如果你是新建的服务器/世界为啥不试试第一种方法？
-
 </Callout>
 
 ### 第一步
@@ -139,64 +133,5 @@ level-name=Bedrock level
 
 ### 第四步
 
-回到终端��面，重新开服，并检查 addon 是否正常加载。
+回到终端页面，重新启动服务器，并检查 addon 是否正常加载。
 
-## 方法三：AddonHelper导入
-
-<Callout type="error" title="过期的内容">
-
-此部分内容已过期，仅在BE1.20.30及以下的LL2服务端可用！
-
-</Callout>
-
-<Callout type="warn" title="提示">
-
-适用服务端：LiteLoaderBDS(LL2)   
-不适用服务端：原版BDS，LeviLamina(LL3)，所有Nukkit系服务端
-
-</Callout>
-
-<Callout type="error" title="警告">
-
-这种方法无法导入文件过大的 Addon！如果你需要导入比较大的 Addon，请考虑使用第一/二种方式！
-
-</Callout>
-
-当你使用的服务端为LiteLoaderBDS时，可以通过LiteLoader官方提供的`Addon安装器`直接安装（这个东西是直接内嵌在LiteLoaderBDS内的，无需额外下载）。
-
-### 第一步
-
-准备好你需要安装的 Addon。
-关闭服务器。
-
-### 第二步
-
-在简幻欢控制台的`文件`页面，转到 `/plugins/AddonsHelper` 文件夹。
-
-![插件目录中的 AddonsHelper 文件夹](/img/pages/mcbe/bds-input-addon-6.webp)
-
-### 第三步
-
-将你需要安装的 Addon 上传至这个文件夹中。
-
-![上传到 AddonsHelper 的 Addon 文件](/img/pages/mcbe/bds-input-addon-7.webp)
-
-<Callout type="warn" title="提示">
-
-请注意文件格式是否正确！
-
-</Callout>
-
-### 第四步
-
-回到终端界面，重新开服，并查看终端窗口中是否出现类似下图红框内的输出，如果出现了，则证明导入成功。
-
-![AddonsHelper 成功导入 Addon 的终端输出](/img/pages/mcbe/bds-input-addon-8.webp)
-
-(使用Windows窗口进行演示)
-
-<Callout type="success" title="提示">
-
-使用这种方式导入 Addon 时，控制台会在加载世界完成后出现一大串红色的 `ERROR`，但这是正常现象（服务器检测到原本的世界没有这些东西而出现 ERROR），绝大部分情况下不影响使用。
-
-</Callout>

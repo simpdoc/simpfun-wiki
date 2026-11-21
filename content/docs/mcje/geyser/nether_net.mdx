@@ -3,9 +3,7 @@ title: "允许基岩高版本玩家进入互通服"
 ---
 
 <Callout type="warn" title="警告">
-
-本文档于 2026 年 10 月 19 日编写。后续 Geyser 官方可能修改配置；若配置发生变化或失效，请以 [Geyser 官方信息](https://geysermc.org/) 为准。
-
+本文档于 2026年11月21日更新。后续 Geyser 官方可能修改配置；若配置发生变化或失效，请以 [Geyser 官方信息](https://geysermc.org/) 为准。
 </Callout>
 
 Geyser 从 1237 版本起提供 NetherNet 支持。
@@ -19,26 +17,91 @@ Geyser 从 1237 版本起提供 NetherNet 支持。
 这意味着，从 10 月 27 日起，如果玩家更新了客户端，可能无法访问服务器。
 
 <Callout type="warn" title="警告">
-
 必须使用 AIO 镜像或基于 AIO 镜像的第三方镜像，否则会因依赖问题导致无法使用！
-
 </Callout>
 
-## 新建端口
+---
 
-从【控制台】->【您的实例】->【管理】处添加端口。除 Java 版端口外，还需要基岩版端口和 NetherNet 使用的 WebRTC UDP 端口，加上 Java 版端口一共需要三个端口。
+您可以选择 仅使用新版协议 和 同时保留旧版协议兼容 的方式来配置 Geyser。
 
-![在控制台端口映射页面新增 10326、38194 和 39565 三个端口并点击“新建端口”](/img/pages/mcje/geyser/03-nether_net-3.webp)
+## 仅使用新版 NetherNet 协议
 
-示例中使用 `10326` 作为基岩版玩家连接端口、`38194` 作为 NetherNet 的 WebRTC UDP 端口，Java 版端口为 `39565`。请按服务商控制台的要求完成对应端口映射，实际端口以服务器配置为准。
+仅使用新版 NetherNet 协议时，Geyser 只会监听一个端口，所有基岩版玩家都将使用该端口连接服务器。
 
-## 新版配置 Geyser
+### 新建端口
+
+从【控制台】->【您的实例】->【管理】处添加一个新的端口。除 Java 版端口外，还需要基岩版 NetherNet 使用的 WebRTC UDP 端口，加上 Java 版端口一共需要两个端口。
+
+![新增1个端口](/img/pages/mcje/geyser/03-4.webp)
+
+示例中使用 `41477` NetherNet 的 TCP 和 WebRTC UDP 端口， `32376` 作为 Java 版玩家连接服务器使用的端口。请按服务商控制台的要求完成对应端口映射，实际端口以服务器配置为准。
+
+### 配置 Geyser
 
 Geyser 的配置文件位置随运行方式变化：Spigot/Paper 插件版通常位于 `plugins/Geyser-Spigot/config.yml`；独立端位于 Geyser 安装目录下的 `config.yml`；其他代理端或模组端以实际生成的配置目录为准。
 
 以下配置示例以 Spigot/Paper 插件版为例。无论使用插件版还是独立端，都需要修改对应 `config.yml` 中的 `bedrock` 段，并按以下示例调整：
 
-```yaml
+```yaml title="config.yml"
+bedrock:
+  address: 0.0.0.0
+  port: 10326                 # 基岩版玩家连接端口
+  webrtc-port: 41477          # NetherNet 使用的 WebRTC UDP 端口；both 模式下必须与 port 不同
+  transport: nethernet             # 同时兼容旧版 RakNet 客户端与新版 NetherNet 客户端
+  clone-remote-port: false
+
+  signaling:
+    mode: builtin
+    builtin:
+      advertise-addresses:
+        - "103.85.86.51:41477"  # 必须为 play.simpfun.cn 解析的 IPv4地址，端口必须与 webrtc-port 一致
+
+      https:
+        certificate: ''
+        private-key: ''
+        password: ''
+
+java:
+  auth-type: floodgate  # 安装 Floodgate 时使用；未安装 Floodgate 时改为 offline
+```
+
+修改下面这几个配置项：
+
++ `port` - 修改为你新建的端口，此处的演示端口为 `41477` 。
++ `webrtc-port` - 可以留空为 `0` ，Geyser 会自动同步为 `port` 的值。
++ `transport` - 修改为 `nethernet` ，仅保留新版协议的支持性。
++ `clone-remote-port` - 修改为 `false` ，防止 Geyser 抢占 Java 版使用的端口。
++ `mode` - 保持为 `builtin` 即可。
++ `advertise-addresses` - 修改配置为 `服务器IP:第二端口` ，例如在此处的演示中需要修改为 `103.85.86.51:41477` ，若使用 IPv6，格式为 `[IPv6]:端口`。DNS 解析结果变化时，需要同步更新此配置。
+
+修改完成后重启服务器，使配置生效。
+
+### 认证模式
+
+`java.auth-type` 需要与服务器的认证方式对应：
+
+- 安装 Floodgate 的服务器必须使用 `floodgate`。
+- 未安装 Floodgate 的服务器使用 `offline`。
+
+## 同时兼容旧版 RakNet 协议
+
+当选择同时兼容 RakNet 协议时，Geyser 会同时监听两个端口，一个用于旧版 RakNet 协议，一个用于新版 NetherNet 协议。
+
+### 新建端口
+
+从【控制台】->【您的实例】->【管理】处添加两个新的端口。除 Java 版端口外，还需要基岩版端口和 NetherNet 使用的 WebRTC UDP 端口，加上 Java 版端口一共需要三个端口。
+
+![在控制台端口映射页面新增 10326、38194 和 39565 三个端口并点击“新建端口”](/img/pages/mcje/geyser/03-nether_net-3.webp)
+
+示例中使用 `10326` 作为基岩版玩家连接端口、`38194` 作为 NetherNet 的 WebRTC UDP 端口，Java 版端口为 `39565`。请按服务商控制台的要求完成对应端口映射，实际端口以服务器配置为准。
+
+### 新版配置 Geyser
+
+Geyser 的配置文件位置随运行方式变化：Spigot/Paper 插件版通常位于 `plugins/Geyser-Spigot/config.yml`；独立端位于 Geyser 安装目录下的 `config.yml`；其他代理端或模组端以实际生成的配置目录为准。
+
+以下配置示例以 Spigot/Paper 插件版为例。无论使用插件版还是独立端，都需要修改对应 `config.yml` 中的 `bedrock` 段，并按以下示例调整：
+
+```yaml title="config.yml"
 bedrock:
   address: 0.0.0.0
   port: 10326                 # 基岩版玩家连接端口
@@ -70,7 +133,7 @@ java:
 
 修改完成后重启服务器，使配置生效。
 
-## 认证模式
+### 认证模式
 
 `java.auth-type` 需要与服务器的认证方式对应：
 

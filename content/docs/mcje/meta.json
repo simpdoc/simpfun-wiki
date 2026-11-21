@@ -6,10 +6,10 @@
   "pages": [
     "index",
     "select_server",
-    "server_install",
     "server_properties",
     "server_files",
     "playerdata",
+    "server_install",
     "extensions",
     "common_operations",
     "advanced",
