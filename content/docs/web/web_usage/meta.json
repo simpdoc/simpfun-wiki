@@ -1,6 +1,7 @@
 {
   "title": "平台使用手册",
   "pages": [
-    "web_tutorial"
+    "web_tutorial",
+    "instance"
   ]
 }

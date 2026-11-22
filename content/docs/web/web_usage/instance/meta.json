@@ -1,0 +1,12 @@
+{
+  "title": "实例管理",
+  "pages": [
+    "shell",
+    "files",
+    "reinstall",
+    "backup",
+    "stats",
+    "tasks",
+    "manage"
+  ]
+}
