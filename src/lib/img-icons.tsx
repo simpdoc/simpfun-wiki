@@ -8,10 +8,14 @@ import type { LoaderPlugin } from 'fumadocs-core/source';
  * so the image must carry its own fixed size to match text height. Tab boxes
  * restore full-size rendering via the `tabs.transform` wrapper in docs layout.
  *
- * `loading="lazy"` opts out of React's automatic image preload. Tab icons for
- * inactive sections are part of the tab-switcher props but are only mounted once
- * the switcher is opened, so an eager preload would fetch an image the initial
- * page never paints (Chrome: "preloaded but not used within a few seconds").
+ * `fetchPriority="low"` opts out of React's automatic image preload. Tab icons
+ * for inactive sections are part of the tab-switcher props but are only mounted
+ * once the switcher is opened, so an eager preload would fetch an image the
+ * initial page never paints (Chrome: "preloaded but not used within a few
+ * seconds"). `fetchPriority="low"` is preferred over `loading="lazy"` here:
+ * lazy images make Edge log an "[Intervention] Images loaded lazily and
+ * replaced with placeholders" console message, while low fetch priority loads
+ * the (tiny) icon immediately without any preload hint.
  */
 export function imgIcons(): LoaderPlugin {
   const replace = (icon: ReactNode): ReactNode =>
@@ -19,7 +23,7 @@ export function imgIcons(): LoaderPlugin {
       <img
         src={icon}
         alt=""
-        loading="lazy"
+        fetchPriority="low"
         decoding="async"
         className="size-4 shrink-0 object-contain"
       />
