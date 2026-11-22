@@ -4,11 +4,11 @@ import { docsContentRoute, docsRoute } from '@/lib/shared';
 
 const { rewrite: rewriteDocs } = rewritePath(
   `${docsRoute}{/*path}`,
-  `${docsContentRoute}{/*path}/content.md`,
+  `${docsContentRoute}${docsRoute}{/*path}.md`,
 );
 const { rewrite: rewriteSuffix } = rewritePath(
   `${docsRoute}{/*path}.md`,
-  `${docsContentRoute}{/*path}/content.md`,
+  `${docsContentRoute}${docsRoute}{/*path}.md`,
 );
 
 export default function proxy(request: NextRequest) {

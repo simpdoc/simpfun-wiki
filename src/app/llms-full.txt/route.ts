@@ -1,8 +1,7 @@
 import { docsLlms } from '@/lib/source';
-import { licenseNoticeMarkdown } from '@/lib/license';
 
 export const revalidate = false;
 
 export async function GET() {
-  return new Response(`${await docsLlms.full()}`);
+  return (await docsLlms.serve('/llms-full.txt')) ?? new Response('Not Found', { status: 404 });
 }

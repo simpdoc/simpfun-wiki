@@ -33,4 +33,6 @@ ${await page.data.getText('processed')}
 ---
 
 ${licenseNoticeMarkdown}`,
+  renderUrl: (item) =>
+    /^\/.*\.(md|txt)$/.test(item.url) ? `${docsContentRoute}${item.url}` : item.url,
 });

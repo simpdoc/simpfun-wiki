@@ -117,7 +117,7 @@ Fumadocs 的三个包各司其职：
 | `/docs/<slug>` | `src/app/docs/[...slug]/page.tsx` | 文档页：TOC、Markdown 复制按钮、「打开」菜单（GitHub / Markdown）、OG 图 |
 | `/api/search` | `src/app/api/search/route.ts` | 搜索索引（`staticGET`，构建时生成静态文件） |
 | `/llms.txt`、`/llms-full.txt` | `src/app/llms*.txt/route.ts` | LLM 索引 / 全站 Markdown |
-| `/llms.mdx/docs/<路径>/content.md` | `src/app/llms.mdx/` | 每篇文档的 Markdown 视图 |
+| `/llms.mdx/docs/<路径>.md` | `src/app/llms.mdx/[...path]/route.ts` | 每篇文档的 Markdown 视图（另含各分区 `llms-full.txt`） |
 | `/og/docs/<路径>/image.png` | `src/app/og/docs/[...slug]/route.tsx` | 分享图，`generateMetadata` 自动引用 |
 
 站点常量集中在 **`src/lib/shared.ts`**：`appName`（站名）、`docsRoute`（文档前缀 `/docs`）、`gitConfig`（GitHub 仓库与分支）。改这些值会影响全站链接与「在 GitHub 中打开」的目标，改前想清楚。
@@ -147,9 +147,9 @@ Fumadocs 的三个包各司其职：
 ## Markdown 与 LLM 视图
 
 - `/llms.txt`（索引）与 `/llms-full.txt`（全量）由 `src/lib/source.ts` 中的 `docsLlms` 生成
-- 单页 Markdown 由 `src/app/llms.mdx/docs/[[...slug]]/route.ts` 在构建时静态生成，地址为 `/llms.mdx/docs/<路径>/content.md`（如 `/llms.mdx/docs/mcje/content.md`）
+- 其余文件由 `src/app/llms.mdx/[...path]/route.ts` 在构建时按 `docsLlms.files()` 静态生成：单页 Markdown 为 `/llms.mdx/docs/<路径>.md`（如 `/llms.mdx/docs/mcje.md`），每个分区另有一份 `/llms.mdx/docs/<分区>/llms-full.txt`
 
-> `edgeone.json` 里为 `/llms.mdx/*` 配置了 `Content-Type: text/markdown; charset=utf-8` 响应头，让 Markdown 视图以正确的类型返回。静态导出后这些路由会变成 `out/` 下的静态文件，托管平台需要支持这类 header 配置。
+> `edgeone.json` 里为 `/llms.mdx/*` 配置了 `Content-Type: text/markdown; charset=utf-8` 响应头。静态导出后这些路由会变成 `out/` 下的静态文件，托管平台需要支持这类 header 配置。
 
 ## 部署
 

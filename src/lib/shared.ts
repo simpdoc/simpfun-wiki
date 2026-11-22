@@ -4,7 +4,7 @@ export const appName = '简幻欢社区维基';
 export const siteUrl = new URL('https://next.simpdoc.top/');
 export const docsRoute = '/docs';
 export const docsImageRoute = '/og/docs';
-export const docsContentRoute = '/llms.mdx/docs';
+export const docsContentRoute = '/llms.mdx';
 
 export const gitConfig = {
   user: 'simpdoc',
@@ -12,12 +12,8 @@ export const gitConfig = {
   branch: 'main',
 };
 
-const getContentUrl = createGetUrl(docsContentRoute);
-
-export function getPageMarkdownUrl(page: { slugs: string[]; locale?: string }) {
-  const segments = [...page.slugs, 'content.md'];
-
-  return { segments, url: getContentUrl(segments, page.locale) };
+export function getPageMarkdownUrl(page: { url: string }) {
+  return `${docsContentRoute}${page.url.replace(/\/$/, '')}.md`;
 }
 
 const getImageUrl = createGetUrl(docsImageRoute);
