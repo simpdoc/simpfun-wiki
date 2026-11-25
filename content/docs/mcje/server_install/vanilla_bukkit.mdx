@@ -3,15 +3,15 @@ title: "安装原版/插件服务端"
 description: "以 Paper 为例，手动安装简幻欢预设中没有的 Vanilla 或 Bukkit 系服务端。"
 ---
 
-本篇文档会教你如何安装简幻欢没有的原版/插件服务端。
+本篇文档介绍如何在简幻欢实例中手动安装预设未提供的原版（Vanilla）与 Bukkit 系（插件）服务端。
 
 ## Vanilla 端 / 大部分 Bukkit 系服务端
 
-Vanilla 端与大部分 Bukkit 系服务端（Spigot 除外）的安装过程较为简单，此处以 **Paper 1.19.2** 进行演示。服务器使用简幻欢 Java 自定义镜像。
+Vanilla 服务端与大部分 Bukkit 系服务端（Spigot 除外）的安装流程基本一致，此处以 **Paper 1.19.2** 为例进行演示。服务器使用简幻欢的 Java 自定义镜像。
 
 ### 第一步：下载服务端核心
 
-在 [Paper 官网](https://fill-ui.papermc.io/projects/paper)下载对应版本的服务端核心。
+在 [Paper 官网](https://fill-ui.papermc.io/projects/paper) 下载与目标版本对应的服务端核心。
 
 ![PaperMC Fill 页面上按 Minecraft 版本分类的核心列表](/img/pages/mcje/mcje-vanilla_bukkit-1.webp)
 
@@ -19,10 +19,10 @@ Vanilla 端与大部分 Bukkit 系服务端（Spigot 除外）的安装过程较
 
 Vanilla（原版）服务端：
 
-+ 官方（不建议，只能下载到最新版本）：[https://www.minecraft.net/zh-hans/download/server](https://www.minecraft.net/zh-hans/download/server)
++ 官方渠道（仅提供最新版本，不推荐用于安装历史版本）：[https://www.minecraft.net/zh-hans/download/server](https://www.minecraft.net/zh-hans/download/server)
 + 无极镜像（CN）：[https://www.fastmirror.net/#/download/Vanilla](https://www.fastmirror.net/#/download/Vanilla?coreVersion=release)
 
-其他 Bukkit 系服务端核心：
+其它 Bukkit 系服务端核心：
 
 + Paper：无极镜像（CN）[https://www.fastmirror.net/#/download/Paper](https://www.fastmirror.net/#/download/Paper)
 + Purpur：官方 [https://purpurmc.org/downloads](https://purpurmc.org/downloads) / 无极镜像（CN）[https://www.fastmirror.net/#/download/Purpur](https://www.fastmirror.net/#/download/Purpur)
@@ -33,11 +33,11 @@ Vanilla（原版）服务端：
 
 ### 第二步：上传服务端核心
 
-上传你下载好的服务端核心到简幻欢的根目录。
+将下载好的服务端核心上传至实例根目录。
 
-确定服务端核心已上传后，**记住文件名（包括后缀名！）**。
+上传完成后，请记下其完整文件名（含扩展名）。
 
-打开根目录下的 `start.sh`，添加一行**类似**下面的命令后保存（不要删除文件里原本的东西，除了最下面那行 `echo`）：
+编辑实例根目录下的 `start.sh`，在文件末尾追加一行与下方类似的启动命令后保存。除文件中最后一行的 `echo` 外，请勿删除已有内容：
 
 ```shell title="start.sh"
 ${openjdk17} -server -Xms1024M -Xmx${maxmem}M -jar paper-1.19.2-307.jar nogui
@@ -45,25 +45,29 @@ ${openjdk17} -server -Xms1024M -Xmx${maxmem}M -jar paper-1.19.2-307.jar nogui
 
 <Callout type="info" title="关于各项参数的说明">
 
-+ `${openjdk17}`：调用变量 `openjdk17`，这个变量在上面的默认内容里已经定义过了。1.16.5 及以下版本的服务端请将 `openjdk17` 改为 `openjdk8` 或 `openjdk11`。
-+ `-server`：指示 JVM 在服务器环境中运行。这是一个优化标记，告诉 JVM 使用更适合长时间运行和高性能的配置。
-+ `-Xms1024M`：服务器运行最小内存为 1024 MiB。`1024M` 可以修改：如果觉得最小运存太大，可以改为 `512M` 或其他值，只要数字部分是 4 的倍数；也可以写成 `1G`，效果相同。
-+ `-Xmx${maxmem}M`：服务器运行最大内存为 `maxmem` M。`maxmem` 是上文定义的变量，值为服务器最大物理内存减 1000（单位 M）。如果不想要这个变量名，可以把 `${maxmem}` 整个改成数字。**注意：`Xmx` 与 `Xms` 均不要设为超出实例运行内存上限的值，也不要设反了让最大值比最小值小，会导致服务器无法启动！**
-+ `-jar`：告诉 Java 要启动 jar 文件，此项不要调整。
-+ `paper-1.19.2-307.jar`：服务端核心名称，**改成自己上传的，包括刚才让你记的后缀名！**
-+ `nogui`：不启用 MC 服务端自带的 GUI 窗口，在面板服/命令行环境运行服务端时不能删。
++ `${openjdk17}`：用来运行服务端的 Java 程序。不同 Minecraft 版本需要不同版本的 Java，请按下表把这一项换成对应的变量：
+  + 1.7.10——1.16.5：`${openjdk8}`（1.16.5 也可以用 `${openjdk11}`）
+  + 1.17——1.20.4：`${openjdk17}`
+  + 1.20.5——1.21.11：`${openjdk21}`
+  + 26.1 及之后：`${openjdk25}`
++ `-server`：让 Java 知道这是一个长期开着的服务器程序，按服务器的需要来运行。
++ `-Xms1024M`：**最小分配内存**，这里是 1024 MiB（也就是 1 GiB）。可以先少给一些，不够再调大，例如改成 `512M` 或 `1G`。
++ `-Xmx${maxmem}M`：**最大分配内存**，服务器最多能用这么多内存；`maxmem` 会自动取「实例可用内存减去 1000」。**注意：最大内存不要超过实例的内存上限，也不能比最小内存还小，否则服务器会启动失败！**
++ `-jar`：表示接下来要运行一个 jar 文件，这一项不用改。
++ `paper-1.19.2-307.jar`：要运行的服务端文件，改成你自己上传的文件名（含 `.jar` 后缀）。
++ `nogui`：不打开服务端的图形窗口。面板服没有桌面窗口，所以这一项必须保留。
 
 </Callout>
 
-调整完的启动命令应类似下图所示：
+调整后的启动命令应类似下图所示：
 
-![start.sh 中修改后的启动命令](/img/pages/mcje/mcje-vanilla_bukkit-2.webp)
+![start.sh 中添加 Paper 启动命令后的内容](/img/pages/mcje/mcje-vanilla_bukkit-2.webp)
 
 ### 第三步：初始化服务器
 
-回到「终端」界面，点击右上角的「启动」，并等待文件下载完成。Vanilla 端不会下载文件。
+返回「终端」页面，点击右上角的「启动」，等待服务端下载并解压所需文件。Vanilla 服务端本身不含额外下载步骤。
 
-下载完成后，终端会输出类似下面的提示并停止运行：
+首次启动会因未同意 EULA 而终止，终端输出类似以下内容：
 
 ```plain
 [15:44:52 WARN]: Failed to load eula.txt
@@ -72,7 +76,7 @@ ${openjdk17} -server -Xms1024M -Xmx${maxmem}M -jar paper-1.19.2-307.jar nogui
 
 ### 第四步：同意 EULA
 
-进入「文件」页面，打开根目录下的 `eula.txt`。
+进入「文件」页面，打开实例根目录下的 `eula.txt`：
 
 ```properties title="eula.txt"
 #By changing the setting below to TRUE you are indicating your agreement to our EULA (https://aka.ms/MinecraftEULA).
@@ -80,7 +84,7 @@ ${openjdk17} -server -Xms1024M -Xmx${maxmem}M -jar paper-1.19.2-307.jar nogui
 eula=false
 ```
 
-将其中的 `false` 改为 `true`，然后保存。
+将其中的 `eula=false` 改为 `eula=true` 后保存。
 
 <Callout type="error" title="警告">
 
@@ -88,7 +92,7 @@ eula=false
 
 </Callout>
 
-回到「终端」界面，点击右上角的「启动」，等待服务器生成文件。看到类似以下的提示即可关闭服务端：
+返回「终端」页面，点击右上角的「启动」，等待服务端生成配置文件。出现类似以下提示后即可关闭服务端：
 
 ```plain
 [15:58:15 INFO]: Done (34.635s)! For help, type "help"
@@ -96,40 +100,40 @@ eula=false
 
 ### 第五步：配置服务器
 
-再次进入「文件」页面，打开根目录下的 `server.properties`。
+进入「文件」页面，打开实例根目录下的 `server.properties`。
 
-简幻欢在上一步启动服务端生成文件时，已自动修改 `server-ip` 为 `0.0.0.0`、`server-port` 为你实例分配到的端口号，因此这两个不用管。
+实例在首次启动生成该文件时，已自动将 `server-ip` 设为 `0.0.0.0`，并将 `server-port` 设为本实例分配的端口号，因此这两项无需修改。
 
-如果你或你的朋友没有正版账户，请把 `online-mode` 的值由 `true` 改为 `false`。请注意，这样做会显著增加你的服务器遭受恶意攻击的风险！
+若你或你的朋友没有正版账户，可将 `online-mode` 由 `true` 改为 `false`。请注意，这会关闭正版验证，并显著增加服务器遭受恶意攻击的风险。
 
-更多关于服务器设置的配置请查看 [server.properties 详解](/docs/mcje/server_properties)。
+更多配置项说明请参见 [server.properties 详解](/docs/mcje/server_properties)。
 
 <Callout type="info" title="提示">
 
-Vanilla 服务端无法装载 mod/插件。
+Vanilla 服务端不支持加载模组（mod）或插件（plugin）。
 
-Bukkit 系服务端需要装载插件的话，将插件放到 `plugins` 文件夹即可。
+Bukkit 系服务端如需安装插件，将插件文件放入实例根目录下的 `plugins` 文件夹即可。
 
 </Callout>
 
-现在你已经配置好服务端了，去进行愉快的游戏吧！
+至此，服务端已完成基础配置，可以启动并进入游戏。
 
 ## Spigot 服务端（教程已过时）
 
 <Callout type="error" title="警告">
 
-这部分教程已经过时，同时我们不建议你使用 Spigot 服务端，可以选择使用 Paper 或其分支的插件服务端。
+本节教程已经过时，且不建议使用 Spigot 服务端，可改用 Paper 或其分支的插件服务端。
 
 </Callout>
 
 <Accordions>
-  <Accordion title="如果你非要看的话，那就点击此处展开">
+  <Accordion title="展开查看已过时的 Spigot 构建教程">
 
   <Callout type="info" title="提示">
 
-  Spigot 端由于其历史原因，官网给的下载链接是一个构建工具，你需要自己下载后手动构建。
+  由于历史原因，Spigot 官网仅提供构建工具 BuildTools，需要自行下载并手动构建服务端核心。
 
-  但其实你可以选择去找镜像站下载已构建完成的 Spigot 服务端。
+  也可以直接在镜像站下载已构建完成的服务端核心。
 
   下方教程为使用 BuildTools 手动构建 Spigot。
 
@@ -137,7 +141,7 @@ Bukkit 系服务端需要装载插件的话，将插件放到 `plugins` 文件�
 
   <Callout type="error" title="注意">
 
-  由于国内下载速度极其缓慢，因此不建议使用此方法在简幻欢上手动构建服务端。如果非常需要此服务端，可以前往镜像站下载，或在有良好网络环境的本地电脑上构建。
+  国内网络下载依赖的速度较慢，因此不建议在简幻欢实例上手动构建服务端。若确实需要该服务端，可前往镜像站下载，或在网络环境良好的本地电脑上构建后再上传。
 
   前往下方镜像站下载已构建完成的 Spigot 服务端：
 
@@ -148,31 +152,31 @@ Bukkit 系服务端需要装载插件的话，将插件放到 `plugins` 文件�
 
   ### 第一步：构建服务端核心
 
-  前往 [Spigot 构建站](https://hub.spigotmc.org/jenkins/job/BuildTools/)下载 `BuildTools.jar`。
+  前往 [Spigot 构建站](https://hub.spigotmc.org/jenkins/job/BuildTools/) 下载 `BuildTools.jar`。
 
   ![Spigot 构建站中 BuildTools.jar 的下载入口](/img/pages/mcje/mcje-vanilla_bukkit-3.webp)
 
-  将 `BuildTools.jar` 上传至实例文件的根目录，并在根目录下的 `start.sh` 内添加一行下面的命令后保存（不要删除 `start.sh` 自带的东西，`echo` 那一行除外）：
+  将 `BuildTools.jar` 上传至实例根目录，并在根目录下的 `start.sh` 中添加一行以下命令后保存（除文件最后一行的 `echo` 外，请勿删除已有内容）：
 
   ```shell title="start.sh"
   ${openjdk17} -Xmx1500m -jar BuildTools.jar --rev 版本号
   ```
 
-  `--rev` 后的版本号换成你想构建的版本，例如 `1.19.3`；设置为 `latest` 时构建最新版本。
+  `--rev` 后的版本号替换为需要构建的版本，例如 `1.19.3`；设为 `latest` 时构建最新版本。
 
   ![start.sh 中新增的 BuildTools 构建命令](/img/pages/mcje/mcje-vanilla_bukkit-4.webp)
 
-  保存完成后启动实例，等待服务端构建完毕。
+  保存完成后启动实例，等待构建完成。
 
   ### 第二步：初始化服务端
 
-  打开根目录下的 `start.sh`，先把第一步添加的这行命令删除：
+  打开实例根目录下的 `start.sh`，先删除第一步添加的这行命令：
 
   ```shell title="start.sh"
   ${openjdk17} -Xmx1500m -jar BuildTools.jar --rev 版本号
   ```
 
-  然后再添加一行类似下面的命令后保存（不要删除文件里原本的东西，除了最下面那行 `echo`）：
+  然后再添加一行与下方类似的启动命令后保存（除文件中最后一行的 `echo` 外，请勿删除已有内容）：
 
   ```shell title="start.sh"
   ${openjdk17} -server -Xms1024M -Xmx${maxmem}M -jar Spigot-1.20.2-3941.jar nogui
@@ -180,19 +184,19 @@ Bukkit 系服务端需要装载插件的话，将插件放到 `plugins` 文件�
 
   <Callout type="info" title="关于各项参数的说明">
 
-  各项参数的含义与上文 Paper 的说明相同，只需要把 `Spigot-1.20.2-3941.jar` 换成你自己构建出的服务端核心名称（包括后缀名）。
+  各项参数的含义与上文 Paper 的说明相同，仅需将 `Spigot-1.20.2-3941.jar` 替换为你实际构建出的服务端核心文件名（含扩展名）。
 
   </Callout>
 
-  调整完的启动命令应类似下图所示：
+  调整后的启动命令应类似下图所示：
 
   ![start.sh 中修改后的 Spigot 启动命令](/img/pages/mcje/mcje-vanilla_bukkit-5.webp)
 
-  此时你可以将 `BuildTools.jar` 删除了。
+  此时可将 `BuildTools.jar` 删除。
 
-  回到「终端」界面，点击右上角的「启动」。
+  返回「终端」页面，点击右上角的「启动」。
 
-  文件释放完成后，终端会输出类似下面的提示并停止运行：
+  文件释放完成后，终端会输出类似以下内容并停止运行：
 
   ```plain
   [15:44:52 WARN]: Failed to load eula.txt
@@ -201,7 +205,7 @@ Bukkit 系服务端需要装载插件的话，将插件放到 `plugins` 文件�
 
   ### 第三步：同意 EULA
 
-  进入「文件」页面，打开根目录下的 `eula.txt`。
+  进入「文件」页面，打开实例根目录下的 `eula.txt`：
 
   ```properties title="eula.txt"
   #By changing the setting below to TRUE you are indicating your agreement to our EULA (https://aka.ms/MinecraftEULA).
@@ -209,7 +213,7 @@ Bukkit 系服务端需要装载插件的话，将插件放到 `plugins` 文件�
   eula=false
   ```
 
-  将其中的 `false` 改为 `true`。
+  将其中的 `eula=false` 改为 `eula=true`。
 
   <Callout type="error" title="警告">
 
@@ -217,7 +221,7 @@ Bukkit 系服务端需要装载插件的话，将插件放到 `plugins` 文件�
 
   </Callout>
 
-  回到「终端」界面，点击右上角的「启动」，等待服务器生成文件。看到类似以下的提示即可关闭服务端：
+  返回「终端」页面，点击右上角的「启动」，等待服务端生成配置文件。出现类似以下提示后即可关闭服务端：
 
   ```plain
   [15:58:15 INFO]: Done (34.635s)! For help, type "help"
@@ -225,17 +229,17 @@ Bukkit 系服务端需要装载插件的话，将插件放到 `plugins` 文件�
 
   ### 第四步：配置服务器
 
-  再次进入「文件」页面，打开根目录下的 `server.properties`。
+  进入「文件」页面，打开实例根目录下的 `server.properties`。
 
-  简幻欢在上一步启动服务端生成文件时，已自动修改 `server-ip` 为 `0.0.0.0`、`server-port` 为你实例分配到的端口号，因此这两个不用管。
+  实例在首次启动生成该文件时，已自动将 `server-ip` 设为 `0.0.0.0`，并将 `server-port` 设为本实例分配的端口号，因此这两项无需修改。
 
-  如果你或你的朋友没有正版账户，请把 `online-mode` 的值由 `true` 改为 `false`。请注意，这样做会显著增加你的服务器遭受恶意攻击的风险！
+  若你或你的朋友没有正版账户，可将 `online-mode` 由 `true` 改为 `false`。请注意，这会关闭正版验证，并显著增加服务器遭受恶意攻击的风险。
 
-  Spigot 服务端需要装载插件的话，将插件放到 `plugins` 文件夹即可。
+  Spigot 服务端如需安装插件，将插件文件放入实例根目录下的 `plugins` 文件夹即可。
 
-  更多关于服务器设置的配置请查看 [server.properties 详解](/docs/mcje/server_properties)。
+  更多配置项说明请参见 [server.properties 详解](/docs/mcje/server_properties)。
 
-  现在你已经配置好服务器了，去进行愉快的游戏吧！
+  至此，服务端已完成基础配置，可以启动并进入游戏。
 
   </Accordion>
 </Accordions>
