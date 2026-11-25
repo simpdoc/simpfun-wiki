@@ -1,6 +1,6 @@
 ---
 title: 在 AI 中使用本维基
-description: 本维基为 AI 助手，提供了标准的内容出口，无需手动复制粘贴，即可让 AI 直接阅读全站内容并回答问题。
+description: 本维基为 AI 助手提供了标准的内容出口，只需告诉一句话，即可让 AI 直接阅读全站内容并回答问题。
 ---
 
 本维基为 AI 助手准备了标准的内容出口（[llms.txt](https://llmstxt.org) 规范）。把下面的地址交给支持联网阅读的 AI，它就能直接引用本站内容回答问题。
@@ -9,15 +9,19 @@ description: 本维基为 AI 助手，提供了标准的内容出口，无需手
 
 | 地址 | 内容 | 适合场景 |
 | --- | --- | --- |
-| https://next.simpdoc.top/llms.txt | 全站文档索引（约 10 KB） | 让 AI 了解站点结构，按需抓取相关页面 |
-| https://next.simpdoc.top/llms-full.txt | 全站内容合集（约 340 KB，约 8.5 万 token） | 支持长上下文的工具一次性读取全部内容 |
+| https://next.simpdoc.top/llms.txt | 全站文档索引 | 让 AI 了解站点结构，按需抓取相关页面 |
+| https://next.simpdoc.top/llms-full.txt | 全站内容合集 | 支持长上下文的工具一次性读取全部内容 |
 | https://next.simpdoc.top/llms.mdx/docs/**.md | 单页 Markdown | 只需引用某篇文档时精确提供 |
 
-> 提示：`llms-full.txt` 体积较大，部分工具会自动截断长文件。建议优先使用 `llms.txt` 索引，让 AI 按需阅读相关页面。
+<Callout type="info" title="提示">
+
+`llms-full.txt` 体积较大，部分工具会自动截断长文件。建议优先使用 `llms.txt` 索引，让 AI 按需阅读相关页面。
+
+</Callout>
 
 ## 让 AI 阅读本维基
 
-### 聊天 AI（ChatGPT / Claude / Kimi / DeepSeek 等）
+### 聊天 AI（千问 / Kimi / DeepSeek 等）
 
 开启联网功能后，直接粘贴以下提示词模板：
 
@@ -28,7 +32,7 @@ description: 本维基为 AI 助手，提供了标准的内容出口，无需手
 <你的问题>
 ```
 
-### 编码与 Agent 助手（Cursor / Cline / Copilot 等）
+### 编码与 Agent 助手（Trae / WorkBuddy / DeepSeek Harness 等）
 
 将上面同样的提示词粘贴到对话中使用；也可以把下列内容加入项目规则文件（如 `.cursorrules`、`AGENTS.md`、系统提示词）：
 

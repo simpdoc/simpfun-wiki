@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { BotIcon, CheckIcon, CopyIcon, ExternalLinkIcon, GraduationCapIcon } from 'lucide-react';
+import { BotIcon, CheckIcon, CopyIcon, GraduationCapIcon } from 'lucide-react';
 import { buttonVariants } from 'fumadocs-ui/components/ui/button';
 import {
   Popover,
@@ -12,9 +12,7 @@ import {
 import { siteUrl } from '@/lib/shared';
 
 const aiLinkItems = [
-  { title: '使用教程：在 AI 中使用本维基', href: '/docs/ai', internal: true },
-  { title: '全站索引 llms.txt', href: '/llms.txt', internal: false },
-  { title: '全站全文 llms-full.txt', href: '/llms-full.txt', internal: false },
+  { title: '使用教程：在 AI 中使用本维基', href: '/docs/ai' },
 ];
 
 export function AiView({ markdownUrl }: { markdownUrl: string }) {
@@ -61,31 +59,17 @@ export function AiView({ markdownUrl }: { markdownUrl: string }) {
           )}
           {copied ? '已复制本页 Markdown 链接' : '复制本页 Markdown 链接'}
         </button>
-        {aiLinkItems.map((item) =>
-          item.internal ? (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setOpen(false)}
-              className="flex items-center gap-2 rounded-lg p-2 text-sm transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground"
-            >
-              <GraduationCapIcon className="size-4" />
-              {item.title}
-            </Link>
-          ) : (
-            <a
-              key={item.href}
-              href={item.href}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="flex items-center gap-2 rounded-lg p-2 text-sm transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground"
-            >
-              <BotIcon className="size-4" />
-              {item.title}
-              <ExternalLinkIcon className="ms-auto size-3.5 text-fd-muted-foreground" />
-            </a>
-          ),
-        )}
+        {aiLinkItems.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            onClick={() => setOpen(false)}
+            className="flex items-center gap-2 rounded-lg p-2 text-sm transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground"
+          >
+            <GraduationCapIcon className="size-4" />
+            {item.title}
+          </Link>
+        ))}
       </PopoverContent>
     </Popover>
   );
