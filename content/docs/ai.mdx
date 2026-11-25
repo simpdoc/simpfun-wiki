@@ -1,0 +1,43 @@
+---
+title: 在 AI 中使用本维基
+description: 本维基为 AI 助手，提供了标准的内容出口，无需手动复制粘贴，即可让 AI 直接阅读全站内容并回答问题。
+---
+
+本维基为 AI 助手准备了标准的内容出口（[llms.txt](https://llmstxt.org) 规范）。把下面的地址交给支持联网阅读的 AI，它就能直接引用本站内容回答问题。
+
+## 可用入口
+
+| 地址 | 内容 | 适合场景 |
+| --- | --- | --- |
+| https://next.simpdoc.top/llms.txt | 全站文档索引（约 10 KB） | 让 AI 了解站点结构，按需抓取相关页面 |
+| https://next.simpdoc.top/llms-full.txt | 全站内容合集（约 340 KB，约 8.5 万 token） | 支持长上下文的工具一次性读取全部内容 |
+| https://next.simpdoc.top/llms.mdx/docs/**.md | 单页 Markdown | 只需引用某篇文档时精确提供 |
+
+> 提示：`llms-full.txt` 体积较大，部分工具会自动截断长文件。建议优先使用 `llms.txt` 索引，让 AI 按需阅读相关页面。
+
+## 让 AI 阅读本维基
+
+### 聊天 AI（ChatGPT / Claude / Kimi / DeepSeek 等）
+
+开启联网功能后，直接粘贴以下提示词模板：
+
+```text
+请先阅读 https://next.simpdoc.top/llms.txt ，这是「简幻欢社区维基」的文档索引。
+请根据索引选择与问题相关的页面进一步阅读，然后回答：
+
+<你的问题>
+```
+
+### 编码与 Agent 助手（Cursor / Cline / Copilot 等）
+
+将上面同样的提示词粘贴到对话中使用；也可以把下列内容加入项目规则文件（如 `.cursorrules`、`AGENTS.md`、系统提示词）：
+
+```text
+遇到简幻欢（SFE）平台相关问题时，请先阅读 https://next.simpdoc.top/llms.txt 中的文档索引，
+再阅读对应页面的 Markdown 版本（地址形如 /llms.mdx/docs/**.md），然后基于文档内容回答。
+```
+
+## 注意事项
+
+- AI 的回答可能不完整或过时，重要操作请以简幻欢官方文档与控制台实际界面为准。
+- 本站内容采用 CC BY-NC-SA 4.0 许可协议，AI 引用或转述时请注明来源「简幻欢社区维基」。
