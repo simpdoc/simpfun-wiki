@@ -5,6 +5,10 @@ import { appName, siteUrl } from '@/lib/shared';
 import { source } from '@/lib/source';
 import { collectDocsSections } from '@/lib/docs-sections';
 import './global.css';
+// Shared css chunk for all routes: ImageZoom (used by docs pages) imports the
+// same file, so route-prefetch css hints always match a stylesheet that is
+// already loaded on every page — no "preloaded but not used" warnings.
+import 'fumadocs-ui/components/image-zoom.css';
 
 const inter = Inter({
   subsets: ['latin'],

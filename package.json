@@ -3,7 +3,7 @@
   "version": "0.0.50",
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "next build && node scripts/strip-prefetch-resource-hints.mjs",
     "dev": "next dev",
     "start": "serve out",
     "types:check": "next typegen && tsc --noEmit",
