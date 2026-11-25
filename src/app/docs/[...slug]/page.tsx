@@ -10,6 +10,7 @@ import { notFound } from 'next/navigation';
 import { getMDXComponents } from '@/components/mdx';
 import { DocumentTitle } from '@/components/document-title';
 import { ViewOptions } from '@/components/view-options';
+import { AiView } from '@/components/ai-view';
 import type { Metadata } from 'next';
 import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { appName, getPageImageUrl, getPageMarkdownUrl, gitConfig } from '@/lib/shared';
@@ -29,6 +30,7 @@ export default async function Page(props: PageProps<'/docs/[...slug]'>) {
       <DocsTitle>{page.data.title}</DocsTitle>
       <DocsDescription className="mb-0">{page.data.description}</DocsDescription>
       <div className="flex flex-row gap-2 items-center border-b pb-6">
+        <AiView markdownUrl={markdownUrl} />
         <MarkdownCopyButton markdownUrl={markdownUrl} />
         <ViewOptions
           markdownUrl={markdownUrl}
