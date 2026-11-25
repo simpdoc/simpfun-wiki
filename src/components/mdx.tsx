@@ -9,7 +9,18 @@ import type { MDXComponents } from 'mdx/types';
 export function getMDXComponents(components?: MDXComponents) {
   return {
     ...defaultMdxComponents,
-    img: (props) => <ImageZoom {...(props as any)} />,
+    // Document content images (mostly below-the-fold screenshots) load lazily;
+    // this also opts them out of React's SSR auto-preload hints. Framework
+    // icons rendered via `imgIcons()` intentionally stay eager (non-lazy).
+    // Spread props last so individual MDX images can override, e.g.
+    // above-the-fold images via `<img loading="eager" ...>`.
+    img: (props) => (
+      <ImageZoom
+        loading="lazy"
+        decoding="async"
+        {...(props as any)}
+      />
+    ),
     ImageZoom,
     Accordion,
     Accordions,
